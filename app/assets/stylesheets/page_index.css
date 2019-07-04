@@ -94,7 +94,14 @@ body, html {
 }
 
 .rowPad {
-    padding: 40px;
+    display: flex;
+    justify-content: center
+}
+
+.btn-white
+{
+  color: #222222;
+  background-color: white;
 }
 
 .passionDiv {
@@ -277,7 +284,7 @@ body, html {
         padding-top: 80px;
         padding-bottom: 80px;
     }
-  
+
 
 }
 

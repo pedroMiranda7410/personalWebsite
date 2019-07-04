@@ -396,6 +396,11 @@
      padding-bottom: 120px;
  }
 
+ .rowFooter {
+     display: flex;
+     justify-content: center
+ }
+
  /* Suitable for mobile devices */
 
  @media (max-width: 991px) {

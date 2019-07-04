@@ -14,7 +14,7 @@
  *= require_self
  */
 
- /*@import "bootstrap";*/
+ @import "bootstrap";
 
  /*nav {
    background-color: #fff;
@@ -47,6 +47,7 @@
      transition: all .3s;
      top: 0;
      position: fixed;
+     color: white;
  }
  .x-navbar.alt-color {
      background-color: #141615 ;
@@ -109,17 +110,6 @@
      text-decoration: none;
  }
 
- .x-navbar {
-     background-color: transparent;
-     -webkit-transition: all .3s;
-     transition: all .3s;
-     top: 0;
-     position: fixed;
- }
- .x-navbar.alt-color {
-     background-color: #fff;
-
- }
 
  li.branca.preta a {
      display: block;
@@ -156,7 +146,6 @@
      color: black;
      font-family: 'Gravity-Regular';
  }
-
 
  .navbar-toggler-icon {
      color: black;

@@ -1,123 +1,20 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <title>Pedro Miranda</title>
-    <link rel="icon" type="image/png" href="/Down-Arrow.png" />
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/application.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/confirm.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/contacts.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/footer.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/page_index.css">
-     <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/scrollTop.css">
-     <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
-     <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/jquery.js"></script>
-<script src="/scrollTop.css"></script>
-
-
-<style>
-html {
-  scroll-behavior: smooth;
-
-}
-
-@media (max-width: 991px) {
-     #global-nav {
-         min-height: 56px !important;
-         background-color: transparent;
-     }
-     #contact-nav {
-         min-height: 56px !important;
-         background-color: transparent;
-     }
- }
-
- /* Large devices (desktops, 992px and up) */
- @media (min-width: 992px) {
-     .transparent {
-         background-color: rgba(0, 0, 0, 0);
-     }
-     #global-nav {
-         height: 120px;
-         -webkit-transition: height .5s, line-height .5s;
-         transition: height .5s, line-height .5s;
-     }
-     #contact-nav {
-         height: 120px;
-         -webkit-transition: height .5s, line-height .5s;
-         transition: height .5s, line-height .5s;
-     }
-     .scrolled-nav {
-         background-color: white;
-         height: 60px !important;
-         line-height: 60px;
-     }
-     .counter {
-       width: 20px;
-       height: 20px;
-       background: black;
-       color: #fff;
-       position: fixed;
-       top: 120px;
-       right: 0;
-     }
-     .navbar-nav li, .navbar-brand {
-         padding-right: 10px;
-         padding-left: 10px;
-     }
- }
-
- @media (max-width: 458px) {
-   #global-nav {
-       min-height: 56px !important;
-       background-color: transparent;
-   }
-   #contact-nav {
-       min-height: 56px !important;
-       background-color: transparent;
-   }
-
- }
-
-
-</style>
-
-
-
-  </head>
   <body>
 
 <!-- INICIO NAV -->
-    <nav class="navbar fixed-top navbar-expand-lg toggle-height " id="global-nav">
-         <div class="container">
-        <a class="navbar-brand scrollN_Pedro" href="/" >Pedro Miranda</a>
-        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon custom-toggler"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li > <a class="nav-link scrollN " href="/software/" style="text-align: center;"><font face = "Gravity-Regular"> Software</font></a></li>
-            <li> <a class="nav-link scrollN " href="/eletronica/" style="text-align: center;"><font face = "Gravity-Regular"> Eletrônica</font></a></li>
-            <!--<li><a class="nav-link scrollN " href="/films/">Films</a></li>
-            <li><a class="nav-link scrollN " href="/photography/">Photography</a></li> -->
-          </ul>
-          <ul class="navbar-nav">
-              <li><a class="nav-link scrollN" href="/contacts/new" style="text-align: center;"><font face = "Gravity-Regular">Contato</font></a></li>
-          </ul>
-        </div>
-         </div>
 
 
-</nav>
+    <div id="navbar">
+      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
+      <div id="navbar-right">
+        <%= link_to 'Software', software_path, id:"software" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Contato', contacts_path, id:"contato" %>
+      </div>
+    </div>
 
 <!-- FIM NAV -->
 

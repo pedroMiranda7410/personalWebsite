@@ -1,15 +1,193 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Myapp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Pedro Miranda</title>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <link rel="icon" type="image/png" href="/Down-Arrow.png" />
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Custom spacing and fonts that are often reused -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="/scrollTop.css"></script>
+  <script src="/css-software/page.css"></script> -->
+
+<!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/application.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/confirm.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/contacts.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/footer.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/page_index.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/scrollTop.css">
+   <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
+   <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script> -->
+
+  <style>
+  html {
+    scroll-behavior: smooth;
+
+  }
+
+   #navbar {
+   overflow: hidden;
+   -webkit-transition: all .3s;
+   transition: all .3s;
+   padding: 35px 25px;
+   transition: 0.4s;
+   position: fixed;
+   width: 100%;
+   top: 0;
+   z-index: 99;
+ }
+
+ .navOnTopColor
+ {
+   color:white;
+ }
+ .navOnBotoomColor
+ {
+   color:black;
+ }
+
+ .navOnTop
+ {
+   background-color: transparent;
+ }
+ .navOnBotoom
+ {
+   background-color: white;
+ }
+
+ #navbar a {
+   float: left;
+   -webkit-transition: all .3s;
+   transition: all .3s;
+   transition: 0.4s;
+   text-align: center;
+   padding: 12px 30px;
+   color: white;
+   text-decoration: none;
+   font-size: 18px;
+   line-height: 25px;
+   border-radius: 4px;
+ }
+
+ #navbar #logo {
+   font-size: 25px;
+   text-decoration: none;
+   font-weight: bold;
+   transition: 0.4s;
+ }
+
+ #navbar a:hover {
+   color: #575757;
+ }
+
+ #navbar-right {
+   float: right;
+ }
+
+ @media screen and (max-width: 580px) {
+   #navbar {
+     padding: 20px 10px !important;
+   }
+   #navbar a {
+     float: none;
+     display: block;
+     text-align: left;
+   }
+   #navbar-right {
+     float: none;
+   }
+ }
+
+
+  </style>
+
+</head>
+<body>
+
+  <%= yield %>
+
+  <footer class="footer container-fluid">
+    <div class="container extraSpace">
+        <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
+            <li style="display:inline-block">
+                <a href="https://www.instagram.com/pedro.jams/"><img src="/icons/instagram.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://github.com/pedroMiranda7410"><img src="/icons/github.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://gitlab.com/pmiranda7410"><img src="/icons/gitlab.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://www.linkedin.com/in/pedro-henrique-a09054167/"><img src="/icons/linkedIn.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="/contacts/new"><img src="/icons/email.png"></img></a>
+            </li>
+        </ul>
+        <p class="footerText subP"><font face = "Gravity-Regular" size = "4">Me envie um e-mail para sugestões,
+        colaborações ou apenas uma boa conversa!<br>pmiranda7410@gmail.com</font></p>
+    </div>
+    <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md">
+                    <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
+                </div><div class="col-md rm"><p>|</p></div>
+                <div class="col-6 col-md" >
+                    <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
+                </div><div class="col-md rm"><p>|</p></div>
+                <div class="col-6 col-md">
+                    <a href="/eletronica"><font face = "Gravity-Regular" size = "3">Eletrônica</font></a>
+                </div><div class="col-md rm"><p>|</p></div>
+                <div class="col-6 col-md">
+                    <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#navbar').addClass('navOnTop');
+  });
+  window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "8px 8px";
+    document.getElementById("navbar").style.backgroundColor = "white";
+    document.getElementById("logo").style.color = "black";
+    document.getElementById("eletronica").style.color = "black";
+    document.getElementById("software").style.color = "black";
+    document.getElementById("contato").style.color = "black";
+    document.getElementById("logo").style.fontSize = "18px";
+  } else {
+    document.getElementById("navbar").style.padding = "35px 25px";
+    document.getElementById("navbar").style.backgroundColor = "transparent";
+    document.getElementById("logo").style.color = "white";
+    document.getElementById("eletronica").style.color = "white";
+    document.getElementById("software").style.color = "white";
+    document.getElementById("contato").style.color = "white";
+    document.getElementById("logo").style.fontSize = "25px";
+  }
+}
+
+</script>
 </html>

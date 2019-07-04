@@ -86,6 +86,10 @@
    transition: 0.4s;
  }
 
+ #navbar #logo:hover {
+   color: #E2E2E2;
+ }
+
  #navbar a:hover {
    color: #575757;
  }
@@ -114,6 +118,27 @@
 </head>
 <body>
 
+  <% if request.original_fullpath == '/' %>
+    <div id="navbar">
+      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
+      <div id="navbar-right">
+        <%= link_to 'Software', software_path, id:"software" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Contato', contacts_path, id:"contato" %>
+      </div>
+    </div>
+
+  <% else %>
+    <div id="navbar">
+      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
+      <div id="navbar-right">
+        <%= link_to 'Software', software_path, id:"software" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Contato', contacts_path, id:"contato" %>
+      </div>
+    </div>
+  <% end %>
+
   <%= yield %>
 
   <footer class="footer container-fluid">
@@ -140,17 +165,17 @@
     </div>
     <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
         <div class="container">
-            <div class="row">
-                <div class="col-6 col-md">
+            <div class="row" style="right:0;left:0;">
+                <div class="col-lg-3">
                     <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
-                </div><div class="col-md rm"><p>|</p></div>
-                <div class="col-6 col-md" >
+                </div>
+                <div class="col-lg-3" >
                     <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
-                </div><div class="col-md rm"><p>|</p></div>
-                <div class="col-6 col-md">
+                </div>
+                <div class="col-lg-3">
                     <a href="/eletronica"><font face = "Gravity-Regular" size = "3">Eletrônica</font></a>
-                </div><div class="col-md rm"><p>|</p></div>
-                <div class="col-6 col-md">
+                </div>
+                <div class="col-lg-3">
                     <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
                 </div>
             </div>
@@ -165,29 +190,53 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#navbar').addClass('navOnTop');
+    scrollFunction();
   });
   window.onscroll = function() {scrollFunction()};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-    document.getElementById("navbar").style.padding = "8px 8px";
-    document.getElementById("navbar").style.backgroundColor = "white";
-    document.getElementById("logo").style.color = "black";
-    document.getElementById("eletronica").style.color = "black";
-    document.getElementById("software").style.color = "black";
-    document.getElementById("contato").style.color = "black";
-    document.getElementById("logo").style.fontSize = "18px";
-  } else {
-    document.getElementById("navbar").style.padding = "35px 25px";
-    document.getElementById("navbar").style.backgroundColor = "transparent";
-    document.getElementById("logo").style.color = "white";
-    document.getElementById("eletronica").style.color = "white";
-    document.getElementById("software").style.color = "white";
-    document.getElementById("contato").style.color = "white";
-    document.getElementById("logo").style.fontSize = "25px";
-  }
-}
+  <% if request.original_fullpath == '/' %>
+    function scrollFunction() {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "black";
+        document.getElementById("eletronica").style.color = "black";
+        document.getElementById("software").style.color = "black";
+        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.fontSize = "18px";
+      } else {
+        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.backgroundColor = "transparent";
+        document.getElementById("logo").style.color = "white";
+        document.getElementById("eletronica").style.color = "white";
+        document.getElementById("software").style.color = "white";
+        document.getElementById("contato").style.color = "white";
+        document.getElementById("logo").style.fontSize = "25px";
+      }
+    }
+
+  <% else %>
+    function scrollFunction() {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "black";
+        document.getElementById("eletronica").style.color = "black";
+        document.getElementById("software").style.color = "black";
+        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.fontSize = "18px";
+      } else {
+        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "black";
+        document.getElementById("eletronica").style.color = "black";
+        document.getElementById("software").style.color = "black";
+        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.fontSize = "25px";
+      }
+    }
+  <% end %>
+
 
 </script>
 </html>

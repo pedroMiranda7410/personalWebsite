@@ -29,102 +29,20 @@
    <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
    <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script> -->
 
-  <style>
-  html {
-    scroll-behavior: smooth;
-
-  }
-
-   #navbar {
-   overflow: hidden;
-   -webkit-transition: all .3s;
-   transition: all .3s;
-   padding: 35px 25px;
-   transition: 0.4s;
-   position: fixed;
-   width: 100%;
-   top: 0;
-   z-index: 99;
- }
-
- .navOnTopColor
- {
-   color:white;
- }
- .navOnBotoomColor
- {
-   color:black;
- }
-
- .navOnTop
- {
-   background-color: transparent;
- }
- .navOnBotoom
- {
-   background-color: white;
- }
-
- #navbar a {
-   float: left;
-   -webkit-transition: all .3s;
-   transition: all .3s;
-   transition: 0.4s;
-   text-align: center;
-   padding: 12px 30px;
-   color: white;
-   text-decoration: none;
-   font-size: 18px;
-   line-height: 25px;
-   border-radius: 4px;
- }
-
- #navbar #logo {
-   font-size: 25px;
-   text-decoration: none;
-   font-weight: bold;
-   transition: 0.4s;
- }
-
- #navbar #logo:hover {
-   color: #E2E2E2;
- }
-
- #navbar a:hover {
-   color: #575757;
- }
-
- #navbar-right {
-   float: right;
- }
-
- @media screen and (max-width: 580px) {
-   #navbar {
-     padding: 20px 10px !important;
-   }
-   #navbar a {
-     float: none;
-     display: block;
-     text-align: left;
-   }
-   #navbar-right {
-     float: none;
-   }
- }
-
-
-  </style>
 
 </head>
 <body>
 
   <% if request.original_fullpath == '/' %>
-    <div id="navbar">
+    <div class="topnav" id="navbar">
       <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
       <div id="navbar-right">
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
         <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
       </div>
     </div>
 
@@ -135,6 +53,9 @@
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
         <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
       </div>
     </div>
   <% end %>
@@ -187,6 +108,16 @@
 
 </body>
 
+<script>
+function myFunction() {
+  var x = document.getElementById("navbar");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -199,7 +130,7 @@
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         document.getElementById("navbar").style.padding = "8px 8px";
         document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#222222";
+        document.getElementById("logo").style.color = "#3B3B3B";
         document.getElementById("eletronica").style.color = "black";
         document.getElementById("software").style.color = "black";
         document.getElementById("contato").style.color = "black";
@@ -220,18 +151,18 @@
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         document.getElementById("navbar").style.padding = "8px 8px";
         document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#222222";
-        document.getElementById("eletronica").style.color = "black";
-        document.getElementById("software").style.color = "black";
-        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("eletronica").style.color = "#3B3B3B";
+        document.getElementById("software").style.color = "#3B3B3B";
+        document.getElementById("contato").style.color = "#3B3B3B";
         document.getElementById("logo").style.fontSize = "18px";
       } else {
         document.getElementById("navbar").style.padding = "35px 25px";
         document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#222222";
-        document.getElementById("eletronica").style.color = "black";
-        document.getElementById("software").style.color = "black";
-        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("eletronica").style.color = "#3B3B3B";
+        document.getElementById("software").style.color = "#3B3B3B";
+        document.getElementById("contato").style.color = "#3B3B3B";
         document.getElementById("logo").style.fontSize = "25px";
       }
     }

@@ -21,7 +21,23 @@
 //= require bootstrap.bundle.min.js
 //= require bootstrap.min.js
 //= require_tree .
+
+
+
 jQuery.noConflict();
+
+
+// MY JAVASCRIPT
+var value=959;
+
+if($(window).width() < value)
+{
+  $("#div-image").removeClass("col-md-4").addClass("col-md-12");
+  $("#div-imageText").removeClass("col-md-8").addClass("col-md-12");
+}
+
+// END MY JS
+
 
 $(document).ready(function() {
         // Transition effect for navbar

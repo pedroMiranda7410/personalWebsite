@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pedro Miranda</title>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
+  <%= csrf_meta_tags %>
+
+  <link rel="icon" type="image/png" href="/Down-Arrow.png" />
+
+  <!-- Custom spacing and fonts that are often reused -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="/scrollTop.css"></script>
+  <script src="/css-software/page.css"></script> -->
+
+<!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/application.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/confirm.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/contacts.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/footer.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/page_index.css">
+   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/scrollTop.css">
+   <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
+   <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script> -->
+
+
+</head>
+<body>
+
+  <% if request.original_fullpath == '/' %>
+    <div class="topnav" id="navbar">
+      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
+      <div id="navbar-right">
+        <%= link_to 'Software', software_path, id:"software" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </div>
+
+  <% else %>
+    <div id="navbar">
+      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
+      <div id="navbar-right">
+        <%= link_to 'Software', software_path, id:"software" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+  <footer class="footer container-fluid">
+    <div class="container extraSpace">
+        <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
+            <li style="display:inline-block">
+                <a href="https://www.instagram.com/pedro.jams/"><img src="/icons/instagram.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://github.com/pedroMiranda7410"><img src="/icons/github.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://gitlab.com/pmiranda7410"><img src="/icons/gitlab.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="https://www.linkedin.com/in/pedro-henrique-a09054167/"><img src="/icons/linkedIn.png"></img></a>
+            </li>
+            <li style="display:inline-block">
+                <a href="/contacts/new"><img src="/icons/email.png"></img></a>
+            </li>
+        </ul>
+        <p class="footerText subP"><font face = "Gravity-Regular" size = "4">Me envie um e-mail para sugestões,
+        colaborações ou apenas uma boa conversa!<br>pmiranda7410@gmail.com</font></p>
+    </div>
+    <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
+        <div class="container">
+            <div style="right:0;left:0;">
+                <div class="col-lg-3 rowFooter">
+                    <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
+                </div>
+                <div class="col-lg-3 rowFooter" >
+                    <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
+                </div>
+                <div class="col-lg-3 rowFooter">
+                    <a href="/eletronica"><font face = "Gravity-Regular" size = "3">Eletrônica</font></a>
+                </div>
+                <div class="col-lg-3 rowFooter">
+                    <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("navbar");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    scrollFunction();
+  });
+  window.onscroll = function() {scrollFunction()};
+
+  <% if request.original_fullpath == '/' %>
+    function scrollFunction() {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("eletronica").style.color = "black";
+        document.getElementById("software").style.color = "black";
+        document.getElementById("contato").style.color = "black";
+        document.getElementById("logo").style.fontSize = "18px";
+      } else {
+        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.backgroundColor = "transparent";
+        document.getElementById("logo").style.color = "white";
+        document.getElementById("eletronica").style.color = "white";
+        document.getElementById("software").style.color = "white";
+        document.getElementById("contato").style.color = "white";
+        document.getElementById("logo").style.fontSize = "25px";
+      }
+    }
+
+  <% else %>
+    function scrollFunction() {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("eletronica").style.color = "#3B3B3B";
+        document.getElementById("software").style.color = "#3B3B3B";
+        document.getElementById("contato").style.color = "#3B3B3B";
+        document.getElementById("logo").style.fontSize = "18px";
+      } else {
+        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.backgroundColor = "white";
+        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("eletronica").style.color = "#3B3B3B";
+        document.getElementById("software").style.color = "#3B3B3B";
+        document.getElementById("contato").style.color = "#3B3B3B";
+        document.getElementById("logo").style.fontSize = "25px";
+      }
+    }
+  <% end %>
+
+
+</script>
+</html>

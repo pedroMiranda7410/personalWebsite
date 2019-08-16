@@ -21,7 +21,7 @@
 //= require bootstrap.bundle.min.js
 //= require bootstrap.min.js
 //= require_tree .
-
+//= require_self
 
 
 jQuery.noConflict();

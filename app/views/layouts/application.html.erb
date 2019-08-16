@@ -16,6 +16,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- <script src="/scrollTop.css"></script>
   <script src="/css-software/page.css"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -39,20 +40,29 @@
       <div id="navbar-right">
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
-        <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <% if current_user == nil %>
+          <%= link_to dashboard_path, id:"contato" do %>
+            <i class="fa fa-fw fa-user"></i> Login
+          <% end %>
+        <% else %>
+          <a id="contato" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-user mr-2"></i><%= current_user.name %>
+        <% end %>
+        </a>
+
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
         </a>
       </div>
     </div>
-
   <% else %>
     <div id="navbar">
       <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
       <div id="navbar-right">
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
-        <%= link_to 'Contato', contacts_path, id:"contato" %>
+        <%= link_to dashboard_path, id:"contato" do %>
+          <i class="fa fa-fw fa-user mr-2"></i><%= current_user == nil ? "Login" : "#{current_user.name}" %>
+        <% end %>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
         </a>
@@ -60,7 +70,9 @@
     </div>
   <% end %>
 
+
   <%= yield %>
+
 
   <footer class="footer container-fluid">
     <div class="container extraSpace">
@@ -86,17 +98,17 @@
     </div>
     <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
         <div class="container">
-            <div style="right:0;left:0;">
-                <div class="col-lg-3 rowFooter">
+            <div class="rowFooter" style="right:0;left:0;">
+                <div class="col-lg-3">
                     <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
                 </div>
-                <div class="col-lg-3 rowFooter" >
+                <div class="col-lg-3" >
                     <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
                 </div>
-                <div class="col-lg-3 rowFooter">
+                <div class="col-lg-3 ">
                     <a href="/eletronica"><font face = "Gravity-Regular" size = "3">Eletrônica</font></a>
                 </div>
-                <div class="col-lg-3 rowFooter">
+                <div class="col-lg-3">
                     <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
                 </div>
             </div>
@@ -104,11 +116,46 @@
     </div>
 </footer>
 
+<% if current_user != nil %>
+  <div class="profile-img shake">
+    <img src="/missing.png" alt="">
+  </div>
+  <div id="menu" class="hoverWrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <span style="font-family: 'Gravity-Regular';font-size: 0.8em;">Olá, </span><br> <strong><small style="font-family: 'Gravity-Regular';font-size: 0.6em;"><%= current_user.name %> !</small></strong>
+          </div>
+          <div class="card-body">
+            <div class="row px-2">
+              <div class="col-lg-12 anchor">
+                <a href="#" class="px-2 py-1">Perfil</a>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-lg-12 anchor">
+                <a href="#" class="px-2 py-1">Editar</a>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-lg-12 logout">
+                <%= link_to 'Logout', logout_path, class:"px-2 py-1" %>
+              </div>
+            </div>
 
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 </body>
 
+
 <script>
+
+
 function myFunction() {
   var x = document.getElementById("navbar");
   if (x.className === "topnav") {
@@ -117,11 +164,40 @@ function myFunction() {
     x.className = "topnav";
   }
 }
+function shake(){
+  setTimeout(function myFunction() {
+    $(".shake").addClass("active");
+    stopShaking();
+  }, 2000);
+}
+
+function stopShaking(){
+  setTimeout(function myFunction() {
+    $(".shake").removeClass("active");
+    shake();
+  }, 2000);
+}
+
+function openMenu(){
+  $(".shake").click( function(){
+    if($('#menu').is(":visible") == true){
+      $('#menu').hide();
+    }
+    else{
+      $('#menu').show();
+    }
+  });
+}
+
 </script>
 
 <script type="text/javascript">
+
+
   $(document).ready(function(){
     scrollFunction();
+    stopShaking();
+    openMenu();
   });
   window.onscroll = function() {scrollFunction()};
 

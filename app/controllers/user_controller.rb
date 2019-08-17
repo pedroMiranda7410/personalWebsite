@@ -1,9 +1,29 @@
 class UserController < ApplicationController
-  before_action :authenticate
 
   def dashboard
-    if current_user.admin == true
+    if current_user != nil
+      if current_user.admin == true
 
+      end
+    else
+      redirect_to login_path
+    end
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to root_path, notice: 'user was successfully created.' }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -13,9 +33,6 @@ class UserController < ApplicationController
 
   def update
     @user = User.find_by_id(current_user.id)
-    if current_user.admin != true
-      current_user.admin  = false
-    end
 
     respond_to do |format|
       if @user.update(user_params)

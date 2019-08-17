@@ -52,18 +52,17 @@
  transition: all .3s;
  transition: 0.4s;
  text-align: center;
- padding: 12px 30px;
+ padding: 8px 20px;
  color: white;
  text-decoration: none;
- font-size: 18px;
+ font-size: 16px;
  line-height: 25px;
  border-radius: 4px;
 }
 
 #navbar #logo {
- font-size: 25px;
+ font-size: 16px;
  text-decoration: none;
- font-weight: bold;
  transition: 0.4s;
 }
 
@@ -81,6 +80,11 @@
 
 #navbar-right {
  float: right;
+ padding-right: 40px;
+}
+#navbar-left {
+ float: left;
+ padding-left: 65px;
 }
 
 @media screen and (max-width: 580px) {

@@ -36,10 +36,12 @@
 
   <% if request.original_fullpath == '/' %>
     <div class="topnav" id="navbar">
-      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
-      <div id="navbar-right">
+      <div id="navbar-left">
+        <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+      </div>
+      <div id="navbar-right">
         <% if current_user == nil %>
           <%= link_to dashboard_path, id:"contato" do %>
             <i class="fa fa-fw fa-user"></i> Login
@@ -56,13 +58,21 @@
     </div>
   <% else %>
     <div id="navbar">
-      <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
-      <div id="navbar-right">
+      <div id="navbar-left">
+        <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
-        <%= link_to dashboard_path, id:"contato" do %>
-          <i class="fa fa-fw fa-user mr-2"></i><%= current_user == nil ? "Login" : "#{current_user.name}" %>
+      </div>
+      <div id="navbar-right">
+        <% if current_user == nil %>
+          <%= link_to dashboard_path, id:"contato" do %>
+            <i class="fa fa-fw fa-user"></i> Login
+          <% end %>
+        <% else %>
+          <a id="contato" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-user mr-2"></i><%= current_user.name %>
         <% end %>
+        </a>
+
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
         </a>
@@ -70,9 +80,7 @@
     </div>
   <% end %>
 
-
   <%= yield %>
-
 
   <footer class="footer container-fluid">
     <div class="container extraSpace">
@@ -204,42 +212,42 @@ function openMenu(){
   <% if request.original_fullpath == '/' %>
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.padding = "8px 20px";
         document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#3B3B3B";
+        document.getElementById("logo").style.color = "black";
         document.getElementById("eletronica").style.color = "black";
         document.getElementById("software").style.color = "black";
         document.getElementById("contato").style.color = "black";
-        document.getElementById("logo").style.fontSize = "18px";
+        document.getElementById("logo").style.fontSize = "16px";
       } else {
-        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.padding = "30px 20px";
         document.getElementById("navbar").style.backgroundColor = "transparent";
         document.getElementById("logo").style.color = "white";
         document.getElementById("eletronica").style.color = "white";
         document.getElementById("software").style.color = "white";
         document.getElementById("contato").style.color = "white";
-        document.getElementById("logo").style.fontSize = "25px";
+        document.getElementById("logo").style.fontSize = "16px";
       }
     }
 
   <% else %>
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.padding = "8px 8px";
+        document.getElementById("navbar").style.padding = "8px 20px";
         document.getElementById("navbar").style.backgroundColor = "white";
         document.getElementById("logo").style.color = "#3B3B3B";
         document.getElementById("eletronica").style.color = "#3B3B3B";
         document.getElementById("software").style.color = "#3B3B3B";
         document.getElementById("contato").style.color = "#3B3B3B";
-        document.getElementById("logo").style.fontSize = "18px";
+        document.getElementById("logo").style.fontSize = "16px";
       } else {
-        document.getElementById("navbar").style.padding = "35px 25px";
+        document.getElementById("navbar").style.padding = "30px 20px";
         document.getElementById("navbar").style.backgroundColor = "white";
         document.getElementById("logo").style.color = "#3B3B3B";
         document.getElementById("eletronica").style.color = "#3B3B3B";
         document.getElementById("software").style.color = "#3B3B3B";
         document.getElementById("contato").style.color = "#3B3B3B";
-        document.getElementById("logo").style.fontSize = "25px";
+        document.getElementById("logo").style.fontSize = "16px";
       }
     }
   <% end %>

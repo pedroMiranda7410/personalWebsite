@@ -1,5 +1,7 @@
 class UserController < ApplicationController
 
+  #https://github.com/user.png
+
   def dashboard
     if current_user != nil
       if current_user.admin == true
@@ -16,6 +18,7 @@ class UserController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
 
     respond_to do |format|
       if @user.save
@@ -47,6 +50,6 @@ class UserController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :nickname, :email, :password, :admin, :avatar)
+      params.require(:user).permit(:name,:github, :nickname, :email, :password, :admin, :avatar)
     end
 end

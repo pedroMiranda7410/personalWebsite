@@ -1,83 +1,91 @@
-<div class="center-page-newUser  mx-4 my-4 anchor-page">
-    <section class="py-5">
-      <div class="card card-signin my-1">
-        <div class="card-body">
 
-          <h5 class="card-title text-center" ><strong>Cadastro</strong></h5>
-          <hr class="my-4">
 
-<%= form_for(@user, url: create_user_path) do |form| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> que impediu(ram) que salvasse:</h2>
+<div class="back">
+  <div class="center cenX my-5 py-5">
+    <h1 class="titleMain" style="font-family: 'Gravity-Regular';">CADASTRO</h1>
+    <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';"> Faça parte da comunidade!</h3>
 
-        <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+    <%= form_for(@user, url: create_user_path) do |form| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> que impediu(ram) que salvasse:</h2>
+
+            <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
         <% end %>
-        </ul>
-      </div>
-    <% end %>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="form-group">
-          <div>
-            <%= form.label 'Nome:' %>
-          </div>
-          <%= form.text_field :name, required: true, class:"form-control"  %>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="form-group">
-          <div>
-            <%= form.label 'Apelido (Username):' %>
-          </div>
-          <%= form.text_field :nickname, required: true, class:"form-control"  %>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="form-group">
-          <div>
-            <%= form.label 'E-mail:' %>
-          </div>
-          <%= form.text_field :email, required: true, class:"form-control"  %>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-6">
             <div class="form-group">
               <div>
-                <%= form.label "Senha: " %>
+                <%= form.label 'Nome:', class: "" %>
               </div>
-              <%= form.password_field :password, required: true, class:"form-control" %>
+              <%= form.text_field :name, required: true, class:"form-control "  %>
             </div>
           </div>
-      <div class="col-lg-4">
-        <div class="form-group">
-          <div>
-            <%= form.label "Confirmar Senha: " %>
-          </div>
-          <%= form.password_field :password_confirmation, required: true, class:"form-control" %>
-        </div>
-      </div>
-    </div>
 
-        <br>
-
-    <div class="actions">
-      <%= form.hidden_field :admin, value: false %>
-      <%= form.submit 'Salvar', class: "btn btn-success",style:"float:right"%>
-    </div>
-<% end %>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div>
+                <%= form.label 'Github (Nick):', class: "" %>
+              </div>
+              <%= form.text_field :github, required: true, class:"form-control "  %>
+            </div>
           </div>
         </div>
 
-    </section>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div>
+                <%= form.label 'Nickname:', class: "" %>
+              </div>
+              <%= form.text_field :nickname, required: true, class:"form-control "  %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div>
+                <%= form.label 'E-mail:', class: "" %>
+              </div>
+              <%= form.text_field :email, required: true, class:"form-control "  %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-5">
+                <div class="form-group">
+                  <div>
+                    <%= form.label "Senha: ", class: "" %>
+                  </div>
+                  <%= form.password_field :password, required: true, class:"form-control " %>
+                </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          <div class="col-lg-5">
+            <div class="form-group">
+              <div>
+                <%= form.label "Confirmar Senha: ", class: "" %>
+              </div>
+              <%= form.password_field :password_confirmation, required: true, class:"form-control " %>
+            </div>
+          </div>
+        </div>
+
+            <br>
+
+        <div class="actions">
+          <%= form.hidden_field :admin, value: false %>
+          <%= form.submit 'Cadastrar', class: "btn btn-success "%>
+        </div>
+    <% end %>
+
   </div>
 </div>
 

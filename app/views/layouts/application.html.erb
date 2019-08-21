@@ -3,9 +3,7 @@
 <head>
   <title>Pedro Miranda</title>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
   <%= csrf_meta_tags %>
 
   <link rel="icon" type="image/png" href="/Down-Arrow.png" />
@@ -47,9 +45,13 @@
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>
-          <a id="contato" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-user mr-2"></i><%= current_user.name %>
+          <%= link_to dashboard_path, class:"sidebar-brand d-flex align-items-center justify-content-center"  do %>
+            <div style="height: 25px; width: 25px">
+              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="https://github.com/<%= current_user.github %>.png">
+            </div>
+            <div class="sidebar-brand-text mx-3" id="contato"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+          <% end %>
         <% end %>
-        </a>
 
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
@@ -69,9 +71,13 @@
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>
-          <a id="contato" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-user mr-2"></i><%= current_user.name %>
+          <%= link_to dashboard_path, class:"sidebar-brand d-flex align-items-center justify-content-center"  do %>
+            <div style="height: 25px; width: 25px">
+              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="https://github.com/<%= current_user.github %>.png">
+            </div>
+            <div class="sidebar-brand-text mx-3" id="contato"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last %></div>
+          <% end %>
         <% end %>
-        </a>
 
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
@@ -133,22 +139,22 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <span style="font-family: 'Gravity-Regular';font-size: 0.8em;">Olá, </span><br> <strong><small style="font-family: 'Gravity-Regular';font-size: 0.6em;"><%= current_user.name %> !</small></strong>
+            <span style="font-family: 'Gravity-Regular';font-size: 0.8em;">Olá, </span><br> <strong><small style="font-family: 'Gravity-Regular';font-size: 0.6em;"><%= current_user.name.rpartition(" ").first %> !</small></strong>
           </div>
           <div class="card-body">
             <div class="row px-2">
               <div class="col-lg-12 anchor">
-                <a href="#" class="px-2 py-1">Perfil</a>
+                <a href="#" class="px-2 py-1" style="font-family: 'Gravity-Regular';font-size: 0.6em;">Perfil</a>
               </div>
             </div>
             <div class="row px-2">
               <div class="col-lg-12 anchor">
-                <a href="#" class="px-2 py-1">Editar</a>
+                <a href="#" class="px-2 py-1" style="font-family: 'Gravity-Regular';font-size: 0.6em;">Editar</a>
               </div>
             </div>
             <div class="row px-2">
               <div class="col-lg-12 logout">
-                <%= link_to 'Logout', logout_path, class:"px-2 py-1" %>
+                <%= link_to 'Logout', logout_path, class:"px-2 py-1", style:"font-family: 'Gravity-Regular';font-size: 0.6em;" %>
               </div>
             </div>
 

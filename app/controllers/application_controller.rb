@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def new
 
     if User.all == []
-      @admin = User.new(password:"123",name: "Pedro Miranda", admin: true, nickname:"pedro.jams", email:"pmiranda7410@gmail.com", avatar: "")
+      @admin = User.new(password:"123",name: "Pedro Miranda", admin: true, github: 'pedroMiranda7410' ,nickname:"pedro.jams", email:"pmiranda7410@gmail.com", avatar: "")
       @admin.save
     end
 

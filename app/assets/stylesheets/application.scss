@@ -16,7 +16,8 @@
 
  @import "bootstrap";
 
- /*nav {
+ /*
+ nav {
    background-color: #fff;
  }
 */
@@ -27,6 +28,11 @@
 html {
   scroll-behavior: smooth;
 
+}
+
+.font-15em {
+  font-family: 'Gravity-Regular';
+  font-size: 1.5em;
 }
 
 .btn-white

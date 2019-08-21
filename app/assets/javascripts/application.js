@@ -22,6 +22,7 @@
 //= require bootstrap.min.js
 //= require_tree .
 //= require_self
+//= require Chart.js
 
 
 jQuery.noConflict();

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_210323) do
     t.string "name", default: "", null: false
     t.string "nickname", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "github", default: "", null: false
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

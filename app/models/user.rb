@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :nickname, uniqueness: true
   validates :email, uniqueness: true
 
-  after_create :send_confirmation
+  #after_create :send_confirmation
 
   private
 

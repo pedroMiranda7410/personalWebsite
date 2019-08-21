@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :nickname, uniqueness: true
+  validates :email, uniqueness: true
 
   after_create :send_confirmation
 

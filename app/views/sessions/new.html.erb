@@ -1,88 +1,39 @@
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"> </script>
-</head>
-<section class="mx-5" >
-  <div class="page-holder my-5 mx-5 w-100 py-5" style="right:0;left:0;display:flex; justify-content:center">
-    <div class="container-fluid">
-            <div class="cenMain">
-
-                     <h1 class="titleMain" style="padding-bottom: 20px;font-family: 'Gravity-Regular';font-size: 4.5em;">LOGIN </h1>
-                     <h3 class="regTitle padB20" style="font-family: 'Gravity-Regular';font-size: 2.5em;">Acesse e faça parte da comunidade!</h3>
-
-                <!--<img>pmiranda7410@gmail.com</img> -->
-                <!-- FORM -->
-                <%= form_tag sessions_path do |form| %>
-                <p id="alert"><%= alert %></p>
-                <div class="row pl-5">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <div>
-                        <label for="nome" class="col-form-label" style="font-family: 'Gravity-Regular';font-size: 1.3em;">Nickname</label>
-                      </div>
-                        <%= text_field_tag :nickname, "", class:" form-control", placeholder:"Apelido", required: true, autofocus: true %>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row pl-5">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <div>
-                        <label for="password" class="col-form-label rp" style="font-family: 'Gravity-Regular';font-size: 1.3em;" >Senha </label>
-                      </div>
-                        <%= password_field_tag :password, "", class: 'form-control', placeholder: "Senha", required: true %>
-                    </div>
-                    <div class="cenX down">
-                        <%= submit_tag "Entrar", class:"btn btn-success", style:"float:right;font-family: 'Gravity-Regular';font-size: 1.3em;" %>
-                    </div>
-                  </div>
-                </div>
-
-
-
-                <% end %>
-
-
-
-            </div>
-  </div>
-</section>
-
-<!--
 <div class="back">
+  <div class="center cenX">
+    <h1 class="titleMain" style="font-family: 'Gravity-Regular';">LOGIN</h1>
+    <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';">Acesse e faça parte da comunidade!</h3>
 
-<div class="page-holder w-100 py-5 d-flex flex-wrap">
-  <div class="container-fluid px-xl-5">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 pt-5 mx-auto">
-        <div class="card card-signin my-1">
-          <div class="card-body">
-            <h5 class="card-title text-center" style="font-size:1.8rem ">LOGIN</h5>
-            <hr class="my-4">
-            <p id="alert"></p>
-            <form class="form-signin">
-              <div class="form-label-group">
-
-              </div>
-              <br>
-              <div class="form-label-group">
-
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-sm-12">
-
-
-                </div>
-              </div>
-            </form>
+    <%= form_tag sessions_path do |form| %>
+    <p id="alert"><%= alert %></p>
+    <div class="row mx-4">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <div>
+            <label for="nome" class="col-form-label" style="font-family: 'Gravity-Regular'">Nickname</label>
           </div>
+            <%= text_field_tag :nickname, "", class:" form-control", placeholder:"Nickname", required: true, autofocus: true %>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="row mx-4">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <div>
+            <label for="password" class="col-form-label rp" style="font-family: 'Gravity-Regular';" >Senha </label>
+          </div>
+            <%= password_field_tag :password, "", class: 'form-control', placeholder: "Senha", required: true %>
+        </div>
+        <div class="cenX down">
+            <%= link_to "Cadastrar", new_user_path, class:"btn btn-outline-info", style:"float:left;font-family: 'Gravity-Regular';" %>
+            <%= submit_tag "Entrar", class:"btn btn-success", style:"float:right;font-family: 'Gravity-Regular';" %>
+        </div>
+      </div>
+    </div>
+
+
+
+    <% end %>
 
   </div>
-</div> -->
+</div>

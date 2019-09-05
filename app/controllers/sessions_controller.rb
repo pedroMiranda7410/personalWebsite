@@ -5,12 +5,9 @@ class SessionsController < ApplicationController
     user = User.find_by_nickname(params[:nickname])
 
         if user && user.authenticate(params[:password])
+          @first_time = params[:first_time] != nil ? params[:first_time] : false
           session[:user_id] = user.id
-          if user.admin == true
-            redirect_to root_path, notice: 'Conectado com sucesso!'
-          else
-            redirect_to software_path, notice: 'Conectado com sucesso!'
-          end
+          redirect_to root_path(first_time: @first_time), notice: 'Conectado com sucesso!'
         else
           flash.now[:alert] = "Apelido/Senha inválido"
           render "new"

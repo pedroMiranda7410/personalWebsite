@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   #USER FOLDER
   get 'dashboard', to: 'user#dashboard'
   get 'new_user', to: 'user#new'
+  get 'dashboard_list_users', to: 'user#list'
   post 'create_user', to: 'user#create'
 
   #SESSIONS FOLDER

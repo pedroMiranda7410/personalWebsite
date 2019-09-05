@@ -30,6 +30,48 @@ html {
 
 }
 
+.roundy {
+  border-radius: 50px;
+}
+
+.bg-hover-gradient-primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.bg-hover-gradient-primary:hover {
+  color: #fff !important;
+}
+
+.bg-hover-gradient-primary:hover [class*='text-']:not(.exclode) {
+  color: #fff !important;
+}
+
+.bg-hover-gradient-primary:hover::before {
+  opacity: 1;
+}
+
+.bg-hover-gradient-primary::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background: -webkit-gradient(linear, right top, left top, from(#379392), to(#1b4948)) !important;
+  background: linear-gradient(to left, #379392, #1b4948) !important;
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.no-anchor-style {
+  text-decoration: none;
+}
+
 .font-15em {
   font-family: 'Gravity-Regular';
   font-size: 1.5em;

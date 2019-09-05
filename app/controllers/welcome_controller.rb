@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    
+    @first_time = params[:first_time] != nil ? params[:first_time] : false
   end
 
   def sotware

@@ -3,6 +3,7 @@ class UserController < ApplicationController
   #https://github.com/user.png
 
   def dashboard
+
     if current_user != nil
       if current_user.admin == true
 
@@ -22,7 +23,7 @@ class UserController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path, notice: 'user was successfully created.' }
+        format.html { redirect_to login_path(first_time: true), notice: 'user was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

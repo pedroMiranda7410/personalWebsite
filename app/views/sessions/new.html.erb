@@ -1,9 +1,9 @@
-<div class="back">
+<div class="back mt-5">
   <div class="center cenX">
-    <h1 class="titleMain" style="font-family: 'Gravity-Regular';">LOGIN</h1>
+    <h1 class="titleMain pt-5" style="font-family: 'Gravity-Regular';">LOGIN</h1>
     <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';">Acesse e faça parte da comunidade!</h3>
 
-    <%= form_tag sessions_path do |form| %>
+    <%= form_tag sessions_path(first_time: @first_time) do |form| %>
     <p id="alert"><%= alert %></p>
     <div class="row mx-4">
       <div class="col-lg-12">

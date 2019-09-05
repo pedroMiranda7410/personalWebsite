@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     user = User.find_by_nickname(params[:nickname])
 
         if user && user.authenticate(params[:password])
-          @first_time = params[:first_time] != nil ? params[:first_time] : false
+          @first_time = params[:first_time] != nil ? (params[:first_time] == "true" ? true : false) : false
           session[:user_id] = user.id
           redirect_to root_path(first_time: @first_time), notice: 'Conectado com sucesso!'
         else

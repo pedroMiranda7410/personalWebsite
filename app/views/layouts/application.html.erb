@@ -172,7 +172,7 @@
   </style>
 </head>
 <body>
-<% if @first_time %>
+<% if @first_time == true %>
   <div id="first_time" class="modal-box">
     <div class="modal">
       <p class="message"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!</p><br>
@@ -198,6 +198,7 @@
     </div>
   </div>
 <% end %>
+
   <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
 
   <% if request.original_fullpath == '/' %>
@@ -256,19 +257,8 @@
 
 
 
-  <%
-    @current_user = current_user
-
-    if @current_user == nil
-      @current_user = false
-    else
-      @current_user = true
-    end
-  %>
-
-
-
-  <% if @url.include? "dashboard" && "#{@current_user}" %>
+  <% if @url.include? "dashboard" %>
+    <% if current_user.admin == true %>
       <!DOCTYPE html>
       <html lang="en">
 
@@ -422,6 +412,7 @@
           </div>
 
         </ul>
+      <% end %>
   <% end %>
 
 

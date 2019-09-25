@@ -1,0 +1,11 @@
+
+    <%= form_for(@user, url: update_user_path(user_id: @user.id, login_count: true)) do |f| %>
+        <%= f.hidden_field :login_count, value: (@user.login_count + 1) %>
+        <%= submit_tag "Login", id="bsubmit" %>
+    <% end %>
+
+<script>
+    (function(){
+        $('#bsubmit').submit();
+    })();
+</script>

@@ -35,8 +35,37 @@ class UserController < ApplicationController
     @user = User.find_by_id(current_user.id)
   end
 
+  def delete
+    @user = User.find_by_id(params[:user_id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_list_users_path, notice: 'Usuário foi excluído com sucesso.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def login_count
+    @user = User.find_by_id(current_user.id)
+  end
+
   def update
     @user = User.find_by_id(current_user.id)
+    @login_counter = params[:login_counter]
+    @tamoJunto_counter = params[:tamoJunto]
+    @euQuemAgradeco_counter = params[:euQuemAgradeco]
+
+    if @login_counter == "true"
+      @total = @user.login_count + 1
+      @user.update(login_count: @total)
+    end
+
+    if @tamoJunto_counter == "true"
+      @user.update(tamo_junto: 1, first_time: false)
+    end
+
+    if @euQuemAgradeco_counter == "true"
+      @user.update(eu_quem_agradeco: 1, first_time: false)
+    end
 
     respond_to do |format|
       if @user.update(user_params)
@@ -51,6 +80,6 @@ class UserController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name,:github, :nickname, :email, :password, :admin, :avatar)
+      params.require(:user).permit(:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
     end
 end

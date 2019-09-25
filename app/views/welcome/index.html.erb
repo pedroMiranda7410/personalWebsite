@@ -262,5 +262,13 @@
     <link rel="stylesheet" href="includes/odometer-theme-default.css"/>
     <script src="includes/odometer.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
+
+
+    <input data-remote="true" id="user-<%= current_user.id %>" data-url="update_user?user_id=<%= current_user.id %>&login_counter=true" style="visibility:hidden" data-method="patch"  type="checkbox" >
   </body>
+  <script>
+    <% if @atualizar_login == true %>
+        $('#user-<%= current_user.id %>').trigger('click');
+    <% end %>
+  </script>
 </html>

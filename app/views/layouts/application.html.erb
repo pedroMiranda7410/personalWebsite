@@ -75,7 +75,7 @@
     transition: visibility 0s 2s, opacity 2s linear;
   }
 
-  .modal {
+  .custom-modal {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -92,12 +92,12 @@
     z-index: 1012;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
   }
-  .modal .message {
+  .custom-modal .message {
     font-size:1.1rem;
     margin-bottom: 1.6rem;
     margin-top: 0;
   }
-   .modal .btn {
+   .custom-modal .btn {
     color:inherit;
       font-family:inherit;
     font-size: inherit;
@@ -109,11 +109,11 @@
     transition: all 0.2s;
   }
 
-  .modal .btn:last-child {
+  .custom-modal .btn:last-child {
     margin: 0;
   }
 
-  .modal .btn:hover {
+  .custom-modal .btn:hover {
     box-shadow: 0.4rem 0.4rem 0 black;
 
     transform: translate(-0.4rem, -0.4rem);
@@ -144,9 +144,9 @@
       }
     */
   #denada:hover {
-    box-shadow: 0.4rem 0.4rem 0 #F62F2A;
-    background: #FF7672;
-    color: white;
+    box-shadow: 0.4rem 0.4rem 0 #FFAE00;
+    background: #FFD375;
+    color: #3F2300;
     transform: translate(-0.4rem, -0.4rem);
 
   }
@@ -159,7 +159,7 @@
 
   }
 
-  .modal .btn:active {
+  .custom-modal .btn:active {
     box-shadow: 0 0 0 black;
     transform: translate(0, 0);
   }
@@ -175,7 +175,7 @@
     transition: all .10s;
   }
 
-  .modal .options {
+  .custom-modal .options {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -183,36 +183,49 @@
   </style>
 </head>
 <body>
-<% if @first_time == true %>
-  <div id="first_time" class="modal-box">
-    <div class="modal">
-      <p class="message"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!</p><br>
-      <div class="row">
-        <div class="col-lg-7">
-          <div class="row">
-            <p class="message text-center">Dê uma olhada nos projetos da galera:</p>
-          </div>
-          <div class="row">
-            <p class="message text-center">Ou  Acesse sua própria dashboard:</p>
-          </div>
+<%# current_user.login_count == 1 && %>
+<% if current_user != nil%>
+  <% if current_user.first_time == true %>
+    <div id="first_time" class="modal-box">
+      <div class="custom-modal">
+        <p class="message text-center"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!<br>
+          Espero te trazer uma excelente experiência dentro dessa nossa aplicação <img src="hearts.png" style="width:15px;height:15px" alt=""><br>
+          <br>
+          <strong>Obs: </strong>Caso queira ter uma boa conversa, me chama no direct do <a href="https://www.instagram.com/pedro.jams/">insta</a> ou só me mande um e-mail!        
+        </p>
 
+        <div class="row">
+          <!-- <div class="col-lg-7">
+            <div class="row">
+              <p class="message text-center">Dê uma olhada nos projetos da galera:</p>
+            </div>
+            <div class="row">
+              <p class="message text-center">Ou  Acesse sua própria dashboard:</p>
+            </div>
+
+          </div> 
+          <div class="col-lg-5">
+            <a href="/software" style="text-decoration:none; color:black"><button id="btn_soft" class="btn">Ver Projetos</button></a>
+            <a href="/dashboard" style="text-decoration:none; color:black"><button id="btn_dash" class="btn mt-2">Acessar</button></a>
+          </div>-->
         </div>
-        <div class="col-lg-5">
-          <a href="/software" style="text-decoration:none; color:black"><button id="btn_soft" class="btn">Ver Projetos</button></a>
-          <a href="/dashboard" style="text-decoration:none; color:black"><button id="btn_dash" class="btn mt-2">Acessar</button></a>
+        <div class="options">
+        <button type="submit" class="btn" data-remote="true" id="denada" data-url="update_user?user_id=<%= current_user.id %>&tamoJunto=true" data-method="patch">Tamo junto! <img src="smile.png" style="width:15px;height:15px" alt=""></button>
+          <button type="submit" class="btn" data-remote="true" id="denada2" data-url="update_user?user_id=<%= current_user.id %>&euQuemAgradeco=true" data-method="patch">Eu quem agradeço <img src="hearts.png" style="width:15px;height:15px" alt=""></button>
+          
         </div>
-      </div>
-      <div class="options">
-        <a href="/" style="text-decoration:none; color:black"><button class="btn" id="denada">De nada! <img src="smile.png" style="width:15px;height:15px" alt=""></button></a>
-        <a href="/" class="ml-5" style="text-decoration:none; color:black"><button class="btn" id="denada2">Eu quem agradeço <img src="hearts.png" style="width:15px;height:15px" alt=""></button></a>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
-  <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+  <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") 
+  
+    puts "#################################################3"
+    puts @url
+  %>
 
-  <% if request.original_fullpath == '/' %>
+  <% if @url == '/' || @url == '/?' %>
     <div class="topnav" id="navbar">
       <div id="navbar-left">
         <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"shadowed-link" %>
@@ -600,7 +613,7 @@ function openMenu(){
 
   });
   window.onscroll = function() {scrollFunction()};
-  <% if request.original_fullpath == '/' %>
+  <% if @url == '/' %>
     <% if current_user != nil && current_mobileDevice == true %>
       $("#contato").hide();
     <% end %>

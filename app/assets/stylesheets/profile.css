@@ -91,6 +91,15 @@
 	-webkit-animation-timing-function: linear;
 }
 
+.shake img{
+  box-shadow: 2px 3px 3px rgba(0,0,0,0.6);
+}
+
+.modal img {
+  border-radius:50%;
+  box-shadow: 2px 4px 5px rgba(0,0,0,0.6);
+}
+
 .wrapper .tooltip {
   background: #1496bb;
   bottom: 100%;

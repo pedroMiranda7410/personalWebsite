@@ -46,11 +46,28 @@
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ganhos (Mensais)</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">$00,00</div>
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Qnt. de <br>"Tamo Junto"</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><img src="smile.png" style="width:15px;height:15px" alt=""> <%= User.where("tamo_junto = 1").length %></div>
                   </div>
                   <div class="col-auto">
-                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Requests Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Qnt. de <br>"Eu quem Agradeço"</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><img src="hearts.png" style="width:15px;height:15px" alt=""> <%= User.where("eu_quem_agradeco = 1").length %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
                   </div>
                 </div>
               </div>
@@ -83,22 +100,7 @@
             </div>
           </div>
 
-          <!-- Pending Requests Card Example -->
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Comentários efetuados</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-comments fa-2x text-gray-300"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div class="row">

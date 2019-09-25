@@ -26,6 +26,7 @@
               <thead>
                 <tr>
                   <th class="text-center">Data Cadastro</th>
+                  <th class="text-center">Agradecimento</th>
                   <th class="text-center">Nome</th>
                   <th class="text-center">Administrador</th>
                   <th class="text-center">Github</th>
@@ -38,6 +39,7 @@
                 <% User.all.where.not(id: current_user.id).each do |u| %>
                   <tr>
                     <td class="text-center"><%= u.created_at.localtime.strftime("%d/%m/%y") + ' ' + u.created_at.localtime.strftime("%H:%M")  %></td>
+                    <td class="text-center" style="color: <%= u.tamo_junto == 1 ? "#3F2300" : u.eu_quem_agradeco == 1 ? "green" : "red" %>"><%= u.tamo_junto == 1 ? "'Tamo Junto'" : u.eu_quem_agradeco == 1 ? "'Eu Quem Agradeço'" : "Nenhum" %></td>
                     <td class="text-center"><%= u.name %></td>
                     <td class="text-center bg-<%= u.admin ? "success" : "danger" %>" style="color:white"><%= u.admin ? "Sim" : "Não" %></td>
                     <td class="text-center"><%= u.github %></td>

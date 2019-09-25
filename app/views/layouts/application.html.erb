@@ -164,6 +164,17 @@
     transform: translate(0, 0);
   }
 
+  .shadowed-link{
+    background: linear-gradient(360deg, rgba(0,0,0,0.2), transparent);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    transition: all .10s;
+  }
+
+  .marginLeft-5px{
+    margin-left:5px;
+    transition: all .10s;
+  }
+
   .modal .options {
     display: flex;
     flex-direction: row;
@@ -204,9 +215,9 @@
   <% if request.original_fullpath == '/' %>
     <div class="topnav" id="navbar">
       <div id="navbar-left">
-        <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
-        <%= link_to 'Software', software_path, id:"software" %>
-        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"shadowed-link" %>
+        <%= link_to 'Software', software_path, id:"software", class:"shadowed-link" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"shadowed-link" %>
       </div>
       <div id="navbar-right">
         <% if current_user == nil %>
@@ -563,7 +574,6 @@ function openMenu(){
 
   });
   window.onscroll = function() {scrollFunction()};
-
   <% if request.original_fullpath == '/' %>
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -574,7 +584,17 @@ function openMenu(){
         document.getElementById("software").style.color = "black";
         document.getElementById("contato").style.color = "black";
         document.getElementById("logo").style.fontSize = "16px";
+        $("#logo").removeClass('shadowed-link');
+        $("#software").removeClass('shadowed-link');
+        $("#eletronica").removeClass('shadowed-link');
+        $("#software").removeClass('marginLeft-5px');
+        $("#eletronica").removeClass('marginLeft-5px');
       } else {
+        $("#logo").addClass('shadowed-link');
+        $("#software").addClass('shadowed-link');
+        $("#eletronica").addClass('shadowed-link');
+        $("#software").addClass('marginLeft-5px');
+        $("#eletronica").addClass('marginLeft-5px');
         document.getElementById("navbar").style.padding = "30px 20px";
         document.getElementById("navbar").style.backgroundColor = "transparent";
         document.getElementById("logo").style.color = "white";
@@ -587,6 +607,11 @@ function openMenu(){
 
   <% else %>
     function scrollFunction() {
+        $("#logo").removeClass('shadowed-link');
+        $("#software").removeClass('shadowed-link');
+        $("#eletronica").removeClass('shadowed-link');
+        $("#software").removeClass('marginLeft-5px');
+        $("#eletronica").removeClass('marginLeft-5px');
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         document.getElementById("navbar").style.padding = "8px 20px";
         document.getElementById("navbar").style.backgroundColor = "white";

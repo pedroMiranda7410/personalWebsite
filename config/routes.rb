@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'user#dashboard'
   get 'new_user', to: 'user#new'
   get 'dashboard_list_users', to: 'user#list'
+  get 'login_c', to: 'user#login_count'
   post 'create_user', to: 'user#create'
+  patch 'update_user', to: 'user#update'
+  delete 'delete_user', to: 'user#delete'
 
   #SESSIONS FOLDER
   get 'login', to: 'sessions#new', as: 'login'

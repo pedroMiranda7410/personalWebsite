@@ -106,25 +106,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.icon{
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+    transition-delay: 0.3s;
+}
 
 @media screen and (max-width: 600px) {
-  #navbar a:not(:first-child) {display: none;}
+  #navbar-left a:not(:first-child) {display: none;}
+  #navbar-left a:first-child {margin-left: 0;}
+  #navbar-right a {display: none;}
   #navbar a.icon {
     float: right;
+    color: black;
     display: block;
+
   }
 }
 
 @media screen and (max-width: 600px) {
-  #navbar.responsive {position: relative;}
+  #navbar.responsive {position: fixed;}
   #navbar.responsive .icon {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 0;    
   }
   #navbar.responsive a {
     float: none;
     display: block;
     text-align: left;
+    background: transparent;
+    box-shadow: 0px 0px 0px #000000;
+    color: black;
   }
 }

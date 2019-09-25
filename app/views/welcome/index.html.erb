@@ -1,6 +1,15 @@
 
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+        <% if current_mobileDevice %>
+            .rowPad{
+                display: grid;
+            }
+        <% end %>
+        </style>
+    </head>
 
   <body>
 
@@ -8,8 +17,8 @@
 
     <div class="homeImg">
         <div class="homeDiv center">
-            <h1 class="titleMain"  style="letter-spacing: 4px;padding-bottom: 0;"><font face = "Gravity-Regular" size = "8">Pedro Miranda</font></h1>
-            <h3><font face = "Gravity-Regular" size = "5">Um entusiasta programador apaixonado por tecnologia inovadora e conteúdo digital.</font></h3>
+            <h1 class="titleMain"  style="letter-spacing: 4px;padding-bottom: 0;"><font face = "Gravity-Regular" size = "<%= current_mobileDevice ? "7" : "8" %>">Pedro Miranda</font></h1>
+            <h3><font face = "Gravity-Regular" size = "<%= current_mobileDevice ? "4" : "5" %>">Um entusiasta programador apaixonado por tecnologia inovadora e conteúdo digital.</font></h3>
         </div>
 
         <div class="homeLeiaMais"  id="section1">
@@ -23,22 +32,46 @@
     <div class="container-fluid aboutMe" id="sobreMim">
         <div class="container aboutMe">
             <div class="rowPad mt-4" >
-                <div class="col-md-4" id="div-image">
-                    <img src="/circle-cropped.png"  class="circleImg"></img>
-                    <!-- https://github.com/pedroMiranda7410.png -->
-                </div>
-                <div class="col-md-8" id="div-imageText">
-                    <p class="pad20" align = "justify">
-                      <font face = "Gravity-Regular" size = "3.5">Bem-vindo ao meu site. Eu sou um hobbista em eletrônica,
-                        curioso e, atualmente, estudante de engenharia de software na Universidade de Brasília.
-                        No passado, graduei 7 semestres dentro do curso de engenharia eletrônica, um dos quais,
-                        participei de alguns projetos envolvendo arduino e construção de simulações gráficas, usando C# dentro da engine Unity (Momento em que me apaixonei pela produção de jogos 2D e 3D).
-                        Durante a evolução desses projetos, me encantei pela área de desenvolvimento de software e sua ilimitada gama de possibilidades. Desde então, venho buscando novas experiências e aprendizados construtivos tanto sociais quanto profissionais.</br>
-                        Meu objetivo é participar de novos projetos e trabalhos afim de aperfeiçoar minhas habilidades profissionais e, a partir disso, descobrir em qual das áreas de desenvolvimento de software tenho mais facilidade e produtividade.
-                      </font>
-                    </p>
+            <% if current_mobileDevice %>
+                <div class="rowPad">
+                    <div class="col-md-12" id="div-image">
+                        <img src="/circle-cropped.png"  class="circleImg"></img>
+                        <!-- https://github.com/pedroMiranda7410.png -->
+                    </div>
+                </div>                    
+                <div class="rowPad">
+                    <div class="col-md-12" id="div-imageText">
+                            <p class="pad20" align = "justify">
+                            <font face = "Gravity-Regular" size = "4">Bem-vindo ao meu site. Eu sou um hobbista em eletrônica,
+                                curioso e, atualmente, estudante de engenharia de software na Universidade de Brasília.
+                                No passado, graduei 7 semestres dentro do curso de engenharia eletrônica, um dos quais,
+                                participei de alguns projetos envolvendo arduino e construção de simulações gráficas, usando C# dentro da engine Unity (Momento em que me apaixonei pela produção de jogos 2D e 3D).
+                                Durante a evolução desses projetos, me encantei pela área de desenvolvimento de software e sua ilimitada gama de possibilidades. Desde então, venho buscando novas experiências e aprendizados construtivos tanto sociais quanto profissionais.</br>
+                                Meu objetivo é participar de novos projetos e trabalhos afim de aperfeiçoar minhas habilidades profissionais e, a partir disso, descobrir em qual das áreas de desenvolvimento de software tenho mais facilidade e produtividade.
+                            </font>
+                            </p>
 
+                        </div>
                 </div>
+                    
+            <% else %>
+                    <div class="col-md-4" id="div-image">
+                        <img src="/circle-cropped.png"  class="circleImg"></img>
+                        <!-- https://github.com/pedroMiranda7410.png -->
+                    </div>
+                    <div class="col-md-8" id="div-imageText">
+                        <p class="pad20" align = "justify">
+                        <font face = "Gravity-Regular" size = "3.5">Bem-vindo ao meu site. Eu sou um hobbista em eletrônica,
+                            curioso e, atualmente, estudante de engenharia de software na Universidade de Brasília.
+                            No passado, graduei 7 semestres dentro do curso de engenharia eletrônica, um dos quais,
+                            participei de alguns projetos envolvendo arduino e construção de simulações gráficas, usando C# dentro da engine Unity (Momento em que me apaixonei pela produção de jogos 2D e 3D).
+                            Durante a evolução desses projetos, me encantei pela área de desenvolvimento de software e sua ilimitada gama de possibilidades. Desde então, venho buscando novas experiências e aprendizados construtivos tanto sociais quanto profissionais.</br>
+                            Meu objetivo é participar de novos projetos e trabalhos afim de aperfeiçoar minhas habilidades profissionais e, a partir disso, descobrir em qual das áreas de desenvolvimento de software tenho mais facilidade e produtividade.
+                        </font>
+                        </p>
+
+                    </div>
+            <% end %>
             </div>
         </div>
     </div>

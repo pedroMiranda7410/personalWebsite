@@ -218,6 +218,16 @@
         <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"shadowed-link" %>
         <%= link_to 'Software', software_path, id:"software", class:"shadowed-link" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"shadowed-link" %>
+        <% if current_mobileDevice == true %>
+          <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+            <div class="d-flex">
+              <div style="display:flex;height: 25px; width: 25px">
+                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+              </div>
+              <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
       <div id="navbar-right">
         <% if current_user == nil %>
@@ -225,11 +235,13 @@
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>
-          <%= link_to dashboard_path, class:"sidebar-brand d-flex align-items-center justify-content-center"  do %>
-            <div style="height: 25px; width: 25px">
-              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-            </div>
-            <div class="sidebar-brand-text mx-3" id="contato"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+          <% if current_mobileDevice == false %>
+            <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+              <div style="height: 25px; width: 25px">
+                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+              </div>
+              <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+            <% end %>
           <% end %>
         <% end %>
 
@@ -244,6 +256,16 @@
         <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <% if current_mobileDevice == true %>
+          <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+            <div class="d-flex">
+              <div style="display:flex;height: 25px; width: 25px">
+                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+              </div>
+              <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
       <div id="navbar-right">
         <% if current_user == nil %>
@@ -251,11 +273,13 @@
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>
-          <%= link_to dashboard_path, class:"sidebar-brand d-flex align-items-center justify-content-center"  do %>
-            <div style="height: 25px; width: 25px">
-              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-            </div>
-            <div class="sidebar-brand-text mx-3" id="contato"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last %></div>
+          <% if current_mobileDevice == false %>
+            <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+              <div style="height: 25px; width: 25px">
+                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+              </div>
+              <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+            <% end %>
           <% end %>
         <% end %>
 
@@ -575,21 +599,28 @@ function openMenu(){
   });
   window.onscroll = function() {scrollFunction()};
   <% if request.original_fullpath == '/' %>
+    <% if current_user != nil && current_mobileDevice == true %>
+      $("#contato").hide();
+    <% end %>
     $("#toggle-icon").click(function(){
       if($("#navbar").hasClass("responsive")){
         if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
           document.getElementById("navbar").style.backgroundColor = "white";
+          $("#contato").show();
         }
         else{
           $("#navbar").css({"background-color":"rgba(0,0,0,0.5)"});
+          $("#contato").show();
         }
       }
       else{
           if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
             document.getElementById("navbar").style.backgroundColor = "white";
+            $("#contato").hide();
           }
           else{          
             document.getElementById("navbar").style.backgroundColor = "transparent";
+            $("#contato").hide();
           }
       }
     });

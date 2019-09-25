@@ -116,7 +116,7 @@ body {
 @media screen and (max-width: 600px) {
   #navbar-left a:not(:first-child) {display: none;}
   #navbar-left a:first-child {margin-left: 0;}
-  #navbar-right a {display: none;}
+  #navbar-right a:not(.icon) {display: none !important;}
   #navbar a.icon {
     float: right;
     color: black;
@@ -132,6 +132,7 @@ body {
     right: 0;
     top: 0;    
   }
+  .responsive #navbar-right a:not(.icon) {display: block !important;}
   #navbar.responsive a {
     float: none;
     display: block;

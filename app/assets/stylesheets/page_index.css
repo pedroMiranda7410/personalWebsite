@@ -58,7 +58,7 @@ body, html {
 .homeLeiaMais {
   text-align: center;
   position: absolute;
-  left: calc(50% - 54px);
+  width:100%;
   top: calc(100% - 120px);
 }
 

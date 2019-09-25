@@ -256,7 +256,7 @@
         <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
         <%= link_to 'Software', software_path, id:"software" %>
         <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
-        <% if current_mobileDevice == true %>
+        <% if current_mobileDevice == true && current_user != nil %>
           <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
             <div class="d-flex">
               <div style="display:flex;height: 25px; width: 25px">

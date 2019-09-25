@@ -1,22 +1,32 @@
 
 <!DOCTYPE HTML>
 <html>
-
+    <style>
+        <% if current_mobileDevice %>
+            .rowBackSS {
+                height: 100px !important;
+            }
+        <% else %>
+            .rowBackSS {
+                height: 240px !important;
+            }
+        <% end %>
+    </style>
     <body>
 
 
         <link rel="stylesheet" href="css/page.css">
         <div class="homeImgSoftware">
             <div class="center container" style="padding-top: 50px;">
-                <h1 class="cenX " style=" color:black;  letter-spacing: 20px; "><font face = "Gravity-Regular" size = "5">REPOSITÓRIO DE CÓDIGOS</font></h1>
+                <h1 class="cenX " style=" color:black;  letter-spacing: <%= current_mobileDevice ? "15px" : "20px" %>; "><font face = "Gravity-Regular" size = "<%= current_mobileDevice ? '2' : '5' %>">REPOSITÓRIO DE CÓDIGOS</font></h1>
                 <div class="rowBackSS"></div>
-                <h6  class ="cenX" style=" color:black;font-family: 'Gravity-Regular'; letter-spacing: 10px;padding-bottom:60px;padding-top:10px;" id="here"><font face = "Gravity-Regular" size = "2">
+                <h6  class ="cenX" style=" color:black;font-family: 'Gravity-Regular'; letter-spacing: 10px;padding-bottom:60px;padding-top:10px;" id="here"><font face = "Gravity-Regular" size = "<%= current_mobileDevice ? "1.5" : "2" %>">
                   RUBY | WEB DESIGN | JAVA | C | C# | C++
                 </font>
                 </h6>
             </div>
-              <div class="homeLeiaMais">
-                  <a class="stealthLink subPmin padX0" href="#top"><h4>VER PROJETOS</h4>
+              <div class="homeLeiaMais" style="">
+                  <a class="stealthLink subPmin padX0" href="#top"><h4><font face = "Gravity-Regular" size = "<%= current_mobileDevice ? '3' : '5' %>">VER PROJETOS</font></h4>
                   <button class="smoothScrollBtn" type="button" href="#sobreMim"><img src="/Down-Arrow.png" width="25"/></button>
                   </a>
               </div>

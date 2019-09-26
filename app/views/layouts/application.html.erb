@@ -77,10 +77,10 @@
 
   .custom-modal {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left:50%;
     transform: translate(-50%, -50%);
-    width: auto;
+    width: 96.5%;
     height: auto;
     display: inline-flex;
     flex-direction: column;
@@ -187,7 +187,7 @@
 <% if current_user != nil%>
   <% if current_user.first_time == true %>
     <div id="first_time" class="modal-box">
-      <div class="custom-modal">
+      <div class="custom-modal ">
         <p class="message text-center"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!<br>
           Espero te trazer uma excelente experiência dentro dessa nossa aplicação <img src="hearts.png" style="width:15px;height:15px" alt=""><br>
           <br>

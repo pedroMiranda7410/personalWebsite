@@ -233,9 +233,9 @@
   <% if @url == '/' || @url == '/?' %>
     <div class="topnav" id="navbar">
       <div id="navbar-left">
-        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"shadowed-link" %>
-        <%= link_to 'Software', software_path, id:"software", class:"shadowed-link" %>
-        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"shadowed-link" %>
+        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in shadowed-link" %>
+        <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in shadowed-link" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"hvr-radial-in shadowed-link" %>
         <% if current_mobileDevice == true && current_user != nil %>
         
           <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
@@ -251,7 +251,7 @@
       </div>
       <div id="navbar-right">
         <% if current_user == nil %>
-          <%= link_to login_path, id:"contato" do %>
+          <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>
@@ -273,9 +273,9 @@
   <% else %>
     <div id="navbar">
       <div id="navbar-left">
-        <%= link_to 'Pedro Miranda', root_path, id:'logo' %>
-        <%= link_to 'Software', software_path, id:"software" %>
-        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica" %>
+        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in" %>
+        <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in" %>
+        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"hvr-radial-in" %>
         <% if current_mobileDevice == true && current_user != nil %>
           <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
             <div class="d-flex">
@@ -289,7 +289,7 @@
       </div>
       <div id="navbar-right">
         <% if current_user == nil %>
-          <%= link_to login_path, id:"contato" do %>
+          <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
             <i class="fa fa-fw fa-user"></i> Login
           <% end %>
         <% else %>

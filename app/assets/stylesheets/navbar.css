@@ -1,3 +1,53 @@
+
+
+.hvr-radial-in:hover, .hvr-radial-in:focus, .hvr-radial-in:active {
+  color: white !important;
+  background: #282828;
+}
+.hvr-radial-in:hover:before, .hvr-radial-in:focus:before, .hvr-radial-in:active:before {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+
+.slice_effect {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.slice_effect:before, .slice_effect:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  top: 50%;
+  margin-top: -0.5px;
+  background: #fff;
+}
+
+.slice_effect:before {
+  left: -2.5px;
+}
+.slice_effect:after {
+  right: 2.5px;
+  background: #fff;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.slice_effect:hover:before {
+  background: #fff;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.slice_effect:hover:after {
+  background: transparent;
+  width: 100%;
+  transition: 0s;
+}
+
+
 .dropdown {
   position: relative;
   display: inline-block;

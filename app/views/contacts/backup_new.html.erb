@@ -1,0 +1,67 @@
+
+    <body>
+<style>
+
+  .hidden {
+    display: none;
+  }
+</style>
+<section >
+        <div class="back" >
+            <div class="cenMain">
+
+                     <h1 class="titleMain font-2" style="padding-bottom: 20px;font-family: 'Gravity-Regular';font-size: 4.5em;">CONTATO </h1>
+                     <h3 class="regTitle padB20" style="font-family: 'Gravity-Regular';font-size: 2.5em;">Envie-me um e-mail por esse formulário.</h3>
+
+                <!--<img>pmiranda7410@gmail.com</img> -->
+                <!-- FORM -->
+                <%= form_for @contact do |f| %>
+                <div class="form-group row">
+                    <label for="nome" class="col-2 col-form-label" style="font-family: 'Gravity-Regular';font-size: 1.3em;">Nome</label>
+                    <div class="col-10">
+                    <%= f.text_field :name, required: true, :class => 'form-control' %>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-2 col-form-label rp" style="font-family: 'Gravity-Regular';font-size: 1.3em;" > E-mail </label>
+                    <div class="col-10">
+                    <%= f.email_field :email, required: true, :class => 'form-control' %>
+
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <label for="assunto" class="col-2 col-form-label" style="font-family: 'Gravity-Regular';font-size: 1.3em;">Assunto</label>
+                    <div class="col-10">
+                    <%= f.text_field :assunto, required: true, :class => 'form-control'%>
+
+                  </div>
+          </div>
+
+
+                <div class="form-group">
+                    <label for="assunto" class="col-2 col-form-label" style="margin: 0; padding-left: 0;font-family: 'Gravity-Regular';font-size: 1.3em;">Mensagem</label>
+
+                    <%= f.text_area :message, as: :text, :class => 'form-control', :style => 'padding-left: 0;'%>
+                </div>
+
+                    <div class="hidden">
+                      <%= f.label :nickname %><br>
+                      <%= f.text_field :nickname, hint: 'leave this field blank' %>
+                    </div>
+
+                    <div class="cenX down">
+                    <%= f.submit 'Enviar', :class => 'btn', :class => 'btn-primary', :class => 'btn-lg', :style => 'color: white;', :style => 'background-color: #C0C6C8;' %>
+                  </div>
+
+                <% end %>
+
+
+
+            </div>
+        </div>
+</section>
+
+    </body>

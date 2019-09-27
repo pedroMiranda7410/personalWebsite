@@ -34,15 +34,9 @@
                     </div>
 
                     <div class="row exText">
-                        <div class="col-4">
-                            <h5 class="cenX"></h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: 2em;">SIMULAÇÃO</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 class="cenX"></h5>
-                        </div>
+                        <div class="col-md-12">
+                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">SIMULAÇÃO</h5>
+                        </div>                            
                     </div>
                     <video width="100%" autoplay loop class="round3 vid">
                         <source src="/video_fluxoSang.mp4"></source>
@@ -52,8 +46,8 @@
 
             <div class="container-fluid  sec" style="background-color: #191919;">
                 <div class="container">
-                    <h3 class="subTitle white" style="font-family: 'Gravity-Regular';font-size: 3em;">TEORIA</h3>
-                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: 1.8em;">
+                    <h3 class="subTitle white" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "3" %>em;">TEORIA</h3>
+                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1" : "1.8" %>em;">
                       Esse projeto foi apresentado durante a semana Universitária, organizada pela UnB-FGA, na qual fui um dos palestrantes.
                       Nosso principal objetivo era introduzir para os alunos leigos no assunto sobre como são os processos de estudos e desenvolvimento de simulações gráficas.
                       Nossa metodologia consistiu em criar essa simulação, de um nano-tubo de ouro reagindo ao magnetismo presente em uma hemácia infectada com alguma doença e, teoricamente, enviando sinais de sua presença no corpo, apenas com o intuito de demonstrar como ela funciona e como desenvolvê-la.
@@ -66,26 +60,26 @@
 
             <div class="container-fluid sec">
                 <div class="container">
-                    <h3 class="subTitle" style="font-family: 'Gravity-Regular';font-size: 3em;">COMO VER O TUTORIAL</h3>
+                    <h3 class="subTitle" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "3" %>em;">COMO VER O TUTORIAL</h3>
                         <ul class="listPad">
-                            <li align = "justify" style="font-family: 'Gravity-Regular';font-size: 2em;">Para seguir o tutorial, utilizamos o software Blender para efetuar as modelagens, que é encontrado gratuitamente na internet para <a href="https://www.blender.org/download/">download,</a>
+                            <li align = "justify" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1" : "2" %>em;">Para seguir o tutorial, utilizamos o software Blender para efetuar as modelagens, que é encontrado gratuitamente na internet para <a href="https://www.blender.org/download/">download,</a>
                               junto da Engine <a href="https://unity3d.com/pt/get-unity/download"> UNITY</a>, na qual, consequentemente segue o download do "microsoft visual studio"
                               (IDE para escrita de códigos), em que será desenvolvido o ambiente da simulação. Efetuado o download desses dois softwares,
                               você está pronto para dar continuidade.
 
                             </li>
-                            <li style="font-family: 'Gravity-Regular';font-size: 2em;">Caso você esteja no celular, baixe o pdf logo abaixo dessa lista e siga o tutorial a partir do slide de número 25, seguindo isso estaremos
+                            <li style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1" : "2" %>em;">Caso você esteja no celular, baixe o pdf logo abaixo dessa lista e siga o tutorial a partir do slide de número 25, seguindo isso estaremos
                             ensinando como modelar uma hemácia e posteriormente como coloca-lá na engine Unity e utiliza-la. Caso contrário apenas siga os slides.</li>
 
 
-                            <li style="font-family: 'Gravity-Regular';font-size: 2em;">qualquer dúvida, <a href="/contacts/new"> Fale comigo</a>.</li>
+                            <li style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1" : "2" %>em;">qualquer dúvida, <a href="/contacts/new"> Fale comigo</a>.</li>
 
                         </ul>
                 </div>
 
 
                 <div class="container">
-                    <iframe src="/PDFslides_fluxoSang.pdf" width="90%" height="650px" class="centerImg padB40"></iframe>
+                    <iframe src="/PDFslides_fluxoSang.pdf" width="98%" height="650px" class="centerImg padB40"></iframe>
                 </div>
             </div>
 
@@ -115,22 +109,22 @@
                     <div class="row">
                         <div class="col-md-4 bot">
                             <div class="leftCenter">
-                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 2em;">ACHOU UM BUG?</h3>
-                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.7em;">Me deixe sabendo no github</p>
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">ACHOU UM BUG?</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.2" : "1.7" %>em;">Me deixe sabendo no github</p>
                                 <a class="btn btn-success btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.7em;" href="https://github.com/pedroMiranda7410" role="button">Problemas</a>
                             </div>
                         </div>
                         <div class="col-md-4 bot">
                             <div class="leftCenter">
-                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 2em;">CONTRIBUA</h3>
-                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.7em;">Faça parte do projeto</p>
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">CONTRIBUA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.2" : "1.7" %>em;">Faça parte do projeto</p>
                                 <a class="btn btn-secondary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.7em;" href="/contacts/new" role="button">Contate-me</a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="leftCenter">
-                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 2em;">PEGUE DE GRAÇA</h3>
-                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.7em;">teste da sua forma</p>
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">PEGUE DE GRAÇA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.2" : "1.7" %>em;">teste da sua forma</p>
                                 <a class="btn btn-primary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.7em;" href="/Arquivos_Apresentação.zip" role="button" download>Download .zip</a>
                             </div>
                         </div>

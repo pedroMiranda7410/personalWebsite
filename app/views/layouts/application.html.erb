@@ -1,713 +1,558 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pedro Miranda</title>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
 
-  <link rel="icon" type="image/png" href="/Down-Arrow.png" />
 
-  <!-- Custom spacing and fonts that are often reused -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Pedro Miranda</title>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- <script src="/scrollTop.css"></script>
-  <script src="/css-software/page.css"></script> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="icon" type="image/png" href="/circle-cropped.png" />
 
-  <meta charset="UTF-8">
-  <meta name="description" content="Me chamo Pedro Miranda e com meu site pessoal trago a iniciativa de criar uma comunidade para ajudar pessoas com dificuldade em programação, trazendo oportunidade, também, pra galera postar seus projetos e ajudar outras pessoas realizando seu cadastro">
-  <meta name="keywords" content="Pedro Miranda,Pedro,Miranda,Comunidade, comunidade, Projetos, Ajuda, Tutoriais, Tutorial, Site Pessoal, Felicidade">
-  <meta name="author" content="Pedro Miranda">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="width=device-width">
-<!--
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/application.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/confirm.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/contacts.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/footer.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/page_index.css">
-   <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/scrollTop.css">
-   <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
-   <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script> -->
+      <!-- Custom spacing and fonts that are often reused -->
 
-  <style media="screen">
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- <script src="/scrollTop.css"></script>
+      <script src="/css-software/page.css"></script> -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  #first_time{
-    z-index:1011;
-    position: fixed;
-    left: 0%;
-    top: 0%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,217,102,0.4);
-    transition: all 2s linear;
-  }
+      <meta charset="UTF-8">
+      <meta name="description" content="Me chamo Pedro Miranda e com meu site pessoal trago a iniciativa de criar uma comunidade para ajudar pessoas com dificuldade em programação, trazendo oportunidade, também, pra galera postar seus projetos e ajudar outras pessoas realizando seu cadastro">
+      <meta name="keywords" content="Pedro Miranda,Pedro,Miranda,Comunidade, comunidade, Projetos, Ajuda, Tutoriais, Tutorial, Site Pessoal, Felicidade">
+      <meta name="author" content="Pedro Miranda">
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+      <meta name="viewport" content="width=device-width">
+    <!--
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/application.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/confirm.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/contacts.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/footer.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/page_index.css">
+      <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/scrollTop.css">
+      <script type="text/javascript" src="../../assets/javascripts/application.js"></script>
+      <script type="text/javascript" src="../../assets/javascripts/scrollTop.js"></script> -->
 
-  @keyframes pulse {
-    0% {
-      opacity; 100%;
-    }
-    100% {
-      background-color: #FF4136;
-    }
-  }
+      <style media="screen">
 
-  div {
-    opacity: 1;
-    transition: opacity .3s linear;
-  }
+      #first_time{
+        z-index:1011;
+        position: fixed;
+        left: 0%;
+        top: 0%;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,217,102,0.4);
+        transition: all 2s linear;
+      }
 
-  div.hide {
-    opacity: 0;
-    pointer-events: none;
-  }
+      @keyframes pulse {
+        0% {
+          opacity; 100%;
+        }
+        100% {
+          background-color: #FF4136;
+        }
+      }
 
-  .visible {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 2s linear;
-  }
-  .hidden {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 2s, opacity 2s linear;
-  }
+      div {
+        opacity: 1;
+        transition: opacity .3s linear;
+      }
 
-  .custom-modal {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    width: <%= current_mobileDevice ? "96.5%" : "auto" %>;
-    height: auto;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.6rem 3rem;
-    border: 3px solid black;
-    border-radius: 5px;
-    background: white;
-    z-index: 1012;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-  .custom-modal .message {
-    font-size:1.1rem;
-    margin-bottom: 1.6rem;
-    margin-top: 0;
-  }
-   .custom-modal .btn {
-    color:inherit;
-      font-family:inherit;
-    font-size: inherit;
-    background: white;
-    padding: 0.3rem 3.4rem;
-    border: 3px solid black;
-    margin-right: 2.6rem;
-    box-shadow: 0 0 0 black;
-    transition: all 0.2s;
-  }
+      div.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-  .custom-modal .btn:last-child {
-    margin: 0;
-  }
+      .visible {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 2s linear;
+      }
+      .hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+      }
 
-  .custom-modal .btn:hover {
-    box-shadow: 0.4rem 0.4rem 0 black;
+      .custom-modal {
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        width: <%= current_mobileDevice ? "96.5%" : "auto" %>;
+        height: auto;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.6rem 3rem;
+        border: 3px solid black;
+        border-radius: 5px;
+        background: white;
+        z-index: 1012;
+        box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .custom-modal .message {
+        font-size:1.1rem;
+        margin-bottom: 1.6rem;
+        margin-top: 0;
+      }
+      .custom-modal .btn {
+        color:inherit;
+          font-family:inherit;
+        font-size: inherit;
+        background: white;
+        padding: 0.3rem 3.4rem;
+        border: 3px solid black;
+        margin-right: 2.6rem;
+        box-shadow: 0 0 0 black;
+        transition: all 0.2s;
+      }
 
-    transform: translate(-0.4rem, -0.4rem);
-  }
+      .custom-modal .btn:last-child {
+        margin: 0;
+      }
 
-  #heart-img {
-    display:none;
-  }
+      .custom-modal .btn:hover {
+        box-shadow: 0.4rem 0.4rem 0 black;
 
-  #first_time {
-    transition: all 2s linear;
-  }
+        transform: translate(-0.4rem, -0.4rem);
+      }
 
-  #btn_soft:hover, #btn_dash:hover {
-    box-shadow: 0.4rem 0.4rem 0 #042A00;
-    background: #0C8200;
-    color: white;
-    transform: translate(-0.4rem, -0.4rem);
-  }
+      #heart-img {
+        display:none;
+      }
 
-    /*
-      #btn_dash:hover {
-        box-shadow: 0.4rem 0.4rem 0 #524900;
-        background: #9F8F00;
+      #first_time {
+        transition: all 2s linear;
+      }
+
+      #btn_soft:hover, #btn_dash:hover {
+        box-shadow: 0.4rem 0.4rem 0 #042A00;
+        background: #0C8200;
+        color: white;
+        transform: translate(-0.4rem, -0.4rem);
+      }
+
+        /*
+          #btn_dash:hover {
+            box-shadow: 0.4rem 0.4rem 0 #524900;
+            background: #9F8F00;
+            color: white;
+            transform: translate(-0.4rem, -0.4rem);
+
+          }
+        */
+      #denada:hover {
+        box-shadow: 0.4rem 0.4rem 0 #FFAE00;
+        background: #FFD375;
+        color: #3F2300;
+        transform: translate(-0.4rem, -0.4rem);
+
+      }
+
+      #denada2:hover {
+        box-shadow: 0.4rem 0.4rem 0 #F62F2A;
+        background: #FF7672;
         color: white;
         transform: translate(-0.4rem, -0.4rem);
 
       }
-    */
-  #denada:hover {
-    box-shadow: 0.4rem 0.4rem 0 #FFAE00;
-    background: #FFD375;
-    color: #3F2300;
-    transform: translate(-0.4rem, -0.4rem);
 
-  }
-
-  #denada2:hover {
-    box-shadow: 0.4rem 0.4rem 0 #F62F2A;
-    background: #FF7672;
-    color: white;
-    transform: translate(-0.4rem, -0.4rem);
-
-  }
-
-  .custom-modal .btn:active {
-    box-shadow: 0 0 0 black;
-    transform: translate(0, 0);
-  }
-
-  .shadowed-link{
-    background: linear-gradient(360deg, rgba(0,0,0,0.2), transparent);
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-    transition: all .10s;
-  }
-
-  .marginLeft-5px{
-    margin-left:5px;
-    transition: all .10s;
-  }
-
-  .custom-modal .options {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  </style>
-</head>
-<body>
-<%# current_user.login_count == 1 && %>
-<% if current_user != nil%>
-  <% if current_user.first_time == true %>
-    <div id="first_time" class="modal-box">
-      <div class="custom-modal ">
-        <p class="message text-center"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!<br>
-          Espero te trazer uma excelente experiência dentro dessa nossa aplicação <img src="hearts.png" style="width:15px;height:15px" alt=""><br>
-          <br>
-          <strong>Obs: </strong>Caso queira ter uma boa conversa, me chama no direct do <a href="https://www.instagram.com/pedro.jams/">insta</a> ou só me mande um e-mail!        
-        </p>
-
-        <div class="row">
-          <!-- <div class="col-lg-7">
-            <div class="row">
-              <p class="message text-center">Dê uma olhada nos projetos da galera:</p>
-            </div>
-            <div class="row">
-              <p class="message text-center">Ou  Acesse sua própria dashboard:</p>
-            </div>
-
-          </div> 
-          <div class="col-lg-5">
-            <a href="/software" style="text-decoration:none; color:black"><button id="btn_soft" class="btn">Ver Projetos</button></a>
-            <a href="/dashboard" style="text-decoration:none; color:black"><button id="btn_dash" class="btn mt-2">Acessar</button></a>
-          </div>-->
-        </div>
-        <div class="options">
-        <button type="submit" class="btn" data-remote="true" id="denada" data-url="update_user?user_id=<%= current_user.id %>&tamoJunto=true" data-method="patch">Tamo junto! <img src="smile.png" style="width:15px;height:15px" alt=""></button>
-          <button type="submit" class="btn" data-remote="true" id="denada2" data-url="update_user?user_id=<%= current_user.id %>&euQuemAgradeco=true" data-method="patch">Eu quem agradeço <img src="hearts.png" style="width:15px;height:15px" alt=""></button>
-          
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-  <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") 
-  
-    puts "#################################################3"
-    puts @url
-  %>
-
-  <% if @url == '/' || @url == '/?' %>
-    <div class="topnav" id="navbar">
-      <div id="navbar-left">
-        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in shadowed-link" %>
-        <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in shadowed-link" %>
-        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"hvr-radial-in shadowed-link" %>
-        <% if current_mobileDevice == true && current_user != nil %>
-        
-          <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
-            <div class="d-flex">
-              <div style="display:flex;height: 25px; width: 25px">
-                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-              </div>
-              <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
-            </div>
-          <% end %>
-
-        <% end %>
-      </div>
-      <div id="navbar-right">
-        <% if current_user == nil %>
-          <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
-            <i class="fa fa-fw fa-user"></i> Login
-          <% end %>
-        <% else %>
-          <%  if current_mobileDevice == false || current_mobileDevice == nil %>
-            <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
-              <div style="height: 25px; width: 25px">
-                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-              </div>
-              <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <a href="javascript:void(0);" class="icon" id="toggle-icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </div>
-  <% else %>
-    <div id="navbar">
-      <div id="navbar-left">
-        <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in" %>
-        <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in" %>
-        <%= link_to 'Eletrônica', eletronica_path, id:"eletronica", class:"hvr-radial-in" %>
-        <% if current_mobileDevice == true && current_user != nil %>
-          <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
-            <div class="d-flex">
-              <div style="display:flex;height: 25px; width: 25px">
-                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-              </div>
-              <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div id="navbar-right">
-        <% if current_user == nil %>
-          <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
-            <i class="fa fa-fw fa-user"></i> Login
-          <% end %>
-        <% else %>
-          <% if current_mobileDevice == false || current_mobileDevice == nil  %>
-            <%= link_to dashboard_path, id:"contato", class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
-              <div style="height: 25px; width: 25px">
-                <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
-              </div>
-              <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </div>
-  <% end %>
-
-
-
-  <% if @url.include? "dashboard" %>
-    <% if current_user.admin == true %>
-      <!DOCTYPE html>
-      <html lang="en">
-
-      <head>
-
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
-
-          <title>Pedro Miranda</title>
-          <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-          <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-          <%= csrf_meta_tags %>
-
-          <link rel="icon" type="image/png" href="/Down-Arrow.png" />
-
-          <!-- Custom spacing and fonts that are often reused -->
-          <script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-base.min.js" type="text/javascript"></script>
-          <script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-data-adapter.min.js"></script>
-          <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-          <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
-      </head>
-
-      <body id="page-top" style="margin-top:100px">
-
-      <!-- Page Wrapper -->
-      <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-principal sidebar sidebar-dark accordion" id="accordionSidebar">
-
-          <!-- Sidebar - Brand -->
-          <%= link_to root_path, class:"sidebar-brand d-flex align-items-center justify-content-center"  do %>
-            <div style="height: 45px; width: 45px">
-              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="https://github.com/<%= current_user.github %>.png">
-            </div>
-            <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %><br><small>Dashboard</small></div>
-          <% end %>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
-
-          <!-- Nav Item - Dashboard -->
-          <li class="nav-item ">
-            <%= link_to dashboard_path, class:"nav-link"  do %>
-              <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>Dashboard</span>
-            <% end %>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider">
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-            Geral
-          </div>
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-chart-area"></i>
-              <span>Usuários</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Visualização:</h6>
-                <%= link_to "Lista", dashboard_list_users_path, class:"collapse-item" %>
-                <a class="collapse-item" href="cards.html">Gráficos</a>
-              </div>
-            </div>
-          </li>
-
-          <!-- Nav Item - Utilities Collapse Menu -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-              <i class="fas fa-fw fa-wrench"></i>
-              <span>Utilities</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-              </div>
-            </div>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider">
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-            Pessoal
-          </div>
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-              <i class="fas fa-fw fa-folder"></i>
-              <span>Posts</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
-              </div>
-            </div>
-          </li>
-
-          <!-- Nav Item - Charts -->
-          <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-              <i class="fas fa-fw fa-chart-area"></i>
-              <span>Charts</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-              <i class="fas fa-fw fa-cog"></i>
-              <span>Ajustes</span>
-            </a>
-          </li>
-
-          <!-- Nav Item - Tables -->
-          <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-              <i class="fas fa-fw fa-table"></i>
-              <span>Tables</span></a>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
-
-          <!-- Sidebar Toggler (Sidebar) -->
-          <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
-
-        </ul>
-      <% end %>
-  <% end %>
-
-
-  <%= yield %>
-
-  <footer class="footer mt-5 container-fluid">
-    <div class="container extraSpace">
-        <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
-            <li style="display:inline-block">
-                <a href="https://www.instagram.com/pedro.jams/"><img src="/icons/instagram.png"></img></a>
-            </li>
-            <li style="display:inline-block">
-                <a href="https://github.com/pedroMiranda7410"><img src="/icons/github.png"></img></a>
-            </li>
-            <li style="display:inline-block">
-                <a href="https://gitlab.com/pmiranda7410"><img src="/icons/gitlab.png"></img></a>
-            </li>
-            <li style="display:inline-block">
-                <a href="https://www.linkedin.com/in/pedro-henrique-a09054167/"><img src="/icons/linkedIn.png"></img></a>
-            </li>
-            <li style="display:inline-block">
-                <a href="/contacts/new"><img src="/icons/email.png"></img></a>
-            </li>
-        </ul>
-        <p class="footerText subP"><font face = "Gravity-Regular" size = "4">Me envie um e-mail para sugestões,
-        colaborações ou apenas uma boa conversa!<br>pmiranda7410@gmail.com</font></p>
-    </div>
-    <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
-        <div class="container">
-            <div class="rowFooter" style="right:0;left:0;">
-                <div class="col-lg-3">
-                    <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
-                </div>
-                <div class="col-lg-3" >
-                    <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
-                </div>
-                <div class="col-lg-3 ">
-                    <a href="/eletronica"><font face = "Gravity-Regular" size = "3">Eletrônica</font></a>
-                </div>
-                <div class="col-lg-3">
-                    <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<% if current_user != nil %>
-  <div class="profile-img shake">
-    <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>" alt="">
-  </div>
-  <div id="menu" class="hoverWrapper">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <span style="font-family: 'Gravity-Regular';font-size: 0.8em;">Olá, </span><br> <strong><small style="font-family: 'Gravity-Regular';font-size: 0.6em;"><%= current_user.name.rpartition(" ").first %> !</small></strong>
-          </div>
-          <div class="card-body">
-            <div class="row px-2">
-              <div class="col-lg-12 anchor">
-                <a href="#" class="px-2 py-1" style="font-family: 'Gravity-Regular';font-size: 0.6em;">Perfil</a>
-              </div>
-            </div>
-            <div class="row px-2">
-              <div class="col-lg-12 anchor">
-                <a href="#" class="px-2 py-1" style="font-family: 'Gravity-Regular';font-size: 0.6em;">Editar</a>
-              </div>
-            </div>
-            <div class="row px-2">
-              <div class="col-lg-12 logout">
-                <%= link_to 'Logout', logout_path, class:"px-2 py-1", style:"font-family: 'Gravity-Regular';font-size: 0.6em;" %>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-</body>
-
-
-<script>
-
-
-function myFunction() {
-  var x = document.getElementById("navbar");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-function shake(){
-  setTimeout(function myFunction() {
-    $(".shake").addClass("active");
-    stopShaking();
-  }, 2000);
-}
-
-function stopShaking(){
-  setTimeout(function myFunction() {
-    $(".shake").removeClass("active");
-    shake();
-  }, 2000);
-}
-
-function openMenu(){
-  $(".shake").click( function(){
-    if($('#menu').is(":visible") == true){
-      $('#menu').hide();
-    }
-    else{
-      $('#menu').show();
-    }
-  });
-}
-
-</script>
-
-<script type="text/javascript">
-
-
-  $(document).ready(function(){
-    scrollFunction();
-    stopShaking();
-    openMenu();
-      <% if @first_time %>
-        setTimeout(function myFunction() {
-          var element = document.getElementById("first_time");
-          element.classList.add("visible");
-        }, 10);
-      <% end %>
-      $("#denada").click(function(){
-        ocultar();
-      });
-      $("#denada2").click(function(){
-        ocultar();
-      });
-
-      function ocultar() {
-        var element = document.getElementById("first_time");
-        element.classList.add("hide");
+      .custom-modal .btn:active {
+        box-shadow: 0 0 0 black;
+        transform: translate(0, 0);
       }
 
-  });
-  window.onscroll = function() {scrollFunction()};
-  <% if @url == '/' %>
-    <% if current_user != nil && current_mobileDevice == true %>
-      $("#contato").hide();
+      .shadowed-link{
+        background: linear-gradient(360deg, rgba(0,0,0,0.2), transparent);
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+        transition: all .10s;
+      }
+
+      .marginLeft-5px{
+        margin-left:5px;
+        transition: all .10s;
+      }
+
+      .custom-modal .options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      </style>
+    </head>
+    <body>
+
+      <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+
+
+                <%# current_user.login_count == 1 && %>
+                <% if current_user != nil%>
+                  <% if current_user.first_time == true %>
+                    <div id="first_time" class="modal-box">
+                      <div class="custom-modal ">
+                        <p class="message text-center"><strong><u>OBRIGADO</u></strong> por fazer parte da comunidade, <%= current_user.name %>!<br>
+                          Espero te trazer uma excelente experiência dentro dessa nossa aplicação <img src="hearts.png" style="width:15px;height:15px" alt=""><br>
+                          <br>
+                          <strong>Obs: </strong>Caso queira ter uma boa conversa, me chama no direct do <a href="https://www.instagram.com/pedro.jams/">insta</a> ou só me mande um e-mail!        
+                        </p>
+
+                        <div class="row">
+                          <!-- <div class="col-lg-7">
+                            <div class="row">
+                              <p class="message text-center">Dê uma olhada nos projetos da galera:</p>
+                            </div>
+                            <div class="row">
+                              <p class="message text-center">Ou  Acesse sua própria dashboard:</p>
+                            </div>
+
+                          </div> 
+                          <div class="col-lg-5">
+                            <a href="/software" style="text-decoration:none; color:black"><button id="btn_soft" class="btn">Ver Projetos</button></a>
+                            <a href="/dashboard" style="text-decoration:none; color:black"><button id="btn_dash" class="btn mt-2">Acessar</button></a>
+                          </div>-->
+                        </div>
+                        <div class="options">
+                        <button type="submit" class="btn" data-remote="true" id="denada" data-url="update_user?user_id=<%= current_user.id %>&tamoJunto=true" data-method="patch">Tamo junto! <img src="smile.png" style="width:15px;height:15px" alt=""></button>
+                          <button type="submit" class="btn" data-remote="true" id="denada2" data-url="update_user?user_id=<%= current_user.id %>&euQuemAgradeco=true" data-method="patch">Eu quem agradeço <img src="hearts.png" style="width:15px;height:15px" alt=""></button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+
+            <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+
+            <% if @url == '/' || @url == '/?' %>
+              <div class="topnav" id="navbar">
+                <div id="navbar-left">
+                  <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in shadowed-link" %>
+                  <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in shadowed-link" %>
+                  <%= link_to 'Comunidade', comunidade_path, id:"comunidade", class:"hvr-radial-in shadowed-link" %>
+                  <% if current_mobileDevice == true && current_user != nil %>
+                  
+                    <%= link_to dashboard_path, id:"contato", :"data-turbolinks" => false, class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+                      <div class="d-flex">
+                        <div style="display:flex;height: 25px; width: 25px">
+                          <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+                        </div>
+                        <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+                      </div>
+                    <% end %>
+
+                  <% end %>
+                </div>
+                <div id="navbar-right">
+                  <% if current_user == nil %>
+                    <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
+                      <i class="fa fa-fw fa-user"></i> Login
+                    <% end %>
+                  <% else %>
+                    <%  if current_mobileDevice == false || current_mobileDevice == nil %>
+                      <%= link_to dashboard_path, id:"contato",:"data-turbolinks" => false,  class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+                        <div style="height: 25px; width: 25px">
+                          <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+                        </div>
+                        <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+
+                  <a href="javascript:void(0);" class="icon" id="toggle-icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </div>
+              </div>
+            <% else %>
+              <div id="navbar">
+                <div id="navbar-left">
+                  <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in" %>
+                  <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in" %>
+                  <%= link_to 'Comunidade', comunidade_path, id:"comunidade", class:"hvr-radial-in" %>
+                  <% if current_mobileDevice == true && current_user != nil %>
+                    <%= link_to dashboard_path, id:"contato", :"data-turbolinks" => false , class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+                      <div class="d-flex">
+                        <div style="display:flex;height: 25px; width: 25px">
+                          <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+                        </div>
+                        <div class="d-flex sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div id="navbar-right">
+                  <% if current_user == nil %>
+                    <%= link_to login_path, id:"contato", class:"hvr-radial-in" do %>
+                      <i class="fa fa-fw fa-user"></i> Login
+                    <% end %>
+                  <% else %>
+                    <% if current_mobileDevice == false || current_mobileDevice == nil  %>
+                      <%= link_to dashboard_path, id:"contato", :"data-turbolinks" => false , class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
+                        <div style="height: 25px; width: 25px">
+                          <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>">
+                        </div>
+                        <div class="sidebar-brand-text mx-3"><%= current_user.name.rpartition(" ").first %> <%= current_user.name.rpartition(" ").last%></div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+
+                  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+
+
+
+          <%= yield %>
+
+              <footer class="footer <%= current_mobileDevice ? "mt-5" : "" %> container-fluid">
+                <div class="container extraSpace">
+                    <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
+                        <li style="display:inline-block">
+                            <a href="https://www.instagram.com/pedro.jams/"><img src="/icons/instagram.png"></img></a>
+                        </li>
+                        <li style="display:inline-block">
+                            <a href="https://github.com/pedroMiranda7410"><img src="/icons/github.png"></img></a>
+                        </li>
+                        <li style="display:inline-block">
+                            <a href="https://gitlab.com/pmiranda7410"><img src="/icons/gitlab.png"></img></a>
+                        </li>
+                        <li style="display:inline-block">
+                            <a href="https://www.linkedin.com/in/pedro-henrique-a09054167/"><img src="/icons/linkedIn.png"></img></a>
+                        </li>
+                        <li style="display:inline-block">
+                            <a href="/contacts/new"><img src="/icons/email.png"></img></a>
+                        </li>
+                    </ul>
+                    <p class="footerText subP"><font face = "Gravity-Regular" size = "4">Me envie um e-mail para sugestões,
+                    colaborações ou apenas uma boa conversa!<br><%= User.where(admin: true).first.email %></font></p>
+                </div>
+                <div class="bottomLinksDiv" style="position:absolute;right:0;left:0;">
+                    <div class="container">
+                        <div class="rowFooter" style="right:0;left:0;">
+                            <div class="col-lg-3">
+                                <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
+                            </div>
+                            <div class="col-lg-3" >
+                                <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
+                            </div>
+                            <div class="col-lg-3 ">
+                                <a href="/Comunidade"><font face = "Gravity-Regular" size = "3">Comunidade</font></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contacts/new"><font face = "Gravity-Regular" size = "3">Contato</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+    <% if current_user != nil %>
+      <% if (@url.include? "dashboard") == false %>
+        <div class="profile-img shake">
+          <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' +current_user.github + '.png' %>" alt="">
+        </div>
+        <div id="menu" class="hoverWrapper">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <span style="font-family: 'Gravity-Regular';font-size: 0.8em;">Olá, </span><br> <strong><small style="font-family: 'Gravity-Regular';font-size: 0.6em;"><%= current_user.name.rpartition(" ").first %> !</small></strong>
+                </div>
+                <div class="card-body">
+                  <div class="row px-2">
+                    <div class="col-lg-12 anchor">
+                      <a href="#" class="px-2 py-1" style="font-family: 'Gravity-Regular';font-size: 0.6em;">Perfil</a>
+                    </div>
+                  </div>
+                  <div class="row px-2">
+                    <div class="col-lg-12 anchor">
+                      <%= link_to "Editar", dashboard_edit_user_path,:"data-turbolinks" => false, class:"px-2 py-1", style:"font-family: 'Gravity-Regular';font-size: 0.6em;" %>
+                    </div>
+                  </div>
+                  <div class="row px-2">
+                    <div class="col-lg-12 logout">
+                      <%= link_to 'Logout', logout_path, class:"px-2 py-1", style:"font-family: 'Gravity-Regular';font-size: 0.6em;" %>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-    $("#toggle-icon").click(function(){
-      if($("#navbar").hasClass("responsive")){
-        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-          document.getElementById("navbar").style.backgroundColor = "white";
-          $("#contato").show();
+
+    </body>
+
+
+    <script>
+
+
+    function myFunction() {
+      var x = document.getElementById("navbar");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    function shake(){
+      setTimeout(function myFunction() {
+        $(".shake").addClass("active");
+        stopShaking();
+      }, 2000);
+    }
+
+    function stopShaking(){
+      setTimeout(function myFunction() {
+        $(".shake").removeClass("active");
+        shake();
+      }, 2000);
+    }
+
+    function openMenu(){
+      $(".shake").click( function(){
+        if($('#menu').is(":visible") == true){
+          $('#menu').hide();
         }
         else{
-          $("#navbar").css({"background-color":"rgba(0,0,0,0.5)"});
-          $("#contato").show();
+          $('#menu').show();
         }
-      }
-      else{
+      });
+    }
+
+    </script>
+
+    <script type="text/javascript">
+
+
+      $(document).ready(function(){
+        scrollFunction();
+        stopShaking();
+        openMenu();
+          <% if @first_time %>
+            setTimeout(function myFunction() {
+              var element = document.getElementById("first_time");
+              element.classList.add("visible");
+            }, 10);
+          <% end %>
+          $("#denada").click(function(){
+            ocultar();
+          });
+          $("#denada2").click(function(){
+            ocultar();
+          });
+
+          function ocultar() {
+            var element = document.getElementById("first_time");
+            element.classList.add("hide");
+          }
+
+      });
+      window.onscroll = function() {scrollFunction()};
+      <% if @url == '/' %>
+        <% if current_user != nil && current_mobileDevice == true %>
+          $("#contato").hide();
+        <% end %>
+        $("#toggle-icon").click(function(){
+          if($("#navbar").hasClass("responsive")){
+            if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+              document.getElementById("navbar").style.backgroundColor = "white";
+              $("#contato").show();
+            }
+            else{
+              $("#navbar").css({"background-color":"rgba(0,0,0,0.5)"});
+              $("#contato").show();
+            }
+          }
+          else{
+              if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                document.getElementById("navbar").style.backgroundColor = "white";
+                $("#contato").hide();
+              }
+              else{          
+                document.getElementById("navbar").style.backgroundColor = "transparent";
+                $("#contato").hide();
+              }
+          }
+        });
+        
+
+        function scrollFunction() {
           if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("navbar").style.padding = "8px 20px";
             document.getElementById("navbar").style.backgroundColor = "white";
-            $("#contato").hide();
+            document.getElementById("logo").style.color = "black";
+            document.getElementById("comunidade").style.color = "black";
+            document.getElementById("software").style.color = "black";
+            document.getElementById("contato").style.color = "black";
+            document.getElementById("logo").style.fontSize = "16px";
+            $("#logo").removeClass('shadowed-link');
+            $("#software").removeClass('shadowed-link');
+            $("#comunidade").removeClass('shadowed-link');
+            $("#software").removeClass('marginLeft-5px');
+            $("#comunidade").removeClass('marginLeft-5px');
+          } else {
+            $("#logo").addClass('shadowed-link');
+            $("#software").addClass('shadowed-link');
+            $("#comunidade").addClass('shadowed-link');
+            $("#software").addClass('marginLeft-5px');
+            $("#comunidade").addClass('marginLeft-5px');
+            if($("#navbar").hasClass("responsive")){
+              $("#navbar").css({"background-color":"rgba(0,0,0,0.5)"});
+            }
+            else{
+              document.getElementById("navbar").style.backgroundColor = "transparent";
+            }
+            document.getElementById("navbar").style.padding = "30px 20px";
+            document.getElementById("logo").style.color = "white";
+            document.getElementById("comunidade").style.color = "white";
+            document.getElementById("software").style.color = "white";
+            document.getElementById("contato").style.color = "white";
+            document.getElementById("logo").style.fontSize = "16px";
           }
-          else{          
-            document.getElementById("navbar").style.backgroundColor = "transparent";
-            $("#contato").hide();
+        }
+
+      <% else %>
+        function scrollFunction() {
+            $("#logo").removeClass('shadowed-link');
+            $("#software").removeClass('shadowed-link');
+            $("#comunidade").removeClass('shadowed-link');
+            $("#software").removeClass('marginLeft-5px');
+            $("#comunidade").removeClass('marginLeft-5px');
+          if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("navbar").style.padding = "8px 20px";
+            document.getElementById("navbar").style.backgroundColor = "white";
+            document.getElementById("logo").style.color = "#3B3B3B";
+            document.getElementById("comunidade").style.color = "#3B3B3B";
+            document.getElementById("software").style.color = "#3B3B3B";
+            document.getElementById("contato").style.color = "#3B3B3B";
+            document.getElementById("logo").style.fontSize = "16px";
+          } else {
+            document.getElementById("navbar").style.padding = "30px 20px";
+            document.getElementById("navbar").style.backgroundColor = "white";
+            document.getElementById("logo").style.color = "#3B3B3B";
+            document.getElementById("comunidade").style.color = "#3B3B3B";
+            document.getElementById("software").style.color = "#3B3B3B";
+            document.getElementById("contato").style.color = "#3B3B3B";
+            document.getElementById("logo").style.fontSize = "16px";
           }
-      }
-    });
-    
-
-    function scrollFunction() {
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.padding = "8px 20px";
-        document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "black";
-        document.getElementById("eletronica").style.color = "black";
-        document.getElementById("software").style.color = "black";
-        document.getElementById("contato").style.color = "black";
-        document.getElementById("logo").style.fontSize = "16px";
-        $("#logo").removeClass('shadowed-link');
-        $("#software").removeClass('shadowed-link');
-        $("#eletronica").removeClass('shadowed-link');
-        $("#software").removeClass('marginLeft-5px');
-        $("#eletronica").removeClass('marginLeft-5px');
-      } else {
-        $("#logo").addClass('shadowed-link');
-        $("#software").addClass('shadowed-link');
-        $("#eletronica").addClass('shadowed-link');
-        $("#software").addClass('marginLeft-5px');
-        $("#eletronica").addClass('marginLeft-5px');
-        if($("#navbar").hasClass("responsive")){
-          $("#navbar").css({"background-color":"rgba(0,0,0,0.5)"});
         }
-        else{
-          document.getElementById("navbar").style.backgroundColor = "transparent";
-        }
-        document.getElementById("navbar").style.padding = "30px 20px";
-        document.getElementById("logo").style.color = "white";
-        document.getElementById("eletronica").style.color = "white";
-        document.getElementById("software").style.color = "white";
-        document.getElementById("contato").style.color = "white";
-        document.getElementById("logo").style.fontSize = "16px";
-      }
-    }
-
-  <% else %>
-    function scrollFunction() {
-        $("#logo").removeClass('shadowed-link');
-        $("#software").removeClass('shadowed-link');
-        $("#eletronica").removeClass('shadowed-link');
-        $("#software").removeClass('marginLeft-5px');
-        $("#eletronica").removeClass('marginLeft-5px');
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.padding = "8px 20px";
-        document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#3B3B3B";
-        document.getElementById("eletronica").style.color = "#3B3B3B";
-        document.getElementById("software").style.color = "#3B3B3B";
-        document.getElementById("contato").style.color = "#3B3B3B";
-        document.getElementById("logo").style.fontSize = "16px";
-      } else {
-        document.getElementById("navbar").style.padding = "30px 20px";
-        document.getElementById("navbar").style.backgroundColor = "white";
-        document.getElementById("logo").style.color = "#3B3B3B";
-        document.getElementById("eletronica").style.color = "#3B3B3B";
-        document.getElementById("software").style.color = "#3B3B3B";
-        document.getElementById("contato").style.color = "#3B3B3B";
-        document.getElementById("logo").style.fontSize = "16px";
-      }
-    }
-  <% end %>
+      <% end %>
 
 
-</script>
-</html>
+    </script>
+    </html>

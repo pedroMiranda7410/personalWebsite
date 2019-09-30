@@ -1,0 +1,2 @@
+class MyObjective < ApplicationRecord
+end

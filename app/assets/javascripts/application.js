@@ -24,6 +24,8 @@
 //= require_self
 //= require Chart.js
 
+
+
 const body = document.querySelector("body");
 const modal = document.querySelector(".modal");
 const modalButton = document.querySelector(".modal-button");

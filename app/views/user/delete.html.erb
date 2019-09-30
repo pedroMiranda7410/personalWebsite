@@ -1,0 +1,99 @@
+
+<% if current_user.admin %>
+
+<%= form_for(@user, url: update_user_path(user_id: @user.id)) do |form| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2 style="color: #AE1400">(<%= pluralize(@user.errors.count, "error") %>) Ao salvar os dados:</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li style="color: #AE1400"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <div class="row">
+          <div class="col-lg-6 <%= current_mobileDevice ? "mx-4" : "" %>">
+            <div class="form-group">
+              <div>
+                <%= form.label 'Nome:', class: "" %>
+              </div>
+              <%= form.text_field :name, required: true, class:"form-control "  %>
+            </div>
+          </div>
+
+          <div class="col-lg-6 <%= current_mobileDevice ? "mx-4" : "" %>">
+            <div class="form-group">
+              <div>
+                <%= form.label 'Github (Nick):', class: "" %>
+              </div>
+              <%= form.text_field :github,focus:true, class:"form-control "  %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 <%= current_mobileDevice ? "mx-4" : "" %>">
+            <div class="form-group">
+              <div>
+                <%= form.label 'Nickname:', class: "" %>
+              </div>
+              <%= form.text_field :nickname, required: true, class:"form-control "  %>
+            </div>
+          </div>
+          <div class="col-lg-6 <%= current_mobileDevice ? "mx-4" : "" %>">
+            <div class="form-group">
+              <div>
+                <%= form.label 'E-mail:', class: "" %>
+              </div>
+              <%= form.text_field :email, required: true, class:"form-control "  %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-5 <%= current_mobileDevice ? "mx-4" : "" %>">
+                <div class="form-group">
+                  <div>
+                    <%= form.label "Senha: ", class: "" %>
+                  </div>
+                  <%= form.password_field :password, required: true, class:"form-control " %>
+                </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          <div class="col-lg-5 <%= current_mobileDevice ? "mx-4" : "" %>">
+            <div class="form-group">
+              <div>
+                <%= form.label "Confirmar Senha: ", class: "" %>
+              </div>
+              <%= form.password_field :password_confirmation, required: true, class:"form-control " %>
+            </div>
+          </div>
+        </div>
+
+      <br>
+  <%= form.submit "Editar", class: "btn btn-success", style:"float:right" %>
+  <% end %>
+
+
+
+      </div>
+
+
+<% else %>
+
+
+  <div class="back">
+    <div class="center cenX">
+      <h1 class="titleMain" style="font-family: 'Gravity-Regular';font-size: 3em;">DASHBOARD</h1>
+      <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';font-size: 2.5em;">EM BREVE...</h3>
+
+    </div>
+  </div>
+
+
+
+<% end %>
+

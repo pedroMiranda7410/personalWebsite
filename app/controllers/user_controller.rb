@@ -32,18 +32,36 @@ class UserController < ApplicationController
   end
 
   def edit
-    @user = User.find_by_id(current_user.id)
-    render :layout => false    
+    if current_user != nil
+      if current_user.admin == true
+        @user = User.find_by_id(current_user.id)    
+        render :layout => false
+      end 
+    else
+      redirect_to login_path
+    end
   end
 
   def list
-    render :layout => false
+    if current_user != nil
+      if current_user.admin == true
+        render :layout => false
+      end
+    else
+      redirect_to login_path
+    end
   end
 
-  def page_data
-    @summary = Summary.last
-    @objective = MyObjective.last
-    render :layout => false
+  def page_data  
+      if current_user != nil
+        if current_user.admin == true
+          @summary = Summary.last
+          @objective = MyObjective.last  
+          render :layout => false
+        end
+      else
+        redirect_to login_path
+      end
   end
 
   def update_summary

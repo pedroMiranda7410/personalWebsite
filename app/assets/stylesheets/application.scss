@@ -400,6 +400,59 @@ html {
      margin-bottom: 0px;
  }
 
+ .subTypeArchtecture{
+    color: white;
+    font-family: "Gravity-Regular";
+    margin-bottom: -10px;
+
+ }
+
+ .archtectureList{
+     color: white;
+     font-size: 12px;
+     margin-bottom:80px;
+ }
+
+ .archtectureList li:last-child{
+    margin-bottom:60px;
+}
+
+ .titleArquitecture{
+    font-family: "Gravity-Regular";
+    letter-spacing: 10px;
+    padding-left: 0px;
+    padding-top: 60px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+ }
+
+ .subberTitle{
+    font-family: "Gravity-Regular";
+    letter-spacing: 1px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 60px;
+    margin-bottom: 0px;
+}
+
+ .basic_subTitle{
+     color: #141615;
+     font-family: "Gravity-Regular";
+     letter-spacing: 1px;
+     padding-top: 40px;
+     padding-bottom: 60px;
+     margin-bottom: 0px;
+ }
+
+ .basic_subTitle_futureChallenges{
+    color: #141615;
+    font-family: "Gravity-Regular";
+    letter-spacing: 1px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    margin-bottom: 0px;
+}
+
  .textCent, .cenX {
      text-align: center;
  }

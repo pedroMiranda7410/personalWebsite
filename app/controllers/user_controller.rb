@@ -6,7 +6,7 @@ class UserController < ApplicationController
 
     if current_user != nil
       if current_user.admin == true
-
+        render :layout => false
       end
     else
       redirect_to login_path
@@ -33,6 +33,45 @@ class UserController < ApplicationController
 
   def edit
     @user = User.find_by_id(current_user.id)
+    render :layout => false    
+  end
+
+  def list
+    render :layout => false
+  end
+
+  def page_data
+    @summary = Summary.last
+    @objective = MyObjective.last
+    render :layout => false
+  end
+
+  def update_summary
+    @summary = Summary.find_by_id(params[:summary_id])
+
+    respond_to do |format|
+      if @summary.update(summary_params)
+        format.html { redirect_to root_path, notice: 'Sumário salvo com sucesso!' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @nuser.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_objective
+    @objective = MyObjective.find_by_id(params[:objective_id])
+
+    respond_to do |format|
+      if @objective.update(my_objective_params)
+        format.html { redirect_to root_path, notice: 'Objetivo salvo com sucesso!' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @nuser.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def delete
@@ -81,5 +120,13 @@ class UserController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
+    end
+
+    def summary_params
+      params.require(:summary).permit(:description)
+    end
+
+    def my_objective_params
+      params.require(:my_objective).permit(:description)
     end
 end

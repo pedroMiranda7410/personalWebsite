@@ -1,0 +1,292 @@
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Usuários Cadastrados</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><i class="fa fa-fw fa-user"></i><%= User.where.not(id: current_user.id).length %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Qnt. de <br>"Tamo Junto"</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><img src="smile.png" style="width:15px;height:15px" alt=""> <%= User.where("tamo_junto = 1").length %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Requests Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Qnt. de <br>"Eu quem Agradeço"</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><img src="hearts.png" style="width:15px;height:15px" alt=""> <%= User.where("eu_quem_agradeco = 1").length %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Meta Principal<br><small>Chegar a 100 inscritos</small></div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= User.where.not(id: current_user.id).length %>%</div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar bg-info" role="progressbar" style="width: <%= User.where.not(id: current_user.id).length %>%" aria-valuenow="<%= User.where.not(id: current_user.id).length %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <div class="row">
+          <!-- Content Column -->
+          <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Gráfico de Usuários</h6>
+                <div class="dropdown no-arrow">
+                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <div class="chart-area">
+                  <small>Quantidade de usuários em cada mês do ano <%= Date.today.year %></small>
+                  <div id="userChart" style="width: 100%; height: 100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Cadastrados</h6>
+                <div class="dropdown no-arrow">
+                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <% @i = 0 %>
+                <% User.where.not(id: current_user.id).order("created_at desc").each do |user| %>
+                  <% @i = @i + 1 %>
+                  <% if @i <= 3 %>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <%= link_to root_path,  class:"message shadow card px-5 py-2 mb-4 border-fastNotification-card bg-hover-gradient-primary no-anchor-style", style:"border-radius:30px;border: 0.5px solid #00615A;text-decoration: none !important; color:black" do %>
+                        <div class="row">
+                          <div class="d-flex align-items-center flex-column flex-lg-row">
+                            <span style="height: 55px; width: 55px">
+                              <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= user.github == "" || user.github == nil ? '/missing.png' : 'https://github.com/' + user.github + '.png' %>">
+                            </span>
+                          </div>
+                          <div class="d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                            <div class="bg-gray-100 roundy pl-2 ml-4 px-2 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark  exclode" style="text-align:center"><%= user.name.rpartition(" ").first %></div>
+                            <p class="mb-0 mt-3 ml-3 mt-lg-0" style="border-radius:50%;padding:8px 3px;text-decoration: none !important;"><%= user.created_at.strftime("%d/%m") %></p>
+                          </div>
+                        </div>
+                      <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+                <% if @i > 3 %>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <%= link_to root_path,  class:"message shadow card px-5 py-2 mb-4 border-fastNotification-card bg-hover-gradient-primary no-anchor-style", style:"border-radius:30px;border: 0.5px solid #00615A;text-decoration: none !important; color:black" do %>
+                      <div class="row">
+                        <div class="d-flex align-items-center flex-column flex-lg-row">
+                          <span style="height: 55px; width: 55px">
+                          </span>
+                        </div>
+                        <div class="d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                          <div class="bg-gray-100 roundy pl-2 ml-4 px-2 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark  exclode" style="text-align:center">Ver Mais...</div>
+                        </div>
+                      </div>
+                    <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJETOS -->
+        <div class="row">
+          <div class="col-lg-12 mb-4">
+
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Projetos</h6>
+              </div>
+              <div class="card-body">
+                <h4 class="small font-weight-bold">Número de postagens <span class="float-right">0%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+                <h4 class="small font-weight-bold">Quantidade de Usuários (Meta: 100) <span class="float-right"><%= User.where.not(id: current_user.id).length >= 100 ? 'Sucesso!' : "Ainda faltam: #{100 - User.where.not(id: current_user.id).length}" %></span></h4>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: <%= User.where.not(id: current_user.id).length %>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; pedro-miranda.herokuapp.com 2019</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
+
+  <script type="text/javascript">
+      // create data
+    var data = [
+      ["Jan", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "01").length %>],
+      ["Fev", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "02").length %>],
+      ["Mar", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "03").length %>],
+      ["Abril", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "04").length %>],
+      ["Maio", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "05").length %>],
+      ["Jun", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "06").length %>],
+      ["Jul", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "07").length %>],
+      ["Ago", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "08").length %>],
+      ["Set", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "09").length %>],
+      ["Out", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "10").length %>],
+      ["Nov", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "11").length %>],
+      ["Dez", <%= User.all.where('extract(year  from created_at) = ?', Date.today.year).where('extract(month from created_at) = ?', "12").length %>]
+    ];
+
+    // create a chart
+    chart = anychart.line();
+
+    // create a line series and set the data
+    var series = chart.line(data);
+
+    // set the container id
+    chart.container("userChart");
+
+    // initiate drawing the chart
+    chart.draw();
+  </script>

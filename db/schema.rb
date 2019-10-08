@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_235349) do
+ActiveRecord::Schema.define(version: 2019_10_08_023346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(version: 2019_09_27_235349) do
   create_table "contributors", force: :cascade do |t|
     t.string "github", default: "", null: false
     t.string "user_d", default: "0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cool_phrases", force: :cascade do |t|
+    t.string "phrase", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

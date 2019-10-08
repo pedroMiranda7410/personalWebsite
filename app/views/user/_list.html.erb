@@ -1,0 +1,113 @@
+
+<% if current_user.admin %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                        <h4 class="card-title">Lista de Usuários</h4>
+                        <p class="card-category">quantidade de usuários: <%= User.all.length - 1 %><br>
+                            quantidade de logins realizados por você: <%= User.where(admin:true).first.login_count %>
+                            
+                        </p>
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                            <table id="dataUsers" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                <th class="text-center">Data Cadastro</th>
+                                <th class="text-center">Qnt. de Logins Realizados</th>
+                                <th class="text-center">Agradecimento</th>
+                                <th class="text-center">Nome</th>
+                                <th class="text-center">Administrador</th>
+                                <th class="text-center">Github</th>
+                                <th class="text-center">Nickname</th>
+                                <th class="text-center">E-mail</th>
+                                <th class="text-center">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% User.all.where.not(id: current_user.id).each do |u| %>
+                                <tr>
+                                    <td class="text-center"><%= u.created_at.localtime.strftime("%d/%m/%y") + ' ' + u.created_at.localtime.strftime("%H:%M")  %></td>
+                                    <td class="text-center"><%= u.login_count %></td>
+                                    <td class="text-center" style="color: <%= u.tamo_junto == 1 ? "#3F2300" : u.eu_quem_agradeco == 1 ? "green" : "red" %>"><%= u.tamo_junto == 1 ? "'Tamo Junto'" : u.eu_quem_agradeco == 1 ? "'Eu Quem Agradeço'" : "Nenhum" %></td>
+                                    <td class="text-center"><%= u.name %></td>
+                                    <td class="text-center bg-<%= u.admin ? "success" : "danger" %>" style="color:white"><%= u.admin ? "Sim" : "Não" %></td>
+                                    <td class="text-center"><%= u.github %></td>
+                                    <td class="text-center"><%= u.nickname %></td>
+                                    <td class="text-center"><%= u.email %></td>
+                                    <td class="pt-1">
+                                    <button type="button" class="btn btn-sm waves-effect waves-light" style="background-color:#A20800;color:white" data-toggle="modal" data-target="#centralModal<%= u.id %>">
+                                        Excluir
+                                    </button>
+                                    </td>
+
+
+
+
+                                    <div class="modal fade" id="centralModal<%= u.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<%= u.id %>" aria-hidden="true">
+
+                                    <!-- Change class .modal-sm to change the size of the modal -->
+                                    <div class="modal-dialog" role="document">
+
+
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title w-100" id="myModalLabel<%= u.id %>">Deseja mesmo excluir?</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row" style="display:flex; justify-content:center">
+                                            <div class="col-md-4" >
+                                                <div style="top:0;left:0;width: 100px; height: 100px;"><img src="https://github.com/<%= u.github %>.png"  style="width:100%;height:100%;"></img></div>
+                                                <!-- https://github.com/pedroMiranda7410.png -->
+                                            </div>  
+                                            <div class="col-md-8" >
+                                                <p class="pl-2">Tem certeza que deseja excluir o <strong><%= u.name %></strong> <strong>permanentemente</strong>? <br>
+                                                    Todas suas evoluções e dados serão excluidos. </p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Voltar </button>
+                                            <%= link_to 'Excluir', delete_user_path(user_id: u.id), method: :delete, class: "btn" , style: "background-color:#A20800;" %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </tr>
+                            <% end %>
+                        </tbody>
+
+                    </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <nav>
+            <ul class="footer-menu">
+            </ul>
+            <p class="copyright text-center">
+                ©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a href="pedro-miranda.herokuapp.com">Pedro Miranda</a>, feito com muito amor para todos.
+            </p>
+        </nav>
+    </div>
+</footer>
+
+
+<% end %>

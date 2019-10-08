@@ -1,3 +1,5 @@
+<% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+
 <% if current_user.admin %>
 
           <!DOCTYPE html>
@@ -18,23 +20,11 @@
         <link href="/style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="/style_js/css/demo.css" rel="stylesheet" />
-        <script>
-            (function(){
-                if($( "body" ).html() == "2019"){
-                    console.log("TESTEEEEEEEEEEE");
-                }
-                })();
-        </script>
     </head>
 
     <body data-no-turbolink>
         <div class="wrapper">
             <div class="sidebar" data-image="/style_js/img/sidebar-5.jpg">
-                <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-            Tip 2: you can also add an image using data-image tag
-        -->
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <%= link_to root_path, :"data-turbolinks" => false, style:"text-decoration:none;color: white; display:flex;" do %>
@@ -46,34 +36,34 @@
                           <% end %>
                     </div>
                     <ul class="nav">
-                        <li class="nav-item active">
+                        <li class="<%= @url == '/dashboard' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard" data-turbolinks="false">
                                 <i class="nc-icon nc-chart-pie-35"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="<%= @url == '/dashboard_edit_user' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard_edit_user" data-turbolinks="false">
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>Perfil Usuário</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="<%= @url == '/dashboard_list_users' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Lista de Usuários</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="<%= @url == '/dashboard_page_data' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Conteúdo Páginas</p>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="./icons.html">
+                        <li class="<%= @url == '/dashboard_projects' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard_projects" data-turbolinks="false">
                                 <i class="nc-icon nc-atom"></i>
-                                <p>Icons</p>
+                                <p>Projetos</p>
                             </a>
                         </li>
                         <li>
@@ -458,8 +448,6 @@
     });
 </script>
 
-           
-
 <% else %>
 
 
@@ -470,7 +458,6 @@
 
     </div>
   </div>
-
 
 
 <% end %>

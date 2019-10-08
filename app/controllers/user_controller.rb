@@ -2,8 +2,20 @@ class UserController < ApplicationController
 
   #https://github.com/user.png
 
-  def dashboard
 
+  def dashboard
+    if current_user != nil
+      if current_user.admin == true
+        render :layout => false
+      end
+    else
+      redirect_to login_path
+    end
+  end 
+
+
+  def layout_dashboard
+    @url = request.original_fullpath.gsub( /[\?#].*|$/, "")
     if current_user != nil
       if current_user.admin == true
         render :layout => false
@@ -12,6 +24,7 @@ class UserController < ApplicationController
       redirect_to login_path
     end
   end
+
 
   def new
     @user = User.new
@@ -29,39 +42,6 @@ class UserController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def edit
-    if current_user != nil
-      if current_user.admin == true
-        @user = User.find_by_id(current_user.id)    
-        render :layout => false
-      end 
-    else
-      redirect_to login_path
-    end
-  end
-
-  def list
-    if current_user != nil
-      if current_user.admin == true
-        render :layout => false
-      end
-    else
-      redirect_to login_path
-    end
-  end
-
-  def page_data  
-      if current_user != nil
-        if current_user.admin == true
-          @summary = Summary.last
-          @objective = MyObjective.last  
-          render :layout => false
-        end
-      else
-        redirect_to login_path
-      end
   end
 
   def update_summary

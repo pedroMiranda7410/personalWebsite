@@ -14,13 +14,17 @@ Rails.application.routes.draw do
   # get 'dashboard_list_users', to: 'user#list'
   # get 'dashboard_edit_user', to: 'user#edit'
 
+  #PROJECT FOLDER
+  post 'create_project', to:'project#create'
+
   #USER FOLDER
   get 'dashboard', to: 'user#dashboard'
   get 'new_user', to: 'user#new'
-  get 'dashboard_list_users', to: 'user#list'
+  get 'dashboard_list_users', to: 'user#layout_dashboard'
   get 'login_c', to: 'user#login_count'
-  get 'dashboard_edit_user', to: 'user#edit'
-  get 'dashboard_page_data', to: 'user#page_data'
+  get 'dashboard_edit_user', to: 'user#layout_dashboard'
+  get 'dashboard_page_data', to: 'user#layout_dashboard'
+  get 'dashboard_projects', to: 'user#layout_dashboard'
   post 'create_user', to: 'user#create'
   patch 'update_user', to: 'user#update'
   patch 'update_summary', to: 'user#update_summary'

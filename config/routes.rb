@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   # get 'dashboard_edit_user', to: 'user#edit'
 
   #PROJECT FOLDER
+  get 'edit_project', to: 'project#layout_dashboard'
+  get 'show_project', to: 'project#show'
+  patch 'update_project', to: 'project#update'
   post 'create_project', to:'project#create'
 
   #USER FOLDER
@@ -22,6 +25,7 @@ Rails.application.routes.draw do
   get 'new_user', to: 'user#new'
   get 'dashboard_list_users', to: 'user#layout_dashboard'
   get 'login_c', to: 'user#login_count'
+  get 'dashboard_edit_project', to: 'user#layout_dashboard'
   get 'dashboard_edit_user', to: 'user#layout_dashboard'
   get 'dashboard_page_data', to: 'user#layout_dashboard'
   get 'dashboard_projects', to: 'user#layout_dashboard'

@@ -16,6 +16,22 @@ class UserController < ApplicationController
 
   def layout_dashboard
     @url = request.original_fullpath.gsub( /[\?#].*|$/, "")
+    @created = params[:created]
+    @updated = params[:updated]
+
+    if @created == true || @created == "true"
+      @created = true
+    else
+      @created = false 
+    end
+
+    if @updated == true || @updated == "true"
+      @updated = true
+    else
+      @updated = false 
+    end
+
+
     if current_user != nil
       if current_user.admin == true
         render :layout => false
@@ -90,6 +106,7 @@ class UserController < ApplicationController
     @login_counter = params[:login_counter]
     @tamoJunto_counter = params[:tamoJunto]
     @euQuemAgradeco_counter = params[:euQuemAgradeco]
+    @notification = params[:notification]
 
     if @login_counter == "true"
       @total = @user.login_count + 1
@@ -104,20 +121,24 @@ class UserController < ApplicationController
       @user.update(eu_quem_agradeco: 1, first_time: false)
     end
 
+    if @notification == "true"
+      @user.update(show_notification: (@user.show_notification ? false : true))
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to root_path, notice: 'Mudanças salvas com sucesso!' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
-        format.json { render json: @nuser.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
     def user_params
-      params.require(:user).permit(:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
+      params.require(:user).permit(:background_image_choose,:filter,:backgroung_image_display,:show_notification,:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
     end
 
     def summary_params

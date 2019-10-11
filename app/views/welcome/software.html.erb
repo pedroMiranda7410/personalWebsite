@@ -50,47 +50,32 @@
 
         <div class="cenX sec temp" id="projetos" width="100%">
             <div class="container" style="display: inline-flex;flex-direction: column;align-items: center;">
-                <div class="borderProj">
-                    <a href="/software/fluxo-sanguineo" class="noColor">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12">
-                                <span class="helper"></span><img src="/fluxo_sanguineo.gif" class="projImg"></img>
+                <% Project.where(principal: true).each do |p| %>
+                    <div class="borderProj">
+                        <%= link_to show_project_path(project_id: p.id), class:"noColor" do %>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12" style="display:flex; justify-content:center; border: 0px solid transparent">
+                                    <% if p.video != "" %>
+                                        <video autoplay loop class="projImg" style="border: 0px solid transparent">
+                                            <source src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.video %>"></source>
+                                        </video>
+                                    <% elsif p.image != "" %>
+                                        <img class="projImg my-auto" src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.image %>">
+                                    <% end %>
+                                </div>
+                                <div class="projText col-lg-8 col-md-12">
+                                    <h3 class="regTitle"><font face = "Gravity-Regular" size = "5"><%= p.title %> | <%= p.language %></font></h3>
+                                    <p class="subP pad0 italic"><font face = "Gravity-Regular" size = "3"><%= p.sub_title %></font></p>
+                                    <p style="padding-top: 20px;font-family: 'Gravity-Regular'; letter-spacing: 1px;">
+                                        <%= p.sub_description %>...
+                                    </p>
+
+                                </div>
                             </div>
-                            <div class="projText col-lg-8 col-md-12">
-                                <h3 class="regTitle"><font face = "Gravity-Regular" size = "5">Simulação de "Nano-robô" | C#</font></h3>
-                                <p class="subP pad0 italic"><font face = "Gravity-Regular" size = "3">Engine Unity</font></p>
-                                  <p style="padding-top: 20px;font-family: 'Gravity-Regular'; letter-spacing: 1px;">
-                                      Simulação gráfica sobre o comportamento de um nano-tubo de ouro ("nano-robô") ao chegar perto
-                                      de uma Hemácia infectada com uma certa doença...
-                                  </p>
-
-
-                                 <p class="subP desc" data-desc="/software/fluxo-sanguineo"></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="borderProj">
-                    <a href="/software/projeto_icf" class="noColor">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12">
-                                <span class="helper"></span><img src="/homeProfessor.png" class="projImg"></img>
-                            </div>
-                            <div class="projText col-lg-8 col-md-12">
-                                <h3 class="regTitle"><font face = "Gravity-Regular" size = "5"> ICF (Iniciação Científica F.G.A) | PYTHON - Django</font></h3>
-
-                                <p style="padding-top:20px; font-family: 'Gravity-Regular'; letter-spacing: 1px; ">
-
-                                  Site em desenvolvimento para ajudar os alunos e professores da UnB-FGA a se aproximarem
-                                  e efetuarem Projetos de Pesquisa (PIBIC)...
-
-                                </p>
-                                 <p class="subP desc" data-desc="/software/projeto_icf"></p>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        <% end %>
+                    </div>
+                <% end %>
+                
             </div>
         </div>
 

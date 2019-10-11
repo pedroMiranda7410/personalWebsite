@@ -349,6 +349,7 @@
                 <a href="javascript:void(0)" class="switch-trigger">
                     <p>Notificações</p>
                     <label class="switch" style="float:right">
+                        <!-- <input data-remote="true" data-toggle="switch" checked="<%= current_user.show_notification ? "true" : "false" %>" data-on-color="primary" data-off-color="primary" id="user-<%= current_user.id %>" data-url="update_user?user_id=<%= current_user.id %>&notification=<%= current_user.show_notification ? "false" : "true" %>" style="visibility:hidden" data-method="patch"  type="checkbox" > -->
                         <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
                     </label>
                     <div class="clearfix"></div>

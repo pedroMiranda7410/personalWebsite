@@ -96,19 +96,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% Project.where(principal: true).each do |p| %>
                                 <tr>
-                                    <td class="text-center"><a href="/software/fluxo-sanguineo" style="text-decoration:none;">Simulação de "Nano-robô"</a></td>
-                                    <td class="">Simulação gráfica sobre o comportamento de um nano-tubo de ouro ("nano-robô") ao chegar perto
-                                      de uma Hemácia infectada com uma certa doença</td>
-                                    <td class="text-center">C#</td>
+                                    <td class="text-center"><%= link_to "#{ p.title }", show_project_path(project_id: p.id), style:"text-decoration:none" %></td>
+                                    <td class=""> <%= p.sub_description %> </td>
+                                    <td class="text-center"><%= p.language %></td>
                                 </tr>
-                                <tr>
-                                    <td class="text-center"><a href="/software/projeto_icf" style="text-decoration:none;">ICF <br>(Iniciação Científica F.G.A)</a></td>
-                                    <td class="">Site em desenvolvimento para ajudar os alunos e professores da UnB-FGA a se aproximarem
-                                         e efetuarem Projetos de Pesquisa (PIBIC)
-                                    </td>
-                                    <td class="text-center">Python</td>
-                                </tr>
+                            <% end %>
                          </tbody>
 
                     </table>

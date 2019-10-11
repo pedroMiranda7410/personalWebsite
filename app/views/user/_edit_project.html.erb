@@ -1,0 +1,532 @@
+<% @project = Project.find_by_id(params[:project_id]) %>
+
+
+<% if @project.user_id == current_user.id || current_user.admin == true %>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="apple-touch-icon" sizes="76x76" href="/circle-cropped.png">
+        <link rel="icon" type="image/png" href="/circle-cropped.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Pedro Miranda</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+        <!--     Fonts and icons     -->
+        <!-- CSS Files -->
+        <link href="/style_js/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="/style_js/css/demo.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/style_js/css/markdown/normalize.css">
+        <link rel="stylesheet" href="/style_js/css/markdown/css/main.css">
+        <link rel="stylesheet" href="/style_js/css/markdown/css/style.css">
+        <script src="/style_js/js/markdown/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" style="text-align: center">Editar projeto: <strong style="color: #900000"><%= @project.title %></strong></h4>
+                </div>
+                <div class="card-body">
+                    <% if @project.get_from_github %>
+                                <%= form_for(@project, url: update_project_path(project_id: @project.id, updated: true)) do |form| %>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Descrição via README.md Github</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row" >
+                                                        <div class="col-md-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                <% if @project.errors.any? %>
+                                                                    <div id="error_explanation">
+                                                                    <h2 style="color: #AE1400">(<%= pluralize(@project.errors.count, "error") %>) Ao salvar os dados:</h2>
+
+                                                                    <ul>
+                                                                    <% @project.errors.full_messages.each do |message| %>
+                                                                        <li style="color: #AE1400"><%= message %></li>
+                                                                    <% end %>
+                                                                    </ul>
+                                                                    </div>
+                                                                <% end %>
+                                                                        <div class="row" style="border-bottom: 0.8px solid #900000;border-top: 0.8px solid #900000">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group">
+                                                                                    <label><strong style="color: #900000">Instruções: </strong></label>
+                                                                                    <p>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            A descrição será retirada do arquivo com o nome README.md que se encontra na branch, repositório e dono do repositório que serão escritos por você! Por favor, confira se tudo está conforme á essas instruções. Obrigado!
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            Você pode colocar uma imagem/video/pdf do seu projeto! Por motivos de diminuir gastos e preocupações quanto á banco de dados, decidi puxar esses arquivos através do github.
+                                                                                            Então, nos campos de imagem, video e pdf você pode, caso queira postar algo do tipo, colocar o caminho do arquivo dentro do repositório, Por exemplo:
+                                                                                            <ul>
+                                                                                                <li> 
+                                                                                                    Assumindo que você está localizado no repositório na branch master e sua imagem, chamada <i>"imagem.png"</i>, está localizada na pasta <i>"img/"</i>. Então você colocará no campo imagem:<br>
+                                                                                                    <i>img/imagem.png</i><br>
+                                                                                                    E o mesmo vale pra qualquer outro arquivo.
+                                                                                                </li>
+                                                                                                <li> 
+                                                                                                    Caso não esteja em nenhuma pasta, mas sim na principal junto com o README, não precisa colocar a "/" antes do nome do arquivo:
+                                                                                                    <i>imagem.png</i><br>
+                                                                                                    E o mesmo vale pra qualquer outro arquivo.
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                            <strong style="color: #900000">Vídeos são do tipo <i>.mp4</i> e funcionarão como gifs</strong>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                        Lembre-se, a imagem ou video e pdf é o que serão postados do seu projeto para melhorar a visualização e o entendimento.
+                                                                                        </li>
+                                                                                        <li>
+                                                                                        No input de repositórios, adicionei um script, no qual, ao longo que você escreve, ele puxa sugestões entre todos os projetos que pertencem á você pra facilitar sua busca. 
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                        
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mt-3">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Nome da Branch:</strong> </label>
+                                                                                    <%= form.text_field :github_branch_name, class:"form-control ", value: "master"  %>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Nome do repositório: </strong></label>
+                                                                                    <%= form.text_field :github_repo_name,list:"repos", class:"form-control "  %>
+                                                                                    <datalist id="repos"> </datalist>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Github do dono do Repositório:</strong> </label>
+                                                                                    <%= form.text_field :github_owner_name, class:"form-control ", value: current_user.github  %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Título:</strong> </label>
+                                                                                    <%= form.text_field :title, class:"form-control ", required: true  %>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Sub-Título:</strong></label>
+                                                                                    <%= form.text_field :sub_title, class:"form-control "  %>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Linguagem(s) (C#,C++,Java...):</strong> </label>
+                                                                                    <%= form.text_field :language, class:"form-control "  %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2">
+                                                                                <table class="">
+                                                                                    <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                    <tbody style="display:flex;flex-direction:row">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <input  type="checkbox" id="image" checked >   
+                                                                                            </td>
+                                                                                            <td>Imagem</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <table class="">
+                                                                                    <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                    <tbody style="display:flex;flex-direction:row">
+                                                                                        <tr >
+                                                                                            <td>
+                                                                                                <input  type="checkbox" id="video">
+                                                                                            </td>
+                                                                                            <td>Vídeo</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4" id="divImage">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Imagem:</strong> </label>
+                                                                                    <%= form.text_field :image, class:"form-control",id:"inputImage", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @project.image  %>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="divVideo" style="display:none">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Vídeo:</strong></label>
+                                                                                    <%= form.text_field :video, class:"form-control",id:"inputVideo", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @project.video %>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>PDF:</strong> </label>
+                                                                                    <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @project.pdf  %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <table class="">
+                                                                                    <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                    <tbody style="display:flex;flex-direction:row">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <label class="form-check-label">
+                                                                                                        <%= form.check_box :principal,class:"form-check-input", checked: @project.principal  %>
+                                                                                                        <span class="form-check-sign"></span>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>Projeto Principal</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Teoria/Objetivo:</strong> </label>
+                                                                                    <%= form.text_area :objective, class:"form-control ", required: true, style:"height:150px;box-shadow: 0px 0.5px 3px 0.5px "  %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group">
+                                                                                    <label><strong>Sub descrição (O que vai aparecer na tabela de projetos):</strong> </label>
+                                                                                    <%= form.text_area :sub_description, class:"form-control ", required: true, style:"height:80px;box-shadow: 0px 0.5px 3px 0.5px "  %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                            <%= form.hidden_field :get_from_github, value: true %>
+                                                                            <%= form.hidden_field :user_id, value: current_user.id %>
+                                                                            <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
+                                                                        <div class="clearfix"></div>
+                                                                    
+                                                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+
+                    <% else %>
+                        <%= form_for(@project, url: update_project_path(project_id: @project.id,updated: true)) do |form| %>
+                            
+                            <div class="row" >
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Projeto</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="border-bottom: 0.8px solid #900000;border-top: 0.8px solid #900000">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label><strong style="color: #900000">Instruções: </strong></label>
+                                                        <p>
+                                                        <ul>
+                                                            <li>
+                                                                A descrição pode ser escrita tanto em HTML/CSS, Markdown ou as duas juntas! Para os internautas mais avançados que quiserem, podem até utilizar o atributo "style" dentro das tags html e costumizar com o css que preferir, incluindo css's do bootstrap. O importante é ser criativo :)
+                                                            </li>
+                                                            <li>
+                                                                Você pode colocar uma imagem/video/pdf do seu projeto! Por motivos de diminuir gastos e preocupações quanto á banco de dados, decidi puxar esses arquivos através do github.
+                                                                Então, nos campos de imagem, video e pdf você pode, caso queira postar algo do tipo, colocar o caminho do arquivo dentro do repositório, Por exemplo:
+                                                                <ul>
+                                                                    <li> 
+                                                                        Assumindo que você está localizado no repositório na branch master e sua imagem, chamada <i>"imagem.png"</i>, está localizada na pasta <i>"img/"</i>. Então você colocará no campo imagem:<br>
+                                                                        <i>img/imagem.png</i><br>
+                                                                        E o mesmo vale pra qualquer outro arquivo.
+                                                                    </li>
+                                                                    <li> 
+                                                                        Caso não esteja em nenhuma pasta, mas sim na principal junto com o README, não precisa colocar a "/" antes do nome do arquivo:
+                                                                        <i>imagem.png</i><br>
+                                                                        E o mesmo vale pra qualquer outro arquivo.
+                                                                    </li>
+                                                                </ul>
+                                                                <strong style="color: #900000">Vídeos são do tipo <i>.mp4</i> e funcionarão como gifs</strong>
+                                                            </li>
+                                                            <li>
+                                                            Lembre-se, a imagem ou video e pdf é o que serão postados do seu projeto para melhorar a visualização e o entendimento.
+                                                            </li>
+                                                            <li>
+                                                                No input de repositórios, adicionei um script, no qual, ao longo que você escreve, ele puxa sugestões entre todos os projetos que pertencem á você pra facilitar sua busca. 
+                                                            </li>
+                                                        </ul>
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Nome da Branch:</strong> </label>
+                                                        <%= form.text_field :github_branch_name, class:"form-control ", value: "master"  %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Nome do repositório: </strong></label>
+                                                        <%= form.text_field :github_repo_name, class:"form-control ", list:"repos_1"  %>
+                                                        <datalist id="repos_1">
+
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Github do dono do Repositório:</strong> </label>
+                                                        <%= form.text_field :github_owner_name, class:"form-control ", value: current_user.github  %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label><strong>Título:</strong> </label>
+                                                        <%= form.text_field :title, class:"form-control ", required: true  %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Sub-Título:</strong></label>
+                                                        <%= form.text_field :sub_title, class:"form-control "  %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Linguagem(s) (C#,C++,Java...):</strong> </label>
+                                                        <%= form.text_field :language, class:"form-control "  %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <table class="">
+                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                        <tbody style="display:flex;flex-direction:row">
+                                                            <tr>
+                                                                <td>
+                                                                        <input  type="checkbox" id="image_1" checked >   
+                                                                </td>
+                                                                <td>Imagem</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <table class="">
+                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                        <tbody style="display:flex;flex-direction:row">
+                                                            <tr >
+                                                                <td>
+                                                                    <input  type="checkbox" id="video_1">
+                                                                </td>
+                                                                <td>Vídeo</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4" id="divImage_1">
+                                                    <div class="form-group">
+                                                        <label><strong>Imagem:</strong> </label>
+                                                        <%= form.text_field :image, class:"form-control",id:"inputImage_1", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @project.image  %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divVideo_1" style="display:none">
+                                                    <div class="form-group">
+                                                        <label><strong>Vídeo:</strong></label>
+                                                        <%= form.text_field :video, class:"form-control",id:"inputVideo_1", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @project.video %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>PDF:</strong> </label>
+                                                        <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @project.pdf  %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <table class="">
+                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                        <tbody style="display:flex;flex-direction:row">
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-check">
+                                                                        <label class="form-check-label">
+                                                                            <%= form.check_box :principal,class:"form-check-input", checked: @project.principal  %>
+                                                                            <span class="form-check-sign"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Projeto Principal</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label><strong>Teoria/Objetivo:</strong> </label>
+                                                        <%= form.text_area :objective, class:"form-control ", required: true, style:"height:150px;box-shadow: 0px 0.5px 3px 0.5px "  %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label><strong>Sub descrição (O que vai aparecer na tabela de projetos):</strong> </label>
+                                                        <%= form.text_area :sub_description, class:"form-control ", value:@project.sub_description , required: true, style:"height:80px;box-shadow: 0px 0.5px 3px 0.5px "  %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Descrição:</strong> </label>
+                                                        <textarea class="mdhtmlform-md" style="height:400px; width:100%;"><%= @project.description %></textarea>
+                                                        <%= form.text_area :description, class:"mdhtmlform-html", style:"display: none;" %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Teoria/Objetivo Preview</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="mdhtmlform-html"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
+                                                <%= form.hidden_field :get_from_github, value: false %>
+                                                <%= form.hidden_field :user_id, value: current_user.id %>
+                                                <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
+                                            <div class="clearfix"></div>
+                                        
+                                
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    <% end %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/style_js/js/markdown/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/style_js/js/markdown/plugins.js"></script>
+
+<!-- mdhtmlform Dependencies -->
+<script src="/style_js/js/markdown/vendor/showdown.js"></script> <!-- Include Showdown before mdhtmlform! -->
+<script src="/style_js/js/markdown/mdhtmlform.js"></script> <!-- The main mdhtmlform file -->
+<!-- end mdhtmlform Dependencies -->
+
+<script src="/style_js/js/markdown/example.js"></script> <!-- The js for this example -->
+
+<!--   Core JS Files   -->
+<script src="/style_js/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="/style_js/js/core/popper.min.js" type="text/javascript"></script>
+<script src="/style_js/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="/style_js/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="/style_js/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/style_js/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="/style_js/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="/style_js/js/demo.js"></script>
+<script src="/style_js/js/markdownHTML_form.js"></script>
+<script>
+     $(document).ready(function(){
+        $("#image").change(function(){
+            $("#divImage").show(50);
+            $("#divVideo").hide(50);
+            $('#inputVideo').val('');
+            $("#video").prop("checked", false);                   
+        });
+
+        $("#video").change(function(){
+            $("#divImage").hide(50);
+            $("#divVideo").show(50);
+            $('#inputImage').val('');
+            $("#image").prop("checked", false);                   
+        });
+
+        $("#image_1").change(function(){
+            $("#divImage_1").show(50);
+            $("#divVideo_1").hide(50);
+            $('#inputVideo_1').val('');
+            $("#video_1").prop("checked", false);                   
+        });
+
+        $("#video_1").change(function(){
+            $("#divImage_1").hide(50);
+            $("#divVideo_1").show(50);
+            $('#inputImage_1').val('');
+            $("#image_1").prop("checked", false);                   
+        });
+    });
+</script>
+
+
+<% else %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card" id="chooseWay" style="box-shadow: 0px 5px 15px 2px !important;margin: 10% 25%;float:none; margin-bottom: 10px;">
+                <div class="card-header">
+                    <h4 class="card-title" style="text-align: center">Opa, não tente acessar o projeto dos outros :/</h4>
+                </div>
+                <div class="card-body">
+                    <p>Seu tempo é tão valioso pra estar gastando tentando burlar o sistema.<br>Vamos ser pessoas mais solidárias e transformar o mundo juntos, eu acredito em você e no seu potencial S2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

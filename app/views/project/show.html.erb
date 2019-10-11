@@ -1,24 +1,15 @@
 
 <!DOCTYPE HTML>
 <html>
-    <head>
 
-      <script src="/css-software/page.css"></script>
-    
-    </head>
     <body>
-
-        <link rel="stylesheet" type="text/css" href="css/page.css"/>
-
-        <link href="/lightbox/ekko-lightbox.css" rel="stylesheet">
-
             <div class="container-fluid">
                 <div class="container ">
                     <div class="row">
                         <div class="col topPad cenX" style="padding-top:200px;">
 
-                                <h1 class="titleMain">Simulação de "Nano-robô"</h1>
-                                <h3 class="regTitle">Engine Unity | C#</h3>
+                                <h1 class="titleMain"><%= @project.title %></h1>
+                                <h3 class="regTitle"><%= @project.sub_title %> | <%= @project.language %></h3>
 
 
                         </div>
@@ -29,57 +20,56 @@
                     </div>
 
                     <div class="cenX padB60">
-                        <a class="btn btn-primary btn-lg" href="/Arquivos_Apresentação.zip" role="button" download>Download arquivos .zip</a>
+                        <a class="btn btn-primary btn-lg" href="https://github.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>" role="button">Download arquivos</a>
                         <!--<a class="linkGrey" id="srcCode" href="https://github.com/DevonCrawford/Timelapse-Auto-Ramp-Photoshop-Plugin">View source code</a>-->
                     </div>
 
                     <div class="row exText">
                         <div class="col-md-12">
-                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">SIMULAÇÃO</h5>
+                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">
+                               <% if @project.video != "" %>
+                                SIMULAÇÃO
+                               <% elsif @project.image != "" %>
+                                IDEIA
+                               <% end %>                                   
+                            </h5>
                         </div>                            
                     </div>
-                    <video width="100%" autoplay loop class="round3 vid">
-                        <source src="/video_fluxoSang.mp4"></source>
-                    </video>
+                    <% if @project.video != "" %>
+                        <video width="100%" autoplay loop class="round3 vid">
+                            <source src="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.video %>"></source>
+                        </video>
+                    <% elsif @project.image != "" %>
+                        <img width="100%" src="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.image %>">
+                    <% end %>
                 </div>
             </div>
 
             <div class="container-fluid  sec" style="background-color: #191919;">
                 <div class="container">
                     <h3 class="subTitle white" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">TEORIA</h3>
-                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: 1em;">
-                      Esse projeto foi apresentado durante a semana Universitária, organizada pela UnB-FGA, na qual fui um dos palestrantes.
-                      Nosso principal objetivo era introduzir para os alunos leigos no assunto sobre como são os processos de estudos e desenvolvimento de simulações gráficas.
-                      Nossa metodologia consistiu em criar essa simulação, de um nano-tubo de ouro reagindo ao magnetismo presente em uma hemácia infectada com alguma doença e, teoricamente, enviando sinais de sua presença no corpo, apenas com o intuito de demonstrar como ela funciona e como desenvolvê-la.
-                    </br>Um tutorial foi criado por nós, incluindo desde o processo de modelagem até o uso da mesma na engine Unity, ensinando como criar o dinamismo por código.
-
-
+                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: 1em;white-space: pre-line">
+                        <%= @project.objective %>
                     </p>
                 </div>
             </div>
 
             <div class="container-fluid sec">
                 <div id="descriptionProject" class="container pt-5 px-5">
-                    <h3 class="subTitle" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">COMO VER O TUTORIAL</h3>
-                        <ul class="listPad">
-                            <li align = "justify" style="font-family: 'Gravity-Regular';font-size: 1em;">Para seguir o tutorial, utilizamos o software Blender para efetuar as modelagens, que é encontrado gratuitamente na internet para <a href="https://www.blender.org/download/">download,</a>
-                              junto da Engine <a href="https://unity3d.com/pt/get-unity/download"> UNITY</a>, na qual, consequentemente segue o download do "microsoft visual studio"
-                              (IDE para escrita de códigos), em que será desenvolvido o ambiente da simulação. Efetuado o download desses dois softwares,
-                              você está pronto para dar continuidade.
+                    <% if @project.get_from_github %>
 
-                            </li>
-                            <li style="font-family: 'Gravity-Regular';font-size: 1em;">Caso você esteja no celular, baixe o pdf logo abaixo dessa lista e siga o tutorial a partir do slide de número 25, seguindo isso estaremos
-                            ensinando como modelar uma hemácia e posteriormente como coloca-lá na engine Unity e utiliza-la. Caso contrário apenas siga os slides.</li>
-
-
-                            <li style="font-family: 'Gravity-Regular';font-size: 1em;">qualquer dúvida, <a href="/contacts/new"> Fale comigo</a>.</li>
-
-                        </ul>
+                    <% else %>
+                        <%= @project.description.html_safe %>
+                    <% end %>
                 </div>
 
-                <div class="container">
-                    <iframe src="/PDFslides_fluxoSang.pdf" width="98%" height="650px" class="centerImg padB40"></iframe>
-                </div>
+                <% if @project.pdf != "" %>
+                    <div class="container" style="display: flex; justify-content: center">
+                        <form method="get" action="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.pdf %>">
+                                <button class="btn btn-success btn-lg w100" type="submit">Faça o download do PDF!</button>
+                        </form>
+                    </div>
+                <% end %>
             </div>
 
             <!-- btnLINKS -->
@@ -90,21 +80,21 @@
                             <div class="leftCenter">
                                 <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">ACHOU UM BUG?</h3>
                                 <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Me deixe sabendo no github</p>
-                                <a class="btn btn-success btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/pedroMiranda7410" role="button">Problemas</a>
+                                <a class="btn btn-danger btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @project.github_owner_name %>/" role="button">Problemas</a>
                             </div>
                         </div>
                         <div class="col-md-4 bot">
                             <div class="leftCenter">
                                 <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">CONTRIBUA</h3>
                                 <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Faça parte do projeto</p>
-                                <a class="btn btn-secondary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="/contacts/new" role="button">Contate-me</a>
+                                <a class="btn btn-primary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="/contacts/new" role="button">Contate-me</a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="leftCenter">
                                 <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">PEGUE DE GRAÇA</h3>
                                 <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">teste da sua forma</p>
-                                <a class="btn btn-primary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="/Arquivos_Apresentação.zip" role="button" download>Download .zip</a>
+                                <a class="btn btn-info btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/" role="button">Download</a>
                             </div>
                         </div>
                     </div>
@@ -121,9 +111,9 @@
         <script>
             $(document).ready(function(){
                 
-                
+            <% if @project.get_from_github %>
                 // get markdown content  
-                var body_location = 'https://raw.githubusercontent.com/pedroMiranda7410/HTML_basics/master/README.md';
+                var body_location = 'https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/README.md';
                 function getText(myUrl){
                     var result = null;
                     $.ajax( { url: body_location, 
@@ -151,6 +141,7 @@
                 $("#descriptionProject ul").addClass( "listPad" );
                 $("#descriptionProject").addClass( "container px-5" );
                 //document.write(output);
+            <% end %>
             });
         </script>
     </body>

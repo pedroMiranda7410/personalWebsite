@@ -11,6 +11,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.integer :tamo_junto, null:false, default: 0
       t.integer :eu_quem_agradeco, null:false, default: 0
       t.boolean :first_time, null:false, default: true
+      t.boolean :show_notification, null:false, default: true
+      t.boolean :backgroung_image_display, null:false, default: true
+      t.integer :filter, null:false, default: 0
+      t.integer :background_image_choose, null: false, default: 0
 
 
       t.timestamps

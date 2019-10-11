@@ -23,6 +23,7 @@
     <link href="../style_js/css/demo.css" rel="stylesheet" />
 </head>
 
+
 <body data-no-turbolink>
     <div class="wrapper">
         <div class="sidebar" data-image="../style_js/img/sidebar-5.jpg">
@@ -128,6 +129,8 @@
                 <%=  render 'page_data'  %>
             <% elsif @url == '/dashboard_projects' %>
                 <%=  render 'projects'  %>
+            <% elsif @url == '/dashboard_edit_project' %>
+                <%=  render 'edit_project', project: @project  %>
             <% end %>
 
         </div>

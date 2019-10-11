@@ -62,7 +62,11 @@
                         <%= @project.description.html_safe %>
                     <% end %>
                 </div>
-
+            <% if @project.github_repo_name == "simulacao_nanorobo" && current_mobileDevice != true %>
+                    <div class="container">
+                        <iframe src="/PDFslides_fluxoSang.pdf" width="98%" height="650px" class="centerImg padB40"></iframe>
+                    </div>
+            <% else %>
                 <% if @project.pdf != "" %>
                     <div class="container" style="display: flex; justify-content: center">
                         <form method="get" action="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.pdf %>">
@@ -70,6 +74,7 @@
                         </form>
                     </div>
                 <% end %>
+            <% end %>
             </div>
 
             <!-- btnLINKS -->

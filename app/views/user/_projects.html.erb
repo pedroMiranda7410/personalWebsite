@@ -32,13 +32,13 @@
             <!-- <section> -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="card" id="chooseWay" style="box-shadow: 0px 5px 15px 2px !important;margin: 10% 25%;float:none; margin-bottom: 10px;">
+                    <div class="card" id="chooseWay" style="box-shadow: 0px 5px 15px 2px !important;margin: <%= current_mobileDevice ? '10% 1%' : '10% 25%' %>;float:none; margin-bottom: 10px;">
                         <div class="card-header">
                             <h4 class="card-title" style="text-align: center">Como deseja criar sua publicação?</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-full-width">
-                                        <table class="table">
+                                        <table class="<%= current_mobileDevice ? '' : 'table' %>">
                                             <tbody>
                                                 <tr>
                                                     <td>
@@ -79,10 +79,10 @@
                                                     </td>
                                                     <td>                                                
                                                         <div class="row" >
-                                                            <div class="col-lg-5">
+                                                            <div class="col-lg-<%= current_mobileDevice ? '12' : '5' %>">
                                                             Editar Projeto: 
                                                             </div>
-                                                            <div class="col-lg-7">
+                                                            <div class="col-lg-<%= current_mobileDevice ? '12' : '7' %>">
                                                                     <%= select_tag :project_id, options_for_select(Project.where("user_id = #{current_user.id}").collect { |p| [p.title, p.id] }), {id:"projects", class:"form-control", style: "height: 40px;width:100%;box-shadow: 0px 3px 10px 2px"} %>
                                                             </div>
                                                         </div>
@@ -104,7 +104,7 @@
                                 <div class="card-body">
                                         <table class="">
                                             <!-- PROJETO ESCRITO MANUALMENTE -->
-                                            <tbody style="display:flex;flex-direction:row">
+                                            <tbody style="display:flex;flex-direction:<%= current_mobileDevice ? 'column' : 'row' %>">
                                                 <tr>
                                                     <td>
                                                         <div class="form-check">
@@ -132,7 +132,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="<%= current_mobileDevice ? 'mt-3' : '' %>">
                                                 <%= form_tag dashboard_edit_project_path,class:"form-signin", id:"edit_project", method: "get" do |form| %>
                                                     <td>
                                                         <button type="submit" rel="tooltip" title="Editar Projeto" class="btn btn-info btn-simple btn-link">
@@ -382,7 +382,7 @@
                                 <div class="card-body">
                                         <table class="">
                                             <!-- PROJETO ESCRITO MANUALMENTE -->
-                                            <tbody style="display:flex;flex-direction:row">
+                                            <tbody style="display:flex;flex-direction:<%= current_mobileDevice ? 'column' : 'row' %> ">
                                                 <tr>
                                                     <td>
                                                         <div class="form-check">
@@ -410,7 +410,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="<%= current_mobileDevice ? 'mt-3' : '' %>">
                                                 <%= form_tag dashboard_edit_project_path,class:"form-signin", id:"edit_project", method: "get" do |form| %>
                                                     <td>
                                                         <button type="submit" rel="tooltip" title="Editar Projeto" class="btn btn-info btn-simple btn-link">

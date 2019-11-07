@@ -100,7 +100,7 @@
                                                 <div class="form-group">
                                                     <label>Linguagem Favorita: </label>
                                                     <%= @language_type = [ "Ruby","Assembly", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]
-                                                    form.select :favorite_language, @language_type,class: "form-control", required: true, class:"form-control" %>
+                                                    form.select :favorite_language, @language_type,{}, required: true, class:"form-control" %>
                                                                 
                                                 </div>
                                             </div>

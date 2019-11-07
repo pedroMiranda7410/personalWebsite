@@ -17,9 +17,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" ></script>
-
         <!-- CSS Files -->
         <link href="/style_js/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
@@ -534,109 +531,16 @@
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="/style_js/js/demo.js"></script>
 
-
-<script>
-<% 
-    @language_array = [] 
-    @colors = []
-
-    Post.where(user_id: current_user.id).each do |p|
-        @language_array << p.principal_language
-    end  
-
-    @language_array.uniq.each do |l|
-        @colour = "%06x" % (rand * 0xffffff)
-        @colors << @colour 
-    end
-%>
-                                    
-var pieChartNulo = {
-    "chart": {
-        "caption": "Projetos Postados",
-        "subCaption": "Filtro por linguagem principal de cada projeto",
-        "use3DLighting": "0",
-        "showPercentValues": "1",
-        "decimals": "1",
-        "showLegend": "0",
-        "pieRadius": "100",
-        "defaultcenterlabel": "<%= Post.where(user_id: current_user.id).length %>",
-        "useDataPlotColorForLabels": "1",
-        "plotToolText": "<b>$dataValue</b> projeto(s) que usam $label",
-        "theme": "umber"
-    },
-    "data": [
-        <% @i = 0 %>
-        <% @language_array.uniq.each do |l| %>
-            {
-                "label": "<%= l %>",
-                "value": "<%= Post.where(principal_language: l, user_id: current_user.id).length %>",
-                "color": "#<%= @colors[@i] %>"
-            },
-            <% @i = @i + 1 %>
-        <% end %>
-    ]
-  }
-
-    var pieChart = FusionCharts.render(
-    {
-        width: "100%",
-        height: "400",
-        type: "doughnut2d",
-        renderAt: "Principal-Languages-chart",
-        dataSource: pieChartNulo
-    });
-
-  if(pieChart.args.dataSource.data.length == 0){
-
-  }else{
-
-  }
-</script>
-
-<script>
-
-<%
-    @lang_array = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]                                                    
-%>
-
-const dataCollumnSource = {
-  chart: {
-    caption: "Todos os Projetos",
-    subCaption: "Filtro por linguagem",
-    xAxisName: "Linguagens",
-    yAxisName: "Nº de Projetos criados",
-    theme: "umber"
-  },
-  data: [
-    <% @lang_array.each do |l| %>
-        <% @colour = "%06x" % (rand * 0xffffff) %>
-        {
-        label: "<%= l %>",
-        value: "<%= Post.where(principal_language: l).length + Project.where(principal_language: l).length  %>",
-        color:"#<%= @colour %>"
-        },
-    <% end %>
-  ]
-};
-
-var collumnChart = FusionCharts.render(
-    {
-        width: "100%",
-        height: "100%",
-        type: "column2d",
-        renderAt: "all-languages-chart",
-        dataSource: dataCollumnSource
-    });
-
-</script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
-        demo.initDashboardPageCharts();
+
+
+        //demo.initDashboardPageCharts();
+
         $("#bgDisplayCheckbox").change(function(){
             $("#bgDisplayForm").submit();
         });
@@ -645,8 +549,9 @@ var collumnChart = FusionCharts.render(
             $("#notificationForm").submit();
         });
 
+
         $("#black").dblclick(function(){
-            $("#bgColorForm").append("<input name='colorValue' value='black' />");
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='black' />");
             $("#bgColorForm").submit();
         });
         $("#azure").dblclick(function(){
@@ -708,7 +613,6 @@ var collumnChart = FusionCharts.render(
         });
 
 
-
         <% if current_user.background_image_display == false %>
             $(".sidebar").removeAttr('data-image');
         <% end %>
@@ -736,21 +640,21 @@ var collumnChart = FusionCharts.render(
 
     <% if @bgColor == true && current_user.show_notification == true %>
         (function(from, align) {
-        color = 1;
+            color = 1;
 
-        $.notify({
-            icon: "nc-icon nc-palette",
-            message: "Cor da sidebar alterada para <strong style='color: <%= @color_choosen[1] == 'azul' ? 'white' : @color_choosen[2] %>' ><%= @color_choosen[1] %></strong> com sucesso!"
+            $.notify({
+                icon: "nc-icon nc-palette",
+                message: "Cor da sidebar alterada para <strong style='color: <%= @color_choosen[1] == 'azul' ? 'white' : @color_choosen[2] %>' ><%= @color_choosen[1] %></strong> com sucesso!"
 
-        }, {
-            type: type[color],
-            timer: 8000,
-            placement: {
-                from: from,
-                align: align
-            }
-        });
-    })();
+            }, {
+                type: type[color],
+                timer: 8000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+        })();
     <% end %>
 
     <% if @notification == true %>
@@ -812,6 +716,98 @@ var collumnChart = FusionCharts.render(
 
     });
 </script>
+
+
+<script>
+<% 
+    @language_array = [] 
+    @colors = []
+
+    Post.where(user_id: current_user.id).each do |p|
+        @language_array << p.principal_language
+    end  
+
+    @language_array.uniq.each do |l|
+        @colour = "%06x" % (rand * 0xffffff)
+        @colors << @colour 
+    end
+%>
+                                    
+var pieChartNulo = {
+    "chart": {
+        "caption": "Projetos Postados",
+        "subCaption": "Filtro por linguagem principal de cada projeto",
+        "use3DLighting": "0",
+        "showPercentValues": "1",
+        "decimals": "1",
+        "showLegend": "0",
+        "pieRadius": "100",
+        "defaultcenterlabel": "<%= Post.where(user_id: current_user.id).length %>",
+        "useDataPlotColorForLabels": "1",
+        "plotToolText": "<b>$dataValue</b> projeto(s) que usam $label",
+        "theme": "umber"
+    },
+    "data": [
+        <% @i = 0 %>
+        <% @language_array.uniq.each do |l| %>
+            {
+                "label": "<%= l %>",
+                "value": "<%= Post.where(principal_language: l, user_id: current_user.id).length %>",
+                "color": "#<%= @colors[@i] %>"
+            },
+            <% @i = @i + 1 %>
+        <% end %>
+    ]
+  }
+
+    var pieChart = FusionCharts.render(
+    {
+        width: "100%",
+        height: "400",
+        type: "doughnut2d",
+        renderAt: "Principal-Languages-chart",
+        dataSource: pieChartNulo
+    });
+
+</script>
+
+<script>
+
+    <%
+        @lang_array = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]                                                    
+    %>
+
+    const dataCollumnSource = {
+    chart: {
+        caption: "Todos os Projetos",
+        subCaption: "Filtro por linguagem",
+        xAxisName: "Linguagens",
+        yAxisName: "Nº de Projetos criados",
+        theme: "umber"
+    },
+    data: [
+        <% @lang_array.each do |l| %>
+            <% @colour = "%06x" % (rand * 0xffffff) %>
+            {
+            label: "<%= l %>",
+            value: "<%= Post.where(principal_language: l).length + Project.where(principal_language: l).length  %>",
+            color:"#<%= @colour %>"
+            },
+        <% end %>
+    ]
+    };
+
+    var collumnChart = FusionCharts.render(
+        {
+            width: "100%",
+            height: "100%",
+            type: "column2d",
+            renderAt: "all-languages-chart",
+            dataSource: dataCollumnSource
+        });
+
+</script>
+
 
 <% else %>
 

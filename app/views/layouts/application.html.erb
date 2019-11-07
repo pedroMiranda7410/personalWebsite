@@ -317,7 +317,8 @@
 
           <%= yield %>
 
-              <footer class="footer container-fluid" style="<%= @url == "/login" || @url == "new_user" ? "margin-top:100px" : "" %>">
+          <% if @url != "/new_user"%>
+              <footer class="footer container-fluid" style="<%= @url == "/login" ? "margin-top:600px" : "" %>">
                 <div class="container extraSpace">
                     <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
                         <li style="display:inline-block">
@@ -358,7 +359,7 @@
                     </div>
                 </div>
             </footer>
-
+        <% end %>
     <% if current_user != nil %>
       <% if (@url.include? "dashboard") == false %>
         <div class="profile-img shake">

@@ -1,0 +1,2 @@
+class CoolPhrase < ApplicationRecord
+end

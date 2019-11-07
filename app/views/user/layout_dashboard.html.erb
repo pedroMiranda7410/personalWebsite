@@ -1,0 +1,253 @@
+<% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+
+<% if current_user.present? %>
+
+
+<!DOCTYPE html>
+<html lang="en" data-no-turbolink>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/circle-cropped.png">
+        <link rel="icon" type="image/png" href="/circle-cropped.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Pedro Miranda</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="../style_js/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../style_js/css/demo.css" rel="stylesheet" />
+</head>
+
+<style>
+    #notificationSidebar .form-check-sign::before, #notificationSidebar .form-check-sign::after{
+        color: white;
+    }
+    #notificationSidebar .form-check-sign::after{
+        color: white;
+    }
+</style>
+
+<%
+        @c_num = current_user.bgColor
+
+        @color_choosen = "" 
+        if @c_num == 0
+            @color_choosen = "black"
+        elsif @c_num == 1
+            @color_choosen = "azure"
+        elsif @c_num == 2
+            @color_choosen = "green"
+        elsif @c_num == 3
+            @color_choosen = "orange"
+        elsif @c_num == 4
+            @color_choosen = "red"
+        elsif @c_num == 5
+            @color_choosen = "purple"
+        end
+    %>
+
+    <body data-no-turbolink>
+        <div class="wrapper">
+            <div class="sidebar" data-color="<%=@color_choosen %>" data-image="<%= current_user.background_image_choose != 6 ? "/style_js/img/Mysidebar-#{current_user.background_image_choose}.jpg" : "https://github.com/#{current_user.github}.png" %> ">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+           <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <%= link_to root_path, :"data-turbolinks" => false, style:"text-decoration:none;color: white; display:flex;" do %>
+
+                                <div style="height: 55px; width: 55px">
+                                  <img class="img-profile rounded-circle" style="height:100%; width:100%" src="<%= current_user.github == "" || current_user.github == nil ? '/missing.png' : 'https://github.com/' + current_user.github + '.png' %>">
+                                </div>
+                                <div class="mx-auto my-auto"><b><%= current_user.name %></b></div>
+                          <% end %>
+                    </div>
+                    <ul class="nav">
+                        <li class="<%= @url == '/dashboard' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard" data-turbolinks="false">
+                                <i class="nc-icon nc-chart-pie-35"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="<%= @url == '/dashboard_edit_user' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard_edit_user" data-turbolinks="false">
+                                <i class="nc-icon nc-circle-09"></i>
+                                <p>Perfil Usuário</p>
+                            </a>
+                        </li>
+                        <% if current_user.admin == true %>
+                            <li class="<%= @url == '/dashboard_list_users' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
+                                    <i class="nc-icon nc-notes"></i>
+                                    <p>Lista de Usuários</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_page_data' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
+                                    <i class="nc-icon nc-paper-2"></i>
+                                    <p>Conteúdo Páginas</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_personal_projects' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_personal_projects" data-turbolinks="false">
+                                    <i class="nc-icon nc-atom"></i>
+                                    <p>Projetos Pessoais</p>
+                                </a>
+                            </li>
+                        <% end %>
+                        <li class="<%= @url == '/dashboard_posts' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard_posts" data-turbolinks="false">
+                                <i class="nc-icon nc-spaceship"></i>
+                                <p>Projetos</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="/dashboard_chat">
+                                <i class="nc-icon nc-chat-round"></i>
+                                <p>Chat</p>
+                            </a>
+                        </li>
+                        <li>
+                            <%= form_for(current_user, url: update_user_path(notification: true), :html => {:id => "notificationForm"}) do |form| %>
+                                <span class="nav-link" style="display:flex; justify-content:center">
+                                    <i class="nc-icon nc-notification-70"></i>
+                                    <p>Notificações
+                                        <div id="notificationSidebar" class="form-check" data-toggle="tooltip" data-placement="top" data-html="true" title="Notificações são importantes pra te retornarem respostas do servidor, aconselho deixar ativada, mas fique a vontade em fazer sua decisão.">
+                                            <label class="form-check-label">
+                                                <%= form.check_box :show_notification, id:"notificationCheckbox", class:"form-check-input", checked: current_user.show_notification  %>
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </p>
+                                </span>
+                            <% end %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class="container-fluid">
+
+                        <%= link_to 'Pedro Miranda', root_path, class:"navbar-brand" %> 
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                            <ul class="nav navbar-nav mr-auto">
+                                
+                                <li class="dropdown nav-item">
+                                    <%= link_to 'Repositório Pessoal', software_path, :"data-turbolinks" => false, class:"nav-link" %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to 'Comunidade', comunidade_path, :"data-turbolinks" => false, class:"nav-link" %>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                  <%= link_to "Log out", logout_path, :"data-turbolinks" => false, class:"nav-link" %>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+            <!-- End Navbar -->
+            <% if @url == '/dashboard' %>
+                <%=  render 'dashboard'  %>
+            <% elsif @url == '/dashboard_edit_user' %>
+                <%=  render 'edit', user: @user %>
+            <% elsif @url == '/dashboard_list_users' %>
+                <%=  render 'list'  %>
+            <% elsif @url == '/dashboard_page_data' %>
+                <%=  render 'page_data'  %>
+            <% elsif @url == '/dashboard_personal_projects' %>
+                <%=  render 'personal_projects'  %>
+            <% elsif @url == '/dashboard_posts' %>
+                <%=  render 'posts'  %>
+            <% elsif @url == '/dashboard_edit_project' %>
+                <%=  render 'edit_project', project: @project  %>
+            <% elsif @url == '/dashboard_edit_post' %>
+                <%=  render 'edit_post', project: @post  %>
+            <% elsif @url == '/dashboard_chat' %>
+                <%=  render 'chat'  %>
+            <% end %>
+
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="../style_js/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../style_js/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../style_js/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../style_js/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../style_js/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../style_js/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../style_js/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../style_js/js/demo.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        <% if current_user.background_image_display == false %>
+            $(".sidebar").removeAttr('data-image');
+        <% end %>
+        
+        $("#notificationCheckbox").change(function(){
+            $("#notificationForm").submit();
+        });
+
+        <% if @notification == true %>
+            (function(from, align) {
+                color = 3;
+
+                $.notify({
+                    icon: "nc-icon nc-notification-70",
+                    message: "Suas notificações foram <strong style='color:#900000'><%= current_user.show_notification ? "Ligadas" : "Desligadas" %></strong>!<br><%= current_user.show_notification ? "" : "Espero que não fique com raiva dessa :D" %>"
+
+                }, {
+                    type: type[color],
+                    timer: 8000,
+                    placement: {
+                        from: from,
+                        align: align
+                    }
+                });
+            })();
+        <% end %>
+    });
+</script>
+</html>
+
+<% else %>
+
+
+  <div class="back">
+    <div class="center cenX">
+      <h1 class="titleMain" style="font-family: 'Gravity-Regular';font-size: 3em;">DASHBOARD</h1>
+      <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';font-size: 2.5em;">EM BREVE...</h3>
+
+    </div>
+  </div>
+
+
+
+<% end %>

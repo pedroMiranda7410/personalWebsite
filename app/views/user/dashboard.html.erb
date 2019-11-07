@@ -1,4 +1,6 @@
-<% if current_user.admin %>
+<% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
+
+<% if current_user.present? %>
 
           <!DOCTYPE html>
     <html lang="en" data-no-turbolink>
@@ -13,28 +15,45 @@
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
         <!-- CSS Files -->
         <link href="/style_js/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="/style_js/css/demo.css" rel="stylesheet" />
-        <script>
-            (function(){
-                if($( "body" ).html() == "2019"){
-                    console.log("TESTEEEEEEEEEEE");
-                }
-                })();
-        </script>
+        <link href="/style_js/css/arrow_bounce.css" rel="stylesheet" />
     </head>
+
+    <style>
+        #notificationSidebar .form-check-sign::before, #notificationSidebar .form-check-sign::after{
+            color: white;
+        }
+        #notificationSidebar .form-check-sign::after{
+            color: white;
+        }
+    </style>
+    <%
+        @c_num = current_user.bgColor
+
+        @color_choosen = "" 
+        if @c_num == 0
+            @color_choosen = ["black", "preto", "#777777"]
+        elsif @c_num == 1
+            @color_choosen = ["azure", "azul", "#4398FF"]
+        elsif @c_num == 2
+            @color_choosen = ["green", "verde", "#00E200"]
+        elsif @c_num == 3
+            @color_choosen = ["orange", "laranja", "#FF511E"]
+        elsif @c_num == 4
+            @color_choosen = ["red", "vermelho", "#FF0024"]
+        elsif @c_num == 5
+            @color_choosen = ["purple", "roxo", "#A420E9"]
+        end
+    %>
 
     <body data-no-turbolink>
         <div class="wrapper">
-            <div class="sidebar" data-image="/style_js/img/sidebar-5.jpg">
-                <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-            Tip 2: you can also add an image using data-image tag
-        -->
+            <div class="sidebar" data-color="<%= @color_choosen[0] %>" data-image="<%= current_user.background_image_choose != 6 ? "/style_js/img/Mysidebar-#{current_user.background_image_choose}.jpg" : "https://github.com/#{current_user.github}.png" %> ">
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <%= link_to root_path, :"data-turbolinks" => false, style:"text-decoration:none;color: white; display:flex;" do %>
@@ -46,47 +65,64 @@
                           <% end %>
                     </div>
                     <ul class="nav">
-                        <li class="nav-item active">
+                        <li class="<%= @url == '/dashboard' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard" data-turbolinks="false">
                                 <i class="nc-icon nc-chart-pie-35"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="<%= @url == '/dashboard_edit_user' ? "nav-item active" : "" %>">
                             <a class="nav-link" href="/dashboard_edit_user" data-turbolinks="false">
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>Perfil Usuário</p>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Lista de Usuários</p>
+                        <% if current_user.admin == true %>
+                            <li class="<%= @url == '/dashboard_list_users' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
+                                    <i class="nc-icon nc-notes"></i>
+                                    <p>Lista de Usuários</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_page_data' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
+                                    <i class="nc-icon nc-paper-2"></i>
+                                    <p>Conteúdo Páginas</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_personal_projects' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_personal_projects" data-turbolinks="false">
+                                    <i class="nc-icon nc-atom"></i>
+                                    <p>Projetos Pessoais</p>
+                                </a>
+                            </li>
+                        <% end %>
+                        <li class="<%= @url == '/dashboard_posts' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard_posts" data-turbolinks="false">
+                                <i class="nc-icon nc-spaceship"></i>
+                                <p>Projetos</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
-                                <i class="nc-icon nc-paper-2"></i>
-                                <p>Conteúdo Páginas</p>
+                            <a class="nav-link" href="/dashboard_chat">
+                                <i class="nc-icon nc-chat-round"></i>
+                                <p>Chat</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./icons.html">
-                                <i class="nc-icon nc-atom"></i>
-                                <p>Icons</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="./maps.html">
-                                <i class="nc-icon nc-pin-3"></i>
-                                <p>Maps</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="./notifications.html">
-                                <i class="nc-icon nc-bell-55"></i>
-                                <p>Notifications</p>
-                            </a>
+                            <%= form_for(current_user, url: update_user_path(notification: true), :html => {:id => "notificationForm"}) do |form| %>
+                                <span class="nav-link" style="display:flex; justify-content:center">
+                                    <i class="nc-icon nc-notification-70"></i>
+                                    <p>Notificações
+                                        <div id="notificationSidebar" class="form-check" data-toggle="tooltip" data-placement="top" data-html="true" title="Notificações são importantes pra te retornarem respostas do servidor, aconselho deixar ativada, mas fique a vontade em fazer sua decisão.">
+                                            <label class="form-check-label">
+                                                <%= form.check_box :show_notification, id:"notificationCheckbox", class:"form-check-input", checked: current_user.show_notification  %>
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </p>
+                                </span>
+                            <% end %>
                         </li>
                     </ul>
                 </div>
@@ -106,7 +142,7 @@
                             <ul class="nav navbar-nav mr-auto">
                                 
                                 <li class="dropdown nav-item">
-                                    <%= link_to 'Software', software_path, :"data-turbolinks" => false, class:"nav-link" %>
+                                    <%= link_to 'Repositório Pessoal', software_path, :"data-turbolinks" => false, class:"nav-link" %>
                                 </li>
                                 <li class="nav-item">
                                     <%= link_to 'Comunidade', comunidade_path, :"data-turbolinks" => false, class:"nav-link" %>
@@ -124,72 +160,40 @@
                 <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Email Statistics</h4>
-                                    <p class="card-category">Last Campaign Performance</p>
-                                </div>
-                                <div class="card-body ">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Users Behavior</h4>
-                                    <p class="card-category">24 Hours performance</p>
-                                </div>
-                                <div class="card-body ">
-                                    <div id="chartHours" class="ct-chart"></div>
-                                </div>
-                                <div class="card-footer ">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">2017 Sales</h4>
-                                    <p class="card-category">All products including Taxes</p>
+                            <%# <div class="card " id="with-graph">
+                                <div class="card-body ">
+                                    <div id="Principal-Languages-chart"></div>
+                                </div>
+                            </div> %>
+                            <div class="card " id="no-graph">
+                                <div class="card-header">
+                                    <h4 class="card-title">Gráfico de pizza</h4>
+                                    <p class="card-category">Estatísticas sobre as principais linguagens de seus projetos</p>
                                 </div>
                                 <div class="card-body ">
-                                    <div id="chartActivity" class="ct-chart"></div>
-                                </div>
-                                <div class="card-footer ">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-check"></i> Data information certified
-                                    </div>
+                                    <p class="card-category">Você ainda não postou nenhum projeto!<br>
+                                    Compartilhe conhecimento e conheça mais sobre você com as estatísticas</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Em desenvolvimento...</h4>
+                                    <p class="card-category"></p>
+                                </div>
+                                <div class="card-body ">
+                                    <p class="card-category">Sugira ideias interessantes sobre o que seria legal de visualizar aqui!<br>
+                                    Quem sabe a gente não acabe trabalhando junto nessa?</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <%# <div class="col-md-6">
                             <div class="card  card-tasks">
                                 <div class="card-header ">
                                     <h4 class="card-title">Tasks</h4>
@@ -325,7 +329,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> %>
+
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-body ">
+                                    <div id="all-languages-chart" class="ct-chart"></div>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -354,64 +370,144 @@
         </a>
 
         <ul class="dropdown-menu">
+            <!--
             <li class="header-title"> Configurações gerais</li>
             <li class="adjustments-line">
                 <a href="javascript:void(0)" class="switch-trigger">
                     <p>Notificações</p>
                     <label class="switch" style="float:right">
+                        <!-- <input data-remote="true" data-toggle="switch" checked="<%= current_user.show_notification ? "true" : "false" %>" data-on-color="primary" data-off-color="primary" id="user-<%= current_user.id %>" data-url="update_user?user_id=<%= current_user.id %>&notification=<%= current_user.show_notification ? "false" : "true" %>" style="visibility:hidden" data-method="patch"  type="checkbox" > 
                         <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
                     </label>
                     <div class="clearfix"></div>
                 </a>
             </li>
-			<li class="header-title"> Sidebar Style</li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger">
-                    <p>Background Image</p>
-                    <label class="switch">
-                        <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
-                    </label>
-                    <div class="clearfix"></div>
-                </a>
+            -->
+			<li class="header-title"> Sidebar Style - <i  style="color: #900000" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Ajuda:</strong><br>Abra sua sidebar, caso esteja no celular, e brinque com as opções de preview até achar a sidebar que fique mais parecida com você!<br> Depois é só salvar no banco de dados selecionando as mesmas opções, que não sejam de preview." class="far fa-question-circle"></i>
+                <span class="arrow">
+                    <i class=" fa fa-arrow-left fa-1x" href="#"></i>
+                </span>
             </li>
-            
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <p>Filters</p>
-                    <div class="pull-right">
-                        <span class="badge filter badge-black" data-color="black"></span>
-                        <span class="badge filter badge-azure" data-color="azure"></span>
-                        <span class="badge filter badge-green" data-color="green"></span>
-                        <span class="badge filter badge-orange" data-color="orange"></span>
-                        <span class="badge filter badge-red" data-color="red"></span>
-                        <span class="badge filter badge-purple active" data-color="purple"></span>
+            <li class="adjustments-line" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="">
+                            <!-- PROJETO ESCRITO MANUALMENTE -->
+                        <%= form_for(current_user, url: update_user_path(bgDisplay: true), :html => {:id => "bgDisplayForm"}) do |form| %>
+                            <tbody style="display:flex;flex-direction:row">
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <%= form.check_box :background_image_display, id:"bgDisplayCheckbox", class:"form-check-input", checked: current_user.background_image_display  %>
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>Foto de fundo na sidebar</td>
+                                </tr>
+                            </tbody>
+                        <% end %>
+                        </table>
                     </div>
-                    <div class="clearfix"></div>
+                </div>
+            </li>
+            <li class="adjustments-line" >
+                <div class="row">
+                        <div class="col-md-12">
+                            <table class="mb-2">
+                                <!-- PROJETO ESCRITO MANUALMENTE -->
+                                <tbody style="display:flex;flex-direction:row">
+                                    <tr>
+                                        <td><strong style="color: #900000" data-toggle="tooltip" data-placement="top" data-html="true" title="Use esse botão de preview ao lado para ver se você prefere sua sidebar com foto de fundo ou sem :)">PREVIEW</strong>
+                                            <span class="arrow">
+                                                <i class=" fa fa-arrow-left fa-1x" href="#"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0)" class="switch-trigger mt-3 ">
+                                                <span class="switch" >
+                                                    <input type="checkbox" <%= current_user.background_image_display ? "checked" : "unchecked" %> data-toggle="switch" data-on-color="primary" data-off-color="primary"><span class="toggle"></span>
+                                                </span>
+                                                <div class="clearfix"></div>
+                                            </a>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </li>
+
+            <li class="adjustments-line" >
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Cor sidebar - <i  style="color: #900000" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Instruções:</strong><br>1 click = Preview<br>2 clicks = salvar opção" class="far fa-question-circle"></i>
+                            <span class="arrow">
+                                <i class=" fa fa-arrow-left fa-1x" href="#"></i>
+                            </span>                        
+                        </p>
+                        <div class="pull-right">
+                                <!-- PROJETO ESCRITO MANUALMENTE -->
+                            <%= form_for(current_user, url: update_user_path( bgColor: true), :html => {:id => "bgColorForm"}) do |form| %>
+                                <span class="badge filter badge-black <%= current_user.bgColor == 0 ? "active" : "" %>" id="black" data-color="black"></span>
+                                <span class="badge filter badge-azure <%= current_user.bgColor == 1 ? "active" : "" %>" id="azure" data-color="azure"></span>
+                                <span class="badge filter badge-green <%= current_user.bgColor == 2 ? "active" : "" %>" id="green" data-color="green"></span>
+                                <span class="badge filter badge-orange <%= current_user.bgColor == 3 ? "active" : "" %>" id="orange" data-color="orange"></span>
+                                <span class="badge filter badge-red <%= current_user.bgColor == 4 ? "active" : "" %>" id="red" data-color="red"></span>
+                                <span class="badge filter badge-purple <%= current_user.bgColor == 5 ? "active" : "" %>" id="purple" data-color="purple"></span>
+                                
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
                 </a>
             </li>
-            <li class="header-title">Imagens da Sidebar</li>
 
-            <li class="active">
-              <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="/_MG_1276.jpg" alt="" />
+            <li class="header-title">Imagens da Sidebar - <i  style="color: #900000" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Instruções:</strong><br>1 click = Preview<br>2 clicks = salvar opção" class="far fa-question-circle"></i>
+            <span class="arrow">
+                <i class=" fa fa-arrow-left fa-1x" href="#"></i>
+            </span>
+            </li>
+        <%= form_for(current_user, url: update_user_path( bgImage: true), :html => {:id => "bgImageForm"}) do |form| %>
+            <li id="image-0" class="active">
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="/style_js/img/Mysidebar-0.jpg" alt="" />
                 </a>
                 
             </li>
-            <li>
+            <li id="image-1">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="/_MG_1640.jpg" alt="" />
+                    <img src="/style_js/img/Mysidebar-1.jpg" alt="" />
                 </a>
             </li>
-            <li>
+            <li id="image-2">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="/_MG_0255-2.jpg" alt="" />
+                    <img src="/style_js/img/Mysidebar-2.jpg" alt="" />
                 </a>
             </li>
-            <li>
+            <li id="image-3">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="/_MG_1462.jpg" alt="" />
+                    <img src="/style_js/img/Mysidebar-3.jpg" alt="" />
                 </a>
             </li>
+            <li id="image-4">
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="/style_js/img/Mysidebar-4.jpg" alt="" />
+                </a>
+            </li>
+            <li id="image-5">
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="/style_js/img/Mysidebar-5.jpg" alt="" />
+                </a>
+            </li>
+            <li id="image-6">
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="https://github.com/<%= current_user.github %>.png" alt="" />
+                </a>
+            </li>
+        <% end %>
         </ul>
     </div>
 </div>
@@ -423,27 +519,224 @@
 <script src="/style_js/js/core/bootstrap.min.js" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
 <script src="/style_js/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!--  Chartist Plugin  -->
-<script src="/style_js/js/plugins/chartist.min.js"></script>
+<script src="/style_js/js/fusioncharts/fusioncharts.js"></script>
+<script src="/style_js/js/fusioncharts/fusioncharts.theme.fint.js"></script>
+<script src="/style_js/js/fusioncharts/fusioncharts.charts.js"></script>
 <!--  Notifications Plugin    -->
 <script src="/style_js/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="/style_js/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="/style_js/js/demo.js"></script>
+
+
+<script>
+<% 
+    @language_array = [] 
+    @colors = []
+
+    Post.where(user_id: current_user.id).each do |p|
+        @language_array << p.principal_language
+    end  
+
+    @language_array.uniq.each do |l|
+        @colour = "%06x" % (rand * 0xffffff)
+        @colors << @colour 
+    end
+%>
+                                    
+var pieChartNulo = {
+    "chart": {
+        "caption": "Projetos Postados",
+        "subCaption": "Filtro por linguagem principal de cada projeto",
+        "use3DLighting": "0",
+        "showPercentValues": "1",
+        "decimals": "1",
+        "showLegend": "0",
+        "pieRadius": "100",
+        "defaultcenterlabel": "<%= Post.where(user_id: current_user.id).length %>",
+        "useDataPlotColorForLabels": "1",
+        "plotToolText": "<b>$dataValue</b> projeto(s) que usam $label",
+        "theme": "umber"
+    },
+    "data": [
+        <% @i = 0 %>
+        <% @language_array.uniq.each do |l| %>
+            {
+                "label": "<%= l %>",
+                "value": "<%= Post.where(principal_language: l, user_id: current_user.id).length %>",
+                "color": "#<%= @colors[@i] %>"
+            },
+            <% @i = @i + 1 %>
+        <% end %>
+    ]
+  }
+
+    var pieChart = FusionCharts.render(
+    {
+        width: "100%",
+        height: "400",
+        type: "doughnut2d",
+        renderAt: "Principal-Languages-chart",
+        dataSource: pieChartNulo
+    });
+
+  if(pieChart.args.dataSource.data.length == 0){
+
+  }else{
+
+  }
+</script>
+
+<script>
+
+<%
+    @lang_array = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]                                                    
+%>
+
+const dataCollumnSource = {
+  chart: {
+    caption: "Todos os Projetos",
+    subCaption: "Filtro por linguagem",
+    xAxisName: "Linguagens",
+    yAxisName: "Nº de Projetos criados",
+    theme: "umber"
+  },
+  data: [
+    <% @lang_array.each do |l| %>
+        <% @colour = "%06x" % (rand * 0xffffff) %>
+        {
+        label: "<%= l %>",
+        value: "<%= Post.where(principal_language: l).length + Project.where(principal_language: l).length  %>",
+        color:"#<%= @colour %>"
+        },
+    <% end %>
+  ]
+};
+
+var collumnChart = FusionCharts.render(
+    {
+        width: "100%",
+        height: "100%",
+        type: "column2d",
+        renderAt: "all-languages-chart",
+        dataSource: dataCollumnSource
+    });
+
+</script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
         demo.initDashboardPageCharts();
+        $("#bgDisplayCheckbox").change(function(){
+            $("#bgDisplayForm").submit();
+        });
+        
+        $("#notificationCheckbox").change(function(){
+            $("#notificationForm").submit();
+        });
 
-    (function(from, align) {
-        color = 2;
+        $("#black").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='black' />");
+            $("#bgColorForm").submit();
+        });
+        $("#azure").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='azure' />'");
+            $("#bgColorForm").submit();
+        });
+        $("#green").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='green' />'");
+            $("#bgColorForm").submit();
+        });
+        $("#orange").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='orange' />'");
+            $("#bgColorForm").submit();
+        });
+        $("#red").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='red' />'");
+            $("#bgColorForm").submit();
+        });
+        $("#purple").dblclick(function(){
+            $("#bgColorForm").append("<input type='hidden' name='colorValue' value='purple' />'");
+            $("#bgColorForm").submit();
+        });
+
+
+        /* FORMS IMAGENS */
+        $("#bgImageForm #image-0").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-0' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-1").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-1' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-2").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-2' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-3").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-3' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-4").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-4' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-5").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-5' />'");
+            $("#bgImageForm").submit();
+        });
+
+         $("#bgImageForm #image-6").dblclick(function(){
+            $("#bgImageForm").append("<input type='hidden' name='imageValue' value='image-6' />'");
+            $("#bgImageForm").submit();
+        });
+
+
+
+        <% if current_user.background_image_display == false %>
+            $(".sidebar").removeAttr('data-image');
+        <% end %>
+
+        
+
+    <% if @bgDisplay == true && current_user.show_notification == true %>
+        (function(from, align) {
+            color = 0;
+
+            $.notify({
+                icon: "nc-icon nc-check-2",
+                message: "Foto de fundo da sidebar foi <strong style'color:#900000'><%= current_user.background_image_display ? "Realocada" : "Retirada" %></strong> com sucesso!"
+
+            }, {
+                type: type[color],
+                timer: 8000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+        })();
+    <% end %>
+
+    <% if @bgColor == true && current_user.show_notification == true %>
+        (function(from, align) {
+        color = 1;
 
         $.notify({
-            icon: "nc-icon nc-app",
-            message: "Bem-vindo á sua <b>Dashboard</b>! Aqui dentro você consegue ter todo controle sobre seus projetos e dados pessoais."
+            icon: "nc-icon nc-palette",
+            message: "Cor da sidebar alterada para <strong style='color: <%= @color_choosen[1] == 'azul' ? 'white' : @color_choosen[2] %>' ><%= @color_choosen[1] %></strong> com sucesso!"
 
         }, {
             type: type[color],
@@ -454,11 +747,67 @@
             }
         });
     })();
+    <% end %>
+
+    <% if @notification == true %>
+        (function(from, align) {
+            color = 3;
+
+            $.notify({
+                icon: "nc-icon nc-notification-70",
+                message: "Suas notificações foram <strong style='color:#900000'><%= current_user.show_notification ? "Ligadas" : "Desligadas" %></strong>!<br><%= current_user.show_notification ? "" : "Espero que não fique com raiva dessa :D" %>"
+
+            }, {
+                type: type[color],
+                timer: 8000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+        })();
+    <% end %>
+
+    <% if @bgImage == true && current_user.show_notification == true  %>
+        (function(from, align) {
+        color = 3;
+
+        $.notify({
+            icon: "nc-icon nc-sun-fog-29",
+            message: "Imagem de Fundo da sidebar foi alterada com sucesso!"
+
+        }, {
+            type: type[color],
+            timer: 8000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    })();
+    <% end %>
+
+    <% if current_user.show_notification == true  %>
+        (function(from, align) {
+            color = 2;
+
+            $.notify({
+                icon: "nc-icon nc-satisfied",
+                message: "Bem-vindo á sua <b>Dashboard</b>! Aqui dentro você consegue alterar a cor e foto de fundo da sua sidebar, clicando na engrenagem e, além disso, ter todo controle sobre seus projetos dados pessoais!"
+
+            }, {
+                type: type[color],
+                timer: 8000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+        })();
+    <% end %>
 
     });
 </script>
-
-           
 
 <% else %>
 
@@ -470,7 +819,6 @@
 
     </div>
   </div>
-
 
 
 <% end %>

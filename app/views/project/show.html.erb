@@ -1,0 +1,153 @@
+
+<!DOCTYPE HTML>
+<html>
+
+    <body>
+            <div class="container-fluid">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col topPad cenX" style="padding-top:200px;">
+
+                                <h1 class="titleMain"><%= @project.title %></h1>
+                                <h3 class="regTitle"><%= @project.sub_title %> | <%= @project.language %></h3>
+
+
+                        </div>
+                        <!-- <div class="col-4 topPad">
+
+                            yoyoyo
+                        </div> -->
+                    </div>
+
+                    <div class="cenX padB60">
+                        <a class="btn btn-primary btn-lg" href="https://github.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>" role="button">Ir ao repositório</a>
+                        <!--<a class="linkGrey" id="srcCode" href="https://github.com/DevonCrawford/Timelapse-Auto-Ramp-Photoshop-Plugin">View source code</a>-->
+                    </div>
+
+                    <div class="row exText">
+                        <div class="col-md-12">
+                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">
+                               <% if @project.video != "" %>
+                                SIMULAÇÃO
+                               <% elsif @project.image != "" %>
+                                IDEIA
+                               <% end %>                                   
+                            </h5>
+                        </div>                            
+                    </div>
+                    <% if @project.video != "" %>
+                        <video width="100%" autoplay loop class="round3 vid">
+                            <source src="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.video %>"></source>
+                        </video>
+                    <% elsif @project.image != "" %>
+                        <img width="100%" src="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.image %>">
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="container-fluid  sec" style="background-color: #191919;">
+                <div class="container">
+                    <h3 class="subTitle white" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">TEORIA</h3>
+                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: 1em;white-space: pre-line">
+                        <%= @project.objective %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="container-fluid sec">
+                <div id="descriptionProject" class="container pt-5 px-5">
+                    <% if @project.get_from_github %>
+
+                    <% else %>
+                        <%= @project.description.html_safe %>
+                    <% end %>
+                </div>
+            <% if @project.github_repo_name == "simulacao_nanorobo" && current_mobileDevice != true %>
+                    <div class="container">
+                        <iframe src="/PDFslides_fluxoSang.pdf" width="98%" height="650px" class="centerImg padB40"></iframe>
+                    </div>
+            <% else %>
+                <% if @project.pdf != "" %>
+                    <div class="container" style="display: flex; justify-content: center">
+                        <form method="get" action="https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/<%= @project.pdf %>">
+                                <button class="btn btn-success btn-lg w100" type="submit">Faça o download do PDF!</button>
+                        </form>
+                    </div>
+                <% end %>
+            <% end %>
+            </div>
+
+            <!-- btnLINKS -->
+            <div class="container-fluid btnLinks extPad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 bot">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">ACHOU UM BUG?</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Me deixe sabendo no github</p>
+                                <a class="btn btn-danger btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @project.github_owner_name %>/" role="button">Problemas</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 bot">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">CONTRIBUA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Faça parte do projeto</p>
+                                <a class="btn btn-primary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="/contacts/new" role="button">Contate-me</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">PEGUE DE GRAÇA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">teste da sua forma</p>
+                                <a class="btn btn-info btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/" role="button">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <p class="subText extPad"></p>
+            </div>
+
+
+        <script src="scripts/mobile.js" type="text/javascript"></script>
+
+        <script>
+            $(document).ready(function(){
+                
+            <% if @project.get_from_github %>
+                // get markdown content  
+                var body_location = 'https://raw.githubusercontent.com/<%= @project.github_owner_name %>/<%= @project.github_repo_name %>/<%= @project.github_branch_name %>/README.md';
+                function getText(myUrl){
+                    var result = null;
+                    $.ajax( { url: body_location, 
+                            type: 'get', 
+                            dataType: 'html',
+                            async: false,
+                            success: function(data) { result = data; } 
+                            }
+                    );
+                    FileReady = true;
+                    return result;
+                }
+
+                var markdown_source = getText(body_location);
+                // convert markdown to html
+                
+                var converter = new showdown.Converter();
+                var output = converter.makeHtml( markdown_source );
+                //alert(markdown_source);
+                //alert(output);
+                console.log(output);
+                $("#descriptionProject").append(output);
+                $("#descriptionProject ul").css({"display":"flex", "flex-direction": "column"});
+                $("#descriptionProject *").css({"font-family":"Gravity-Regular"});
+                $("#descriptionProject ul").addClass( "listPad" );
+                $("#descriptionProject").addClass( "container px-5" );
+                //document.write(output);
+            <% end %>
+            });
+        </script>
+    </body>
+</html>

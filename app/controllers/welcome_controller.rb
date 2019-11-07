@@ -18,6 +18,13 @@ class WelcomeController < ApplicationController
       @objective.save
     end
 
+    if Community.all == []
+      @community = Community.new(description:"
+        TEXTO AQUI
+      ")
+      @community.save
+    end
+
     @first_time = params[:first_time] != nil ? (params[:first_time] == "true" || params[:first_time] == true ? true : false)  : false
 
     if params[:loged]

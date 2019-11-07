@@ -168,6 +168,19 @@ body .padX0 {
     padding-bottom: 120px;
 }
 
+/* Animação de Bounce das setas "Leia Mais" */
+
+.smoothScrollBtn img{
+    -webkit-animation: bounce_down 2s infinite ease-in-out;
+}
+
+@-webkit-keyframes bounce_down {
+	0%, 20%, 60%, 100%  { -webkit-transform: translateY(0); }
+    40%  { -webkit-transform: translateY(-8px); }
+	80% { -webkit-transform: translateY(-2.5px); }
+}
+
+
 /* Suitable for mobile devices */
 
 @media (max-width: 991px) {

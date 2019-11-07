@@ -9,7 +9,7 @@ class ProjectController < ApplicationController
 
       respond_to do |format|
         if @project.update(project_params)
-          format.html { redirect_to dashboard_projects_path(updated: true), notice: 'Mudanças salvas com sucesso!' }
+          format.html { redirect_to dashboard_personal_projects_path(updated: true), notice: 'Mudanças salvas com sucesso!' }
           format.json { render :show, status: :ok, location: @project }
         else
           format.html { render :edit }
@@ -28,7 +28,7 @@ class ProjectController < ApplicationController
   
       respond_to do |format|
         if @project.save
-          format.html { redirect_to dashboard_projects_path(created: true), notice: 'project was successfully created.' }
+          format.html { redirect_to dashboard_personal_projects_path(created: true), notice: 'project was successfully created.' }
         else
           format.html { render :new }
           format.json { render json: @project.errors, status: :unprocessable_entity }

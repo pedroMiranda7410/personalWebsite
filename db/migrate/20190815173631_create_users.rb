@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :first_time, null:false, default: true
       t.boolean :show_notification, null:false, default: true
       t.boolean :background_image_display, null:false, default: true
-      t.integer :bgColor, null:false, default: 3
+      t.integer :bgColor, null:false, default: 0
       t.integer :background_image_choose, null: false, default: 6
 
 

@@ -5,9 +5,35 @@ class UserController < ApplicationController
 
   def dashboard
     if current_user != nil
-      if current_user.admin == true
-        render :layout => false
+      @bgDisplay = params[:bgDisplay]
+      @bgImage = params[:bgImage]
+      @bgColor = params[:bgColor]
+      @notification = params[:notification]
+
+      @notification = @notification == "true" ? true : false
+
+      if @bgDisplay == "true" || @bgDisplay == true
+        @bgDisplay = true
+      else
+        @bgDisplay = false
       end
+
+      if @bgColor == "true" || @bgColor == true
+        @bgColor = true
+      else
+        @bgColor = false
+      end
+
+      if @bgImage == "true" || @bgImage == true
+        @bgImage = true
+      else
+        @bgImage = false
+      end
+
+      if current_user.admin == true
+        
+      end
+      render :layout => false
     else
       redirect_to login_path
     end
@@ -34,8 +60,9 @@ class UserController < ApplicationController
 
     if current_user != nil
       if current_user.admin == true
-        render :layout => false
+        
       end
+      render :layout => false
     else
       redirect_to login_path
     end
@@ -88,11 +115,43 @@ class UserController < ApplicationController
     end
   end
 
+  def update_community
+    @community = Community.find_by_id(params[:community_id])
+
+    respond_to do |format|
+      if @community.update(community_params)
+        format.html { redirect_to root_path, notice: 'Comunidade salva com sucesso!' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @nuser.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def delete
     @user = User.find_by_id(params[:user_id])
     @user.destroy
     respond_to do |format|
       format.html { redirect_to dashboard_list_users_path, notice: 'Usuário foi excluído com sucesso.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_post
+    @post = Post.find_by_id(params[:post_id])
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_list_users_path, notice: 'Postagem foi excluído com sucesso.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_project
+    @project = Project.find_by_id(params[:project_id])
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_list_users_path, notice: 'Projeto foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -107,6 +166,9 @@ class UserController < ApplicationController
     @tamoJunto_counter = params[:tamoJunto]
     @euQuemAgradeco_counter = params[:euQuemAgradeco]
     @notification = params[:notification]
+    @bgDisplay = params[:bgDisplay]
+    @bgColor = params[:bgColor]
+    @bgImage = params[:bgImage]
 
     if @login_counter == "true"
       @total = @user.login_count + 1
@@ -125,20 +187,136 @@ class UserController < ApplicationController
       @user.update(show_notification: (@user.show_notification ? false : true))
     end
 
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to root_path, notice: 'Mudanças salvas com sucesso!' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if @bgColor == "true"
+      @colorValue = params[:colorValue]
+
+      if @colorValue == 'black'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 0)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
+      elsif @colorValue == 'azure'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 1)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
+      elsif @colorValue == 'green'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 2)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
+      elsif @colorValue == 'orange'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 3)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
+      elsif @colorValue == 'red'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 4)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
+      elsif @colorValue == 'purple'
+        respond_to do |format|
+          if @user.update_attributes(bgColor: 5)
+            format.html { redirect_to dashboard_path(bgColor: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end 
       end
+    else
+
+      if @bgDisplay == "true"
+        respond_to do |format|
+          if @user.update_attributes(background_image_display: (@user.background_image_display ? false : true))
+            format.html { redirect_to dashboard_path(bgDisplay: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end      
+      elsif @bgImage == "true"
+        @imageValue = params[:imageValue]
+        @choosen = 0
+        if @imageValue == "image-0"
+          @choosen = 0
+        elsif @imageValue == "image-1"
+          @choosen = 1
+        elsif @imageValue == "image-2"
+          @choosen = 2
+        elsif @imageValue == "image-3"
+          @choosen = 3
+        elsif @imageValue == "image-4"
+          @choosen = 4 
+        elsif @imageValue == "image-5"
+          @choosen = 5   
+        elsif @imageValue == "image-6"
+          @choosen = 6        
+        end
+        respond_to do |format|
+          if @user.update_attributes(background_image_choose: @choosen)
+            format.html { redirect_to dashboard_path(bgImage: true), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        respond_to do |format|
+
+          if @user.admin == false
+            @bool_falsingAdmin = true
+          end
+
+          if @user.update(user_params)
+            if @bool_falsingAdmin
+              @user.update_attribute(:admin, false)
+            end
+            
+            format.html { redirect_to (@notification == "true" ? dashboard_path(notification: true) : dashboard_edit_user_path), notice: 'Mudanças salvas com sucesso!' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { render :edit }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end
+      end
+
     end
   end
 
   private
     def user_params
-      params.require(:user).permit(:background_image_choose,:filter,:backgroung_image_display,:show_notification,:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
+      params.require(:user).permit(:favorite_language, :background_image_choose,:bgColor,:background_image_display,:show_notification,:name,:github, :nickname, :email, :password, :admin, :avatar, :login_count, :first_time,:tamo_junto,:eu_quem_agradeco)
     end
 
     def summary_params
@@ -147,5 +325,9 @@ class UserController < ApplicationController
 
     def my_objective_params
       params.require(:my_objective).permit(:description)
+    end
+
+    def community_params
+      params.require(:community).permit(:description)
     end
 end

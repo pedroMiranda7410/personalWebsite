@@ -1,6 +1,6 @@
 <% @url = request.original_fullpath.gsub( /[\?#].*|$/, "") %>
 
-<% if current_user.admin %>
+<% if current_user.present? %>
 
 
 <!DOCTYPE html>
@@ -23,10 +23,37 @@
     <link href="../style_js/css/demo.css" rel="stylesheet" />
 </head>
 
+<style>
+    #notificationSidebar .form-check-sign::before, #notificationSidebar .form-check-sign::after{
+        color: white;
+    }
+    #notificationSidebar .form-check-sign::after{
+        color: white;
+    }
+</style>
 
-<body data-no-turbolink>
-    <div class="wrapper">
-        <div class="sidebar" data-image="../style_js/img/sidebar-5.jpg">
+<%
+        @c_num = current_user.bgColor
+
+        @color_choosen = "" 
+        if @c_num == 0
+            @color_choosen = "black"
+        elsif @c_num == 1
+            @color_choosen = "azure"
+        elsif @c_num == 2
+            @color_choosen = "green"
+        elsif @c_num == 3
+            @color_choosen = "orange"
+        elsif @c_num == 4
+            @color_choosen = "red"
+        elsif @c_num == 5
+            @color_choosen = "purple"
+        end
+    %>
+
+    <body data-no-turbolink>
+        <div class="wrapper">
+            <div class="sidebar" data-color="<%=@color_choosen %>" data-image="<%= current_user.background_image_choose != 6 ? "/style_js/img/Mysidebar-#{current_user.background_image_choose}.jpg" : "https://github.com/#{current_user.github}.png" %> ">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -55,35 +82,52 @@
                                 <p>Perfil Usuário</p>
                             </a>
                         </li>
-                        <li class="<%= @url == '/dashboard_list_users' ? "nav-item active" : "" %>">
-                            <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Lista de Usuários</p>
-                            </a>
-                        </li>
-                        <li class="<%= @url == '/dashboard_page_data' ? "nav-item active" : "" %>">
-                            <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
-                                <i class="nc-icon nc-paper-2"></i>
-                                <p>Conteúdo Páginas</p>
-                            </a>
-                        </li>
-                        <li class="<%= @url == '/dashboard_projects' ? "nav-item active" : "" %>">
-                            <a class="nav-link" href="/dashboard_projects" data-turbolinks="false">
-                                <i class="nc-icon nc-atom"></i>
+                        <% if current_user.admin == true %>
+                            <li class="<%= @url == '/dashboard_list_users' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_list_users" data-turbolinks="false">
+                                    <i class="nc-icon nc-notes"></i>
+                                    <p>Lista de Usuários</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_page_data' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_page_data" data-turbolinks="false">
+                                    <i class="nc-icon nc-paper-2"></i>
+                                    <p>Conteúdo Páginas</p>
+                                </a>
+                            </li>
+                            <li class="<%= @url == '/dashboard_personal_projects' ? "nav-item active" : "" %>">
+                                <a class="nav-link" href="/dashboard_personal_projects" data-turbolinks="false">
+                                    <i class="nc-icon nc-atom"></i>
+                                    <p>Projetos Pessoais</p>
+                                </a>
+                            </li>
+                        <% end %>
+                        <li class="<%= @url == '/dashboard_posts' ? "nav-item active" : "" %>">
+                            <a class="nav-link" href="/dashboard_posts" data-turbolinks="false">
+                                <i class="nc-icon nc-spaceship"></i>
                                 <p>Projetos</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./maps.html">
-                                <i class="nc-icon nc-pin-3"></i>
-                                <p>Maps</p>
+                            <a class="nav-link" href="/dashboard_chat">
+                                <i class="nc-icon nc-chat-round"></i>
+                                <p>Chat</p>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="./notifications.html">
-                                <i class="nc-icon nc-bell-55"></i>
-                                <p>Notifications</p>
-                            </a>
+                            <%= form_for(current_user, url: update_user_path(notification: true), :html => {:id => "notificationForm"}) do |form| %>
+                                <span class="nav-link" style="display:flex; justify-content:center">
+                                    <i class="nc-icon nc-notification-70"></i>
+                                    <p>Notificações
+                                        <div id="notificationSidebar" class="form-check" data-toggle="tooltip" data-placement="top" data-html="true" title="Notificações são importantes pra te retornarem respostas do servidor, aconselho deixar ativada, mas fique a vontade em fazer sua decisão.">
+                                            <label class="form-check-label">
+                                                <%= form.check_box :show_notification, id:"notificationCheckbox", class:"form-check-input", checked: current_user.show_notification  %>
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </p>
+                                </span>
+                            <% end %>
                         </li>
                     </ul>
                 </div>
@@ -103,7 +147,7 @@
                             <ul class="nav navbar-nav mr-auto">
                                 
                                 <li class="dropdown nav-item">
-                                    <%= link_to 'Software', software_path, :"data-turbolinks" => false, class:"nav-link" %>
+                                    <%= link_to 'Repositório Pessoal', software_path, :"data-turbolinks" => false, class:"nav-link" %>
                                 </li>
                                 <li class="nav-item">
                                     <%= link_to 'Comunidade', comunidade_path, :"data-turbolinks" => false, class:"nav-link" %>
@@ -127,10 +171,16 @@
                 <%=  render 'list'  %>
             <% elsif @url == '/dashboard_page_data' %>
                 <%=  render 'page_data'  %>
-            <% elsif @url == '/dashboard_projects' %>
-                <%=  render 'projects'  %>
+            <% elsif @url == '/dashboard_personal_projects' %>
+                <%=  render 'personal_projects'  %>
+            <% elsif @url == '/dashboard_posts' %>
+                <%=  render 'posts'  %>
             <% elsif @url == '/dashboard_edit_project' %>
                 <%=  render 'edit_project', project: @project  %>
+            <% elsif @url == '/dashboard_edit_post' %>
+                <%=  render 'edit_post', project: @post  %>
+            <% elsif @url == '/dashboard_chat' %>
+                <%=  render 'chat'  %>
             <% end %>
 
         </div>
@@ -155,7 +205,36 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
+<script>
+    $(document).ready(function(){
+        <% if current_user.background_image_display == false %>
+            $(".sidebar").removeAttr('data-image');
+        <% end %>
+        
+        $("#notificationCheckbox").change(function(){
+            $("#notificationForm").submit();
+        });
 
+        <% if @notification == true %>
+            (function(from, align) {
+                color = 3;
+
+                $.notify({
+                    icon: "nc-icon nc-notification-70",
+                    message: "Suas notificações foram <strong style='color:#900000'><%= current_user.show_notification ? "Ligadas" : "Desligadas" %></strong>!<br><%= current_user.show_notification ? "" : "Espero que não fique com raiva dessa :D" %>"
+
+                }, {
+                    type: type[color],
+                    timer: 8000,
+                    placement: {
+                        from: from,
+                        align: align
+                    }
+                });
+            })();
+        <% end %>
+    });
+</script>
 </html>
 
 <% else %>

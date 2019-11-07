@@ -12,6 +12,9 @@
         <!-- CSS Files -->
         <link href="/style_js/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/style_js/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="/style_js/css/demo.css" rel="stylesheet" />
         <link rel="stylesheet" href="/style_js/css/markdown/normalize.css">
@@ -34,7 +37,7 @@
                 <div class="container-fluid">
                     <div class="card" id="chooseWay" style="box-shadow: 0px 5px 15px 2px !important;margin: <%= current_mobileDevice ? '10% 1%' : '10% 25%' %>;float:none; margin-bottom: 10px;">
                         <div class="card-header">
-                            <h4 class="card-title" style="text-align: center">Como deseja criar sua publicação?</h4>
+                            <h4 class="card-title"><span style="text-align: center">Como deseja criar sua publicação?</span><span><i  style="color: #900000; float:right" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Aviso:</strong><br>Seus projetos <u>devem</u> estar integrados com o github, necessariamente." class="far fa-question-circle"></i></span></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-full-width">
@@ -253,6 +256,18 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label><strong>Principal Linguagem do Projeto: <span style="color:red">*</span></strong> </label>
+                                                    <%= @language_type = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]
+                                                    form.select :principal_language, @language_type,{include_blank: "Selecione uma..."},class: "form-control", required: true, class:"form-control" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1" style="text-align:center">
+                                                <i  style="color: #900000; float:right" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Aviso:</strong><br>Por questões de controle, Você deve escolher entre imagem e video, infelizmente não pode ser colocado os dois.<br>Se você digitar algo em imagem e selecionar a checkbox video, o nome do arquivo imagem inserido será <strong>anulado</strong>" class="far fa-question-circle"></i>
+                                            </div>
                                             <div class="col-md-2">
                                                 <table class="">
                                                     <!-- PROJETO ESCRITO MANUALMENTE -->
@@ -534,14 +549,25 @@
                                                                     <%= form.text_field :sub_title, class:"form-control "  %>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
+                                                            <div class="form-group">
                                                                     <label><strong>Linguagem(s) (C#,C++,Java...):</strong> </label>
                                                                     <%= form.text_field :language, class:"form-control "  %>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label><strong>Principal Linguagem do Projeto: <span style="color:red">*</span></strong> </label>
+                                                                    <%= @language_type = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]
+                                                                    form.select :principal_language, @language_type,{include_blank: "Selecione uma..."},class: "form-control", required: true, class:"form-control" %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-1" style="text-align:center">
+                                                                <i  style="color: #900000; float:right" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Aviso:</strong><br>Por questões de controle, Você deve escolher entre imagem e video, infelizmente não pode ser colocado os dois.<br>Se você digitar algo em imagem e selecionar a checkbox video, o nome do arquivo imagem inserido será <strong>anulado</strong>" class="far fa-question-circle"></i>
+                                                            </div>
                                                             <div class="col-md-2">
                                                                 <table class="">
                                                                     <!-- PROJETO ESCRITO MANUALMENTE -->
@@ -688,6 +714,12 @@
         $("#manuallyTrue").hide();
     })();
     $(document).ready(function() {
+
+         $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+
         jQuery.githubUser = function(username, callback) {
             jQuery.getJSON('https://api.github.com/users/'+username+'/repos?callback=?',callback);
         }
@@ -721,13 +753,13 @@
         // demo.initDashboardPageCharts();
         //$("#manuallyFalse").hide();
         //$("#manuallyTrue").hide();
-    <% if @created %>
+    <% if @created && current_user.show_notification == true %>
         (function(from, align) {
             color = 2;
 
             $.notify(
                 {
-                    icon: "nc-icon nc-app",
+                    icon: "nc-icon nc-send",
                     message: "Projeto criado com sucesso!"
                 }, 
                 {
@@ -741,13 +773,13 @@
         })();
     <% end %>
 
-    <% if @updated %>
+    <% if @updated && current_user.show_notification == true  %>
         (function(from, align) {
             color = 2;
 
             $.notify(
                 {
-                    icon: "nc-icon nc-app",
+                    icon: "nc-icon nc-send",
                     message: "Projeto atualizado com sucesso!"
                 }, 
                 {

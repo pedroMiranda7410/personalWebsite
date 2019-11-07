@@ -1,7 +1,7 @@
-<% @project = Project.find_by_id(params[:project_id]) %>
+<% @post = Post.find_by_id(params[:post_id]) %>
 
 
-<% if @project != nil && (@project.user_id == current_user.id || current_user.admin == true) %>
+<% if @post != nil && (@post.user_id == current_user.id || current_user.admin == true) %>
     <head>
         <meta charset="utf-8" />
         <link rel="apple-touch-icon" sizes="76x76" href="/circle-cropped.png">
@@ -27,11 +27,11 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" style="text-align: center">Editar projeto: <strong style="color: #900000"><%= @project.title %></strong></h4>
+                    <h4 class="card-title" style="text-align: center">Editar projeto: <strong style="color: #900000"><%= @post.title %></strong></h4>
                 </div>
                 <div class="card-body">
-                    <% if @project.get_from_github %>
-                                <%= form_for(@project, url: update_project_path(project_id: @project.id, updated: true)) do |form| %>
+                    <% if @post.get_from_github %>
+                                <%= form_for(@post, url: update_post_path(post_id: @post.id, updated: true)) do |form| %>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
@@ -43,12 +43,12 @@
                                                         <div class="col-md-12">
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                <% if @project.errors.any? %>
+                                                                <% if @post.errors.any? %>
                                                                     <div id="error_explanation">
-                                                                    <h2 style="color: #AE1400">(<%= pluralize(@project.errors.count, "error") %>) Ao salvar os dados:</h2>
+                                                                    <h2 style="color: #AE1400">(<%= pluralize(@post.errors.count, "error") %>) Ao salvar os dados:</h2>
 
                                                                     <ul>
-                                                                    <% @project.errors.full_messages.each do |message| %>
+                                                                    <% @post.errors.full_messages.each do |message| %>
                                                                         <li style="color: #AE1400"><%= message %></li>
                                                                     <% end %>
                                                                     </ul>
@@ -153,7 +153,7 @@
                                                                                     <tbody style="display:flex;flex-direction:row">
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <input  type="checkbox" id="image" @project.image != "" ? "checked" : "" >   
+                                                                                                <input  type="checkbox" id="image" @post.image != "" ? "checked" : "" >   
                                                                                             </td>
                                                                                             <td>Imagem</td>
                                                                                         </tr>
@@ -166,7 +166,7 @@
                                                                                     <tbody style="display:flex;flex-direction:row">
                                                                                         <tr >
                                                                                             <td>
-                                                                                                <input  type="checkbox" id="video" @project.video != "" ? "checked" : "">
+                                                                                                <input  type="checkbox" id="video" @post.video != "" ? "checked" : "">
                                                                                             </td>
                                                                                             <td>Vídeo</td>
                                                                                         </tr>
@@ -179,43 +179,66 @@
                                                                             <div class="col-md-4" id="divImage">
                                                                                 <div class="form-group">
                                                                                     <label><strong>Imagem:</strong> </label>
-                                                                                    <%= form.text_field :image, class:"form-control",id:"inputImage", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @project.image  %>
+                                                                                    <%= form.text_field :image, class:"form-control",id:"inputImage", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @post.image  %>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4" id="divVideo" style="display:none">
                                                                                 <div class="form-group">
                                                                                     <label><strong>Vídeo:</strong></label>
-                                                                                    <%= form.text_field :video, class:"form-control",id:"inputVideo", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @project.video %>
+                                                                                    <%= form.text_field :video, class:"form-control",id:"inputVideo", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @post.video %>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
                                                                                     <label><strong>PDF:</strong> </label>
-                                                                                    <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @project.pdf  %>
+                                                                                    <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @post.pdf  %>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                <table class="">
-                                                                                    <!-- PROJETO ESCRITO MANUALMENTE -->
-                                                                                    <tbody style="display:flex;flex-direction:row">
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <div class="form-check">
-                                                                                                    <label class="form-check-label">
-                                                                                                        <%= form.check_box :principal,class:"form-check-input", checked: @project.principal  %>
-                                                                                                        <span class="form-check-sign"></span>
-                                                                                                    </label>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <td>Projeto Principal</td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                        
+                                                                        <% if current_user.admin %>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <table class="">
+                                                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                        <tbody style="display:flex;flex-direction:row">
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div class="form-check">
+                                                                                                        <label class="form-check-label">
+                                                                                                            <%= form.check_box :principal,class:"form-check-input", checked: @post.principal  %>
+                                                                                                            <span class="form-check-sign"></span>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>Projeto Principal</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <table class="">
+                                                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                        <tbody style="display:flex;flex-direction:row">
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div class="form-check">
+                                                                                                        <label class="form-check-label">
+                                                                                                            <%= form.check_box :admin_verification ,class:"form-check-input", checked: @post.admin_verification  %>
+                                                                                                            <span class="form-check-sign"></span>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>Verificação do Administrador</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        <% end %>
 
                                                                         <div class="row">
                                                                             <div class="col-md-12">
@@ -236,7 +259,7 @@
                                                                         </div>
                                                                         
                                                                             <%= form.hidden_field :get_from_github, value: true %>
-                                                                            <%= form.hidden_field :user_id, value: @project.id %>
+                                                                            <%= form.hidden_field :user_id, value: @post.user_id %>
                                                                             <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                                                         <div class="clearfix"></div>
                                                                         
@@ -251,7 +274,7 @@
                                 <% end %>
 
                     <% else %>
-                        <%= form_for(@project, url: update_project_path(project_id: @project.id,updated: true), id:"test") do |form| %>
+                        <%= form_for(@post, url: update_post_path(post_id: @post.id,updated: true), id:"test") do |form| %>
                             
                             <div class="row" >
                                 <div class="col-md-12">
@@ -361,7 +384,7 @@
                                                         <tbody style="display:flex;flex-direction:row">
                                                             <tr>
                                                                 <td>
-                                                                    <% if @project.image != "" %>
+                                                                    <% if @post.image != "" %>
                                                                         <input  type="checkbox" id="image_1" checked >  
                                                                     <% else %>
                                                                         <input  type="checkbox" id="image_1" > 
@@ -378,7 +401,7 @@
                                                         <tbody style="display:flex;flex-direction:row">
                                                             <tr >
                                                                 <td>
-                                                                    <% if @project.video != "" %>
+                                                                    <% if @post.video != "" %>
                                                                         <input  type="checkbox" id="video_1" checked> 
                                                                     <% else %>
                                                                         <input  type="checkbox" id="video_1" > 
@@ -392,46 +415,68 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-4" id="divImage_1" style="<%= @project.image != "" ? "" : "display:none" %>">
+                                                <div class="col-md-4" id="divImage_1" style="<%= @post.image != "" ? "" : "display:none" %>">
                                                     <div class="form-group">
                                                         <label><strong>Imagem:</strong> </label>
-                                                        <%= form.text_field :image, class:"form-control",id:"inputImage_1", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @project.image  %>
+                                                        <%= form.text_field :image, class:"form-control",id:"inputImage_1", placeholder:"<nome-pasta>/<nome-imagem>.png .jpg",value: @post.image  %>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4" id="divVideo_1" style="<%= @project.video != "" ? "" : "display:none" %>">
+                                                <div class="col-md-4" id="divVideo_1" style="<%= @post.video != "" ? "" : "display:none" %>">
                                                     <div class="form-group">
                                                         <label><strong>Vídeo:</strong></label>
-                                                        <%= form.text_field :video, class:"form-control",id:"inputVideo_1", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @project.video %>
+                                                        <%= form.text_field :video, class:"form-control",id:"inputVideo_1", placeholder:"<nome-pasta>/<nome-video>.mp4", value: @post.video %>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label><strong>PDF:</strong> </label>
-                                                        <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @project.pdf  %>
+                                                        <%= form.text_field :pdf, class:"form-control", placeholder:"<nome-pasta>/<nome-pdf>.pdf", value: @post.pdf  %>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <table class="">
-                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
-                                                        <tbody style="display:flex;flex-direction:row">
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <label class="form-check-label">
-                                                                            <%= form.check_box :principal,class:"form-check-input", checked: @project.principal  %>
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>Projeto Principal</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            <% if current_user.admin %>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <table class="">
+                                                            <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                            <tbody style="display:flex;flex-direction:row">
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="form-check">
+                                                                            <label class="form-check-label">
+                                                                                <%= form.check_box :principal,class:"form-check-input", checked: @post.principal  %>
+                                                                                <span class="form-check-sign"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Projeto Principal</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <table class="">
+                                                            <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                            <tbody style="display:flex;flex-direction:row">
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="form-check">
+                                                                            <label class="form-check-label">
+                                                                                <%= form.check_box :admin_verification ,class:"form-check-input", checked: @post.admin_verification  %>
+                                                                                <span class="form-check-sign"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Verificação do Administrador</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            <% end %>
 
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -446,7 +491,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label><strong>Sub descrição (O que vai aparecer na tabela de projetos):</strong> </label>
-                                                        <%= form.text_area :sub_description, maxlength: 200, class:"form-control ", value:@project.sub_description , required: true, style:"height:80px;box-shadow: 0px 0.5px 3px 0.5px "  %>
+                                                        <%= form.text_area :sub_description, maxlength: 200, class:"form-control ", value:@post.sub_description , required: true, style:"height:80px;box-shadow: 0px 0.5px 3px 0.5px "  %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -454,7 +499,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label><strong>Descrição:</strong> </label>
-                                                        <textarea class="mdhtmlform-md" style="height:400px; width:100%;"><%= @project.description %></textarea>
+                                                        <textarea class="mdhtmlform-md" style="height:400px; width:100%;"><%= @post.description %></textarea>
                                                         <%= form.text_area :description, class:"mdhtmlform-html", style:"display: none;" %>
                                                     </div>
                                                 </div>
@@ -471,7 +516,7 @@
                                             </div>
                                                 
                                                 <%= form.hidden_field :get_from_github, value: false %>
-                                                <%= form.hidden_field :user_id, value: @project.user_id %>
+                                                <%= form.hidden_field :user_id, value: @post.user_id %>
                                                 <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                             <div class="clearfix"></div>
                                         

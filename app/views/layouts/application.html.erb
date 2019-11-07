@@ -237,7 +237,7 @@
               <div class="topnav" id="navbar">
                 <div id="navbar-left">
                   <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in shadowed-link" %>
-                  <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in shadowed-link" %>
+                  <%= link_to 'Repositório Pessoal', software_path, id:"software", class:"hvr-radial-in shadowed-link" %>
                   <%= link_to 'Comunidade', comunidade_path, id:"comunidade", class:"hvr-radial-in shadowed-link" %>
                   <% if current_mobileDevice == true && current_user != nil %>
                   
@@ -277,7 +277,7 @@
               <div id="navbar">
                 <div id="navbar-left">
                   <%= link_to 'Pedro Miranda', root_path, id:'logo', class:"hvr-radial-in" %>
-                  <%= link_to 'Software', software_path, id:"software", class:"hvr-radial-in" %>
+                  <%= link_to 'Repositório Pessoal', software_path, id:"software", class:"hvr-radial-in" %>
                   <%= link_to 'Comunidade', comunidade_path, id:"comunidade", class:"hvr-radial-in" %>
                   <% if current_mobileDevice == true && current_user != nil %>
                     <%= link_to dashboard_path, id:"contato", :"data-turbolinks" => false , class:"sidebar-brand #{ current_mobileDevice ? "" : "d-flex"} align-items-center justify-content-center"  do %>
@@ -317,7 +317,7 @@
 
           <%= yield %>
 
-              <footer class="footer container-fluid">
+              <footer class="footer container-fluid" style="<%= @url == "/login" || @url == "new_user" ? "margin-top:100px" : "" %>">
                 <div class="container extraSpace">
                     <ul class="centerLinks socialIcons" style="display:table; margin:0 auto;">
                         <li style="display:inline-block">
@@ -346,7 +346,7 @@
                                 <a href="/"><font face = "Gravity-Regular" size = "3">Home</font></a>
                             </div>
                             <div class="col-lg-3" >
-                                <a href="/software"><font face = "Gravity-Regular" size = "3">Software</font></a>
+                                <a href="/software"><font face = "Gravity-Regular" size = "3">Repositório Pessoal</font></a>
                             </div>
                             <div class="col-lg-3 ">
                                 <a href="/Comunidade"><font face = "Gravity-Regular" size = "3">Comunidade</font></a>

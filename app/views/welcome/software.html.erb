@@ -128,7 +128,7 @@
             <div class="container" style="margin: 0 auto;">
                 <div class="row">
                     <div class="col-lg-5" style="background: #222222; border-radius:20px">
-                        <h3 class="white py-1" style=" border-radius:20px" align = "center"><font face = "Gravity-Regular" size = "4">LISTA DE TODOS PROJETOS</font></h3>
+                        <h3 class="white py-1" style=" border-radius:20px" align = "center"><font face = "Gravity-Regular" size = "4">LISTA DOS DEMAIS PROJETOS</font></h3>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -142,7 +142,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% Project.where(principal: true).each do |p| %>
+                                <% Project.where(principal: false).each do |p| %>
                                     <tr>
                                         <td class="text-center"><%= link_to "#{ p.title }", show_project_path(project_id: p.id), style:"text-decoration:none" %></td>
                                         <td class=""> <%= p.sub_description %> </td>
@@ -236,6 +236,11 @@
                     responsive: true
                 });
 
+                //$('input[type=search]').addClass('form-control');
+                $('select, input[type=search]').addClass('px-1 py-1');  
+
+                $('select, input[type=search]').css({"background":"white","border-radius":"5px","box-shadow":"0.5px 0.5px 5px 0px"});  
+                
                 $('#summary').ready(function(){
                     var $this = $(this);
                     var t = $this.text();

@@ -1,0 +1,305 @@
+
+<!DOCTYPE HTML>
+<html>  
+    <style>
+        .circleImg-posted {
+            border-radius: 50%;
+            height: 300px;
+            position: relative;
+            <%# top: -5%%; %>
+            transform: translateY(-50%);
+            float: left;
+        }
+
+        .subTitle-teoria {
+            font-family: "Gravity-Regular";
+            letter-spacing: 10px;
+            padding-left: <%= current_mobileDevice ? "0px" : "60px" %>;
+            margin-top: <%= current_mobileDevice ? "0px" : "-4%" %> ;
+            padding-bottom: <%= current_mobileDevice ? "0px" : "60px" %>;
+            margin-bottom: 0px;
+        }
+
+        .my-tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+            transition: all .2s;
+        }
+
+        /* Tooltip text */
+        .my-tooltip .my-tooltiptext {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 5px 5px;
+            border-radius: 6px;
+            width: 220px;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+            transition: all .2s;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .my-tooltip:hover .my-tooltiptext {
+            visibility: visible;
+        }
+    </style>
+    <body>
+            <div class="<%= current_mobileDevice ? "mt-5" : "" %> container-fluid">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col topPad cenX" style="padding-top:200px;">
+
+                                <h1 class="titleMain"><%= @post.title %></h1>
+                                <h3 class="regTitle"><%= @post.sub_title %> | <%= @post.language %></h3>
+
+
+                        </div>
+                        <!-- <div class="col-4 topPad">
+
+                            yoyoyo
+                        </div> -->
+                    </div>
+
+                    <div class="cenX padB60">
+                        <a class="btn btn-primary btn-lg" href="https://github.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>" role="button">Ir ao repositório</a>
+                        <!--<a class="linkGrey" id="srcCode" href="https://github.com/DevonCrawford/Timelapse-Auto-Ramp-Photoshop-Plugin">View source code</a>-->
+                    </div>
+
+                    <div class="row exText">
+                        <div class="col-md-12">
+                            <h5 class="cenX" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">
+                               <% if @post.video != "" %>
+                                SIMULAÇÃO
+                               <% elsif @post.image != "" %>
+                                IDEIA
+                               <% end %>                                   
+                            </h5>
+                        </div>                            
+                    </div>
+                    <% if @post.video != "" %>
+                        <video width="100%" autoplay loop class="round3 vid">
+                            <source src="https://raw.githubusercontent.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>/<%= @post.github_branch_name %>/<%= @post.video %>"></source>
+                        </video>
+                    <% elsif @post.image != "" %>
+                        <img class="pb-4 mb-5" width="100%" src="https://raw.githubusercontent.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>/<%= @post.github_branch_name %>/<%= @post.image %>">
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="<%= current_mobileDevice ? "mt-5" : "" %> container-fluid  sec" style="background-color: #191919;">
+                <% if current_mobileDevice %>
+                    <div class="rowPad">
+                        <div class="col-md-12" id="div-image">
+                            <img src="/circle-cropped.png"  style="width:200px; height:200px;top: -2.5%;border: 8px solid #191919;" class="circleImg"></img>
+                            <!-- https://github.com/pedroMiranda7410.png -->
+                        </div>
+                    </div>                    
+                    <div class="rowPad" style="margin-top:-25%;">
+                        <div class="col-md-12" style="width:100%;display: inline-flex;flex-direction: row;align-items: center;" >
+                            <div class="col-lg-6">
+                                <span style="color:white;font-family:'Gravity-Regular'">Autor: <%= User.find_by_id(@post.user_id).name %></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <span style="color:white;font-family:'Gravity-Regular'">Github: <a href="https://github.com/<%= User.find_by_id(@post.user_id).github %>">@<%= User.find_by_id(@post.user_id).github %></a></span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="pt-2 px-auto rowPad">
+                        <div class="col-lg-6" style="width:100%;display: inline-flex;flex-direction: row;align-items: center;">
+                            <span style="color:white;font-family:'Gravity-Regular'">Colaboradores:<u id="collaborators-count" class="my-tooltip">
+                                    <span class="my-tooltiptext"><ul id="collaborators_list" style="display: inline-flex;flex-direction: column; "> </ul></span>
+                            </u></span>
+                        </div>
+                    </div>
+                        
+                <% else %>
+                    <div class="rowPad" >
+                        <div class="col-md-2" id="div-image">
+                            <img src="https://github.com/<%= User.find_by_id(@post.user_id).github %>.png"  style="width:200px; height:200px;top: -2.5%;border: 8px solid #191919;" class="circleImg"></img>
+                            <!-- https://github.com/pedroMiranda7410.png -->
+                        </div>
+                        <div class="col-md-8" style="width:100%;display: inline-flex;flex-direction: row;">
+                            <div class="pt-4 col-lg-3">
+                                <span style="color:white;font-family:'Gravity-Regular'"><u>Autor:</u> <br><%= User.find_by_id(@post.user_id).name %></span>
+                            </div>
+                            <div class="pt-4 col-lg-3">
+                                <span style="color:white;font-family:'Gravity-Regular'"><u>Github:</u><br> <a href="https://github.com/<%= User.find_by_id(@post.user_id).github %>">@<%= User.find_by_id(@post.user_id).github %></a></span>
+                            </div>
+                            <div class="pt-4 col-lg-3">
+                                <span style="color:white;font-family:'Gravity-Regular'">Colaboradores:<br><u id="collaborators-count" class="my-tooltip">
+                                     <span class="my-tooltiptext"><ul id="collaborators_list" style="display: inline-flex;flex-direction: column; "> </ul></span>
+                                </u></span>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+                <div class="container <%= current_mobileDevice ? "mt-5" : "" %> " style="<%= current_mobileDevice ? "display: inline-flex;flex-direction: column;align-items: center;text-align:center; vertical-align: middle;" : "" %>" >
+                    <h3 class="subTitle-teoria white" style="font-family: 'Gravity-Regular';font-size: <%= current_mobileDevice ? "1.5" : "2" %>em;">TEORIA</h3>
+                    <p class="subText white extPad" align = "justify" id="desc" style="font-family: 'Gravity-Regular';font-size: 1em;white-space: pre-line">
+                        <%= @post.objective %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="container-fluid sec">
+                <div id="descriptionProject" class="container pt-5 px-5">
+                    <% if @post.get_from_github %>
+
+                    <% else %>
+                        <%= @post.description.html_safe %>
+                    <% end %>
+                </div>
+            <% if @post.github_repo_name == "simulacao_nanorobo" && current_mobileDevice != true %>
+                    <div class="container">
+                        <iframe src="/PDFslides_fluxoSang.pdf" width="98%" height="650px" class="centerImg padB40"></iframe>
+                    </div>
+            <% else %>
+                <% if @post.pdf != "" %>
+                    <div class="container" style="display: flex; justify-content: center">
+                        <form method="get" action="https://raw.githubusercontent.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>/<%= @post.github_branch_name %>/<%= @post.pdf %>">
+                                <button class="btn btn-success btn-lg w100" type="submit">Faça o download do PDF!</button>
+                        </form>
+                    </div>
+                <% end %>
+            <% end %>
+            </div>
+
+            <!-- btnLINKS -->
+            <div class="container-fluid btnLinks extPad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 bot">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">ACHOU UM BUG?</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Me deixe sabendo no github</p>
+                                <a class="btn btn-danger btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @post.github_owner_name %>/" role="button">Problemas</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 bot">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">CONTRIBUA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">Faça parte do projeto</p>
+                                <a class="btn btn-primary btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="/contacts/new" role="button">Contate-me</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="leftCenter">
+                                <h3 class="sub2" style="font-family: 'Gravity-Regular';font-size: 1.5em;">PEGUE DE GRAÇA</h3>
+                                <p class="subText" style="font-family: 'Gravity-Regular';font-size: 1.2em;">teste da sua forma</p>
+                                <a class="btn btn-info btn-lg w100" style="font-family: 'Gravity-Regular';font-size: 1.5em;" href="https://github.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>/" role="button">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <p class="subText extPad"></p>
+            </div>
+
+
+        <script src="scripts/mobile.js" type="text/javascript"></script>
+
+        
+        <script>
+            $(document).ready(function(){
+                $(function () {
+                    console.log(this.$('[data-toggle="tooltip"]'));
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
+            })
+        </script>
+        <script>
+
+            $(document).ready(function(){
+        
+            /*$.getJSON('https://api.github.com/repos/<%= User.find_by_id(@post.user_id).github %>/<%= @post.github_repo_name %>/contributors', function(data) {
+                alert(data.length());
+            });*/
+
+                // get markdown content  
+                var body_location_2 = 'https://api.github.com/repos/<%= User.find_by_id(@post.user_id).github %>/<%= @post.github_repo_name %>/contributors';
+                function getJson(myUrl){
+                    var result = null;
+                    $.ajax( { url: body_location_2, 
+                            type: 'get', 
+                            dataType: 'html',
+                            async: false,
+                            success: function(data) { result = data; } 
+                            }
+                    );
+                    FileReady = true;
+                    return result;
+                }
+
+                var json = JSON.parse(getJson(body_location_2));
+
+                if(json == null){
+                    $("#collaborators-count").append("0");
+                }
+                $("#collaborators-count").append(json.length);
+
+                var ul = document.getElementById("collaborators_list");
+                var li;
+                var a;
+
+                for(var i = 0; i < json.length; i++){
+                    a = document.createElement("a");
+                    li = document.createElement("li");
+                    li.setAttribute("id", json[i].login ); // added line
+                    //li.appendChild(document.createTextNode(json[i].login));
+                    ul.appendChild(li);
+
+                    a.appendChild(document.createTextNode("@" + json[i].login));
+                    a.href = "https://github.com/" + json[i].login;
+                    li.appendChild(a);
+                }
+                <%# console.log(json.length);
+                console.log(json);
+                console.log(json[0]);
+                console.log(json[0].login);
+                alert(json[0].id); %>
+
+            <% if @post.get_from_github %>
+                // get markdown content  
+                var body_location = 'https://raw.githubusercontent.com/<%= @post.github_owner_name %>/<%= @post.github_repo_name %>/<%= @post.github_branch_name %>/README.md';
+                function getText(myUrl){
+                    var result = null;
+                    $.ajax( { url: body_location, 
+                            type: 'get', 
+                            dataType: 'html',
+                            async: false,
+                            success: function(data) { result = data; } 
+                            }
+                    );
+                    FileReady = true;
+                    return result;
+                }
+
+                var markdown_source = getText(body_location);
+                // convert markdown to html
+                
+                var converter = new showdown.Converter();
+                var output = converter.makeHtml( markdown_source );
+                //alert(markdown_source);
+                //alert(output);
+                console.log(output);
+                $("#descriptionProject").append(output);
+                $("#descriptionProject ul").css({"display":"flex", "flex-direction": "column"});
+                $("#descriptionProject *").css({"font-family":"Gravity-Regular"});
+                $("#descriptionProject ul").addClass( "listPad" );
+                $("#descriptionProject").addClass( "container px-5" );
+                //document.write(output);
+            <% end %>
+            });
+        </script>
+    </body>
+</html>

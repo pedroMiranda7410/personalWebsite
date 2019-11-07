@@ -2,7 +2,7 @@
     <% 
         @summary = Summary.last
         @objective = MyObjective.last 
-          
+        @community = Community.last
      %>
 
             
@@ -67,6 +67,44 @@
                                                 <div class="form-group">
                                                     <label>Objetivo: </label>
                                                     <%= form.text_area :description, class:"form-control ", style:"height:400px", value: @objective.description  %>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <%= form.submit "Editar", class:"btn btn-info btn-fill pull-right" %>
+                                        <div class="clearfix"></div>
+                                    
+                            <% end %>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Editar Objetivo da Comunidade</h4>
+                                </div>
+                                <div class="card-body">
+                                <%= form_for(@community, url: update_community_path(community_id: @community.id)) do |form| %>
+                                <% if @community.errors.any? %>
+                                    <div id="error_explanation">
+                                    <h2 style="color: #AE1400">(<%= pluralize(@community.errors.count, "error") %>) Ao salvar os dados:</h2>
+
+                                    <ul>
+                                    <% @community.errors.full_messages.each do |message| %>
+                                        <li style="color: #AE1400"><%= message %></li>
+                                    <% end %>
+                                    </ul>
+                                    </div>
+                                <% end %>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Comunidade: </label>
+                                                    <%= form.text_area :description, class:"form-control ", style:"height:400px", value: @community.description  %>
                                                 </div>
                                             </div>
                                             

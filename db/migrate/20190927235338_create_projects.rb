@@ -7,6 +7,7 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.string :sub_description, null:false, default: ""
       t.string :description, null:false, default: ""
       t.string :language, null:false, default: ""
+      t.string :principal_language, null:false, default: ""
       t.string :pdf, null:false, default: ""
       t.string :readme, null:false, default: ""
       t.string :video, null:false, default: ""

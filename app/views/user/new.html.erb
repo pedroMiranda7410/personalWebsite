@@ -1,7 +1,7 @@
 
 
-<div class="back my-5" style="<%= current_mobileDevice ? "margin-bottom:150px;" : "" %>; height: 120% !important;" >
-  <div class="<%= current_mobileDevice ? "" : "center" %> cenX pt-5 py-5" style="<%= current_mobileDevice ? "margin-top:100px;" : "" %>">
+<div class="back my-5" style="margin-top: 101px;<%= current_mobileDevice ? "margin-bottom:150px;" : "" %>; height: 120% !important;" >
+  <div class="<%= current_mobileDevice ? "" : "center" %> cenX pt-5 py-5" style="margin-top: 101px;">
     <h1 class="titleMain pt-5" style="font-family: 'Gravity-Regular';">CADASTRO</h1>
     <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';"> Faça parte da comunidade!</h3>
 
@@ -33,7 +33,7 @@
               <div>
                 <%= form.label 'Github (Nick):', class: "" %>
               </div>
-              <%= form.text_field :github,focus:true, class:"form-control "  %>
+              <%= form.text_field :github, required: true,focus:true, class:"form-control "  %>
             </div>
           </div>
         </div>
@@ -77,6 +77,21 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-6">
+              <div class="form-group">
+                  <label>Linguagem Favorita: </label>
+                  <%= @language_type = [ "Ruby","Assembly", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]
+                  form.select :favorite_language, @language_type,{},class: "form-control", required: true, class:"form-control" %>
+                              
+              </div>
+          </div>
+          <div class="col-lg-3">
+          </div>          
+        </div>
+        
 
             <br>
 

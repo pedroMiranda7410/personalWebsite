@@ -1,10 +1,309 @@
 
 
 
-  <div class="back">
-    <div class="center cenX">
-      <h1 class="titleMain" style="font-family: 'Gravity-Regular';">COMUNIDADE</h1>
-      <h3 class="regTitle padB40" style="margin-top:0;font-family: 'Gravity-Regular';">EM BREVE...</h3>
+  
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
+        <!-- <script src="/scrollTop.css"></script>
+        <script src="/css-software/page.css"></script> -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    </head>
+    <style>
+        <% if current_mobileDevice %>
+            .rowBackSS {
+                height: 100px !important;
+            }
 
-    </div>
-  </div>
+            .titleComunidade {
+              font-family: "Gravity-Regular";
+              letter-spacing: 10px;
+              padding-top: 60px;
+              padding-bottom: 5px;
+              margin-bottom: 0px;
+              text-align: center;
+            }
+        <% else %>
+            .rowBackSS {
+                height: 240px !important;
+            }
+
+            .titleComunidade {
+              font-family: "Gravity-Regular";
+              letter-spacing: 10px;
+              padding-left: 60px;
+              padding-top: 60px;
+              padding-bottom: 5px;
+              margin-bottom: 0px;
+            }
+        <% end %>
+
+        <%# .titleComunidade {
+          font-family: "Gravity-Regular";
+          letter-spacing: 10px;
+          padding-left: 60px;
+          padding-top: 60px;
+          padding-bottom: 5px;
+          margin-bottom: 0px;
+        } %>
+        <% if current_mobileDevice %>
+            .rowBackSS {
+                height: 100px !important;
+            }
+        <% else %>
+            .rowBackSS {
+                height: 240px !important;
+            }
+        <% end %>
+
+        .subTitleComunidade{
+            padding-top: 20px;
+            padding-right: 60px;
+            padding-bottom: 10px;
+            padding-left: 60px;
+        }
+
+        #titleStarProjects:before{
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            <% if current_mobileDevice %>
+                border-width: 20px 20px 0 0;
+            <% else %>
+                border-width: 40px 40px 0 0;
+            <% end %>
+            border-style: solid;
+            border-color: #DA8C00 #fff;
+        }
+
+        #border-all, #border-principal {
+              transition: all .2s;
+          }
+
+        @media (min-width: 992px){
+          .selected {
+              flex: 0 0 100%;
+              max-width: 100%;
+          }
+
+          .not-selected {
+              flex: 0 0 50%;
+              max-width: 50%;
+          }
+        }
+
+        #principal_projs .col-lg-12, #all_projs .col-lg-12{
+          border-bottom: 3px solid #191919;
+        }
+
+        #all_projs .col-lg-6, #principal_projs .col-lg-6{
+          border-bottom: 2px solid #8D8B8B;
+        }
+
+        .hovered{
+            flex: 0 0 100%;
+            max-width: 100%;
+            border-bottom: 3px solid #191919;
+        }
+
+        .not-hovered{
+            flex: 0 0 50%;
+              max-width: 50%;
+            border-bottom: 2px solid #8D8B8B;
+        }
+    </style>
+    <body>
+
+
+        <link rel="stylesheet" href="css/page.css">
+
+
+        <div class="container-fluid backDark sec" style="margin-top: 101px;" width="100%">
+            <div class="container-fluid" width="100%">
+                <h3 class="titleComunidade white" align = "justify"><font face = "Gravity-Regular" size = "6">COMUNIDADE</font></h3>
+                    <p class="subText white extPad">
+                        <font face = "Gravity-Regular" style="white-space: pre-line">
+                            <%= Community.last.description %>
+                        </font>
+                    </p>
+            </div>
+        </div>
+        
+        <div class="row">
+          <% if current_mobileDevice == true %>
+            <div class="col-lg-12" style="width:100%;display: inline-flex;flex-direction: row;align-items: center;">
+              <div class="col-lg-6 py-4" id="principal_projs" style="cursor:pointer;display: inline-flex;flex-direction: column;align-items: center;text-align:center; vertical-align: middle;">
+                <span class="my-auto" id="principal-txt" style="font-family: 'Gravity-Regular';">
+                    PRINCIPAIS PROJETOS
+                </span>
+                <div class="col-lg-12" id="border-principal">
+                </div>
+              </div>
+              <div class="col-lg-6 py-4" id="all_projs" style="cursor:pointer;display: inline-flex;flex-direction: column;align-items: center;text-align:center; vertical-align: middle;">
+                <span class="my-auto" id="all-txt" style="font-family: 'Gravity-Regular';">
+                    TODOS PROJETOS
+                </span>
+                <div class="col-lg-6 not-hovered" id="border-all">
+                </div>
+              </div>
+            </div>
+          <% else %>
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-4 py-4" id="principal_projs" style="cursor:pointer;display: inline-flex;flex-direction: column;align-items: center;text-align:center; vertical-align: middle;">
+                <span class="my-auto" id="principal-txt" style="font-family: 'Gravity-Regular';">
+                    PRINCIPAIS PROJETOS
+                </span>
+                <div class="col-lg-12" id="border-principal">
+                </div>
+              </div>
+              <div class="col-lg-4 py-4" id="all_projs" style="cursor:pointer;display: inline-flex;flex-direction: column;align-items: center;text-align:center; vertical-align: middle;">
+                <span class="my-auto" id="all-txt" style="font-family: 'Gravity-Regular';">
+                    TODOS PROJETOS
+                </span>
+                <div class="col-lg-6 not-hovered" id="border-all">
+                </div>
+              </div>
+              <div class="col-lg-2">
+              </div>
+          <% end %>
+        </div>
+
+        
+        <div class="cenX sec temp mt-3" id="projects" width="100%">
+            <div class="container" style="display: inline-flex;flex-direction: column;align-items: center;">
+                <% Post.where(admin_verification: true, principal: true).order("updated_at DESC").each do |p| %>
+                        <div class="borderProj" style="width:80%">
+                            <%= link_to show_post_path(post_id: p.id), class:"noColor" do %>
+                                <div class="row">
+                                    <div class="col-lg-3" style="display:flex; justify-content:center; border: 0px solid transparent">
+                                        <% if p.video != "" %>
+                                            <video autoplay loop class="projImg" style="border: 0px solid transparent">
+                                                <source src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.video %>"></source>
+                                            </video>
+                                        <% elsif p.image != "" %>
+                                            <img class="projImg my-auto" src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.image %>">
+                                        <% end %>
+                                    </div>
+                                    <div class="projText col-lg-7">
+                                        <h3 class="regTitle"><font face = "Gravity-Regular" size = "5"><%= p.title %> | <%= p.language %></font></h3>
+                                        <p class="subP pad0 italic"><font face = "Gravity-Regular" size = "3"><%= p.sub_title %></font></p>
+                                        <p style="padding-top: 20px;font-family: 'Gravity-Regular'; letter-spacing: 1px;">
+                                            <%= p.sub_description %>...
+                                        </p>
+
+                                    </div>
+                                    <div class="col-lg-2" style="display:flex; justify-content:center;">                                        
+                                      <div style="width: 150px; height: <%= current_mobileDevice ? "150" : "90" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></img></div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                <% end %>
+                
+            </div>
+        </div>
+
+        <div class="container-fluid py-auto my-5" id="table" style="margin: 0 auto;">
+            <div class="container" style="margin: 0 auto;">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <table id="projects-table" style="width: 100%" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">Autor</th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">Título</th>
+                                    <th class="text-center">Sub-descrição</th>
+                                    <th class="text-center">Linguagem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% Post.where(admin_verification: true).order("updated_at DESC").each do |p| %>
+                                    <tr>
+                                        <td class="text-center"><div style="width: 50px; height: <%= current_mobileDevice ? "50" : "50" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="width:100px;height:100px;box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></div></td>
+                                        <td class="text-center"><%= User.find_by_id(p.user_id).name %></td>
+                                        <td class="text-center"><a href="https://github.com/<%= User.find_by_id(p.user_id).github %>">@<%= User.find_by_id(p.user_id).github %></a></td>
+                                        <td class="text-center"><%= link_to "#{p.title}", show_post_path(post_id: p.id) %></td>
+                                        <td class="text-center"><%= p.sub_description %>...</td>
+                                        <td class="text-center"><%= p.language %></td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script type="text/javascript" src="scripts/shift.js"></script>
+        <script type="text/javascript" src="/scripts/fetchDesc.js"></script>
+        <script>
+            $(document).ready(function(){
+                  
+                $('#projects-table').DataTable({
+                    responsive: true
+                });
+
+                $('#all_projs').click( function(){
+                    $("#projects").hide(300);
+                    $("#table").show(300);
+                    $("#border-all").addClass("col-lg-12");
+                    $("#border-all").removeClass("col-lg-6");
+                    $("#border-all").addClass("hovered");
+                    $("#border-all").removeClass("not-hovered");
+                    $("#border-principal").removeClass("col-lg-12");
+                    $("#border-principal").addClass("col-lg-6");
+                    $("#border-principal").addClass("not-hovered");
+                    $("#border-principal").removeClass("hovered");
+                });
+
+                $('#principal_projs').click( function(){
+                  $("#table").hide(300);
+                  $("#projects").show(300);
+                  $("#border-all").addClass("col-lg-6");
+                  $("#border-all").removeClass("col-lg-12");
+                  $("#border-all").addClass("not-hovered");
+                  $("#border-all").removeClass("hovered");
+                  $("#border-principal").removeClass("not-hovered");
+                  $("#border-principal").removeClass("col-lg-6");
+                  $("#border-principal").addClass("col-lg-12");
+                  $("#border-principal").addClass("hovered");
+                });
+
+                $('#principal_projs').ready( function(){
+                  $("#border-principal").addClass("hovered");
+                });
+
+
+                //$('input[type=search]').addClass('form-control');
+                $('select, input[type=search]').addClass('px-1 py-1');  
+
+                $('select, input[type=search]').css({"background":"white","border-radius":"5px","box-shadow":"0.5px 0.5px 5px 0px"});  
+                
+                $('#summary').ready(function(){
+                    var $this = $(this);
+                    var t = $this.text();
+                    $this.html(t.replace(/&lt;br\s*\/&gt;/g,'<br>'));
+                });
+            });
+        </script>
+
+        <script>
+          $(document).ready(function(){
+            $("#projects").show();
+            $("#table").hide();
+          })
+        </script>
+    </body>
+</html>
+

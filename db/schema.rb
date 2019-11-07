@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_121911) do
+ActiveRecord::Schema.define(version: 2019_11_06_223349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "communities", force: :cascade do |t|
+    t.string "description", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contributors", force: :cascade do |t|
     t.string "github", default: "", null: false
@@ -43,10 +49,11 @@ ActiveRecord::Schema.define(version: 2019_10_10_121911) do
     t.string "sub_description", default: "", null: false
     t.string "description", default: "", null: false
     t.string "language", default: "", null: false
+    t.string "principal_language", default: "", null: false
     t.string "pdf", default: "", null: false
     t.string "readme", default: "", null: false
     t.string "video", default: "", null: false
-    t.string "photo", default: "", null: false
+    t.string "image", default: "", null: false
     t.string "summary_file_zip", default: "", null: false
     t.string "github_repo_name", default: "", null: false
     t.string "github_owner_name", default: "", null: false
@@ -57,6 +64,8 @@ ActiveRecord::Schema.define(version: 2019_10_10_121911) do
     t.string "files_zip_content_type"
     t.integer "files_zip_file_size"
     t.datetime "files_zip_updated_at"
+    t.boolean "principal", default: false, null: false
+    t.integer "likes", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -70,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_10_10_121911) do
     t.string "sub_description", default: "", null: false
     t.string "description", default: "", null: false
     t.string "language", default: "", null: false
+    t.string "principal_language", default: "", null: false
     t.string "pdf", default: "", null: false
     t.string "readme", default: "", null: false
     t.string "video", default: "", null: false
@@ -102,15 +112,16 @@ ActiveRecord::Schema.define(version: 2019_10_10_121911) do
     t.string "nickname", default: "", null: false
     t.string "email", default: "", null: false
     t.string "github", default: "", null: false
+    t.string "favorite_language", default: "", null: false
     t.boolean "admin", default: false, null: false
     t.integer "login_count", default: 0, null: false
     t.integer "tamo_junto", default: 0, null: false
     t.integer "eu_quem_agradeco", default: 0, null: false
     t.boolean "first_time", default: true, null: false
     t.boolean "show_notification", default: true, null: false
-    t.boolean "backgroung_image_display", default: true, null: false
-    t.integer "filter", default: 0, null: false
-    t.integer "background_image_choose", default: 0, null: false
+    t.boolean "background_image_display", default: true, null: false
+    t.integer "bgColor", default: 3, null: false
+    t.integer "background_image_choose", default: 6, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar_file_name"

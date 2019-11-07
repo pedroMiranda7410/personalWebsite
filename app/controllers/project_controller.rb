@@ -38,7 +38,7 @@ class ProjectController < ApplicationController
     
     private
       def project_params
-        params.require(:project).permit(:sub_description, :user_id,:get_from_github,:github_branch_name,:github_owner_name,:github_repo_name,:sub_title, :title,:objective, :description, :language, :pdf, :readme, :video, :image, :summary_file_zip,:files_zip,:github_link, :principal)
+        params.require(:project).permit(:principal_language, :sub_description, :user_id,:get_from_github,:github_branch_name,:github_owner_name,:github_repo_name,:sub_title, :title,:objective, :description, :language, :pdf, :readme, :video, :image, :summary_file_zip,:files_zip,:github_link, :principal)
       end
   end
   

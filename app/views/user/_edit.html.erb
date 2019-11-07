@@ -93,6 +93,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Linguagem Favorita: </label>
+                                                    <%= @language_type = [ "Ruby","Assembly", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]
+                                                    form.select :favorite_language, @language_type,class: "form-control", required: true, class:"form-control" %>
+                                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                            </div>
+                                        </div>
                                         <%# <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
@@ -174,23 +188,24 @@
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         // demo.initDashboardPageCharts();
+        <% if current_user.show_notification == true  %>
+            (function(from, align) {
+                color = 1;
 
-        (function(from, align) {
-            color = 1;
+                $.notify({
+                    icon: "nc-icon nc-atom",
+                    message: "Bem-vindo á sua <b>Página de Perfil</b>! Sua fotinha é copiada do banco de dados do github por uma API. Caso queira alterá-la é só acessar sua conta clicando no ícone do github abaixo dessa frase motivacional que deixei pra você e, só pra constar, essa fotinha ta de tirar o fôlego :)."
 
-            $.notify({
-                icon: "nc-icon nc-app",
-                message: "Bem-vindo á sua <b>Página de Perfil</b>! Sua fotinha é copiada do banco de dados do github por uma API, caso queira alterá-la é só acessar sua conta clicando no ícone do github abaixo da sua foto (Que aliás, está sensacional S2) :)."
-
-            }, {
-                type: type[color],
-                timer: 8000,
-                placement: {
-                    from: from,
-                    align: align
-                }
-            });
-        })();
+                }, {
+                    type: type[color],
+                    timer: 8000,
+                    placement: {
+                        from: from,
+                        align: align
+                    }
+                });
+            })();
+        <% end %>
 
     });
 </script>

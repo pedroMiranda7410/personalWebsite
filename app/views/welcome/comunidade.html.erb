@@ -259,6 +259,35 @@
                             <% end %>
                         </div>
                 <% end %>
+
+                <% Project.where(principal: true).order("updated_at DESC").each do |p| %>
+                        <div class="borderProj" style="width:80%">
+                            <%= link_to show_post_path(post_id: p.id), class:"noColor" do %>
+                                <div class="row">
+                                    <div class="col-lg-3" style="display:flex; justify-content:center; border: 0px solid transparent">
+                                        <% if p.video != "" %>
+                                            <video autoplay loop class="projImg" style="border: 0px solid transparent">
+                                                <source src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.video %>"></source>
+                                            </video>
+                                        <% elsif p.image != "" %>
+                                            <img class="projImg my-auto" src="https://raw.githubusercontent.com/<%= p.github_owner_name %>/<%= p.github_repo_name %>/<%= p.github_branch_name %>/<%= p.image %>">
+                                        <% end %>
+                                    </div>
+                                    <div class="projText col-lg-7">
+                                        <h3 class="regTitle"><font face = "Gravity-Regular" size = "5"><%= p.title %> | <%= p.language %></font></h3>
+                                        <p class="subP pad0 italic"><font face = "Gravity-Regular" size = "3"><%= p.sub_title %></font></p>
+                                        <p style="padding-top: 20px;font-family: 'Gravity-Regular'; letter-spacing: 1px;">
+                                            <%= p.sub_description %>...
+                                        </p>
+
+                                    </div>
+                                    <div class="col-lg-2" style="display:flex; justify-content:center;">                                        
+                                      <div style="width: 150px; height: <%= current_mobileDevice ? "150" : "90" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></img></div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                <% end %>
                 
             </div>
         </div>
@@ -280,6 +309,17 @@
                             </thead>
                             <tbody>
                                 <% Post.where(admin_verification: true).order("updated_at DESC").each do |p| %>
+                                    <tr>
+                                        <td class="text-center"><div style="width: 50px; height: <%= current_mobileDevice ? "50" : "50" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="width:100px;height:100px;box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></div></td>
+                                        <td class="text-center"><%= User.find_by_id(p.user_id).name %></td>
+                                        <td class="text-center"><a href="https://github.com/<%= User.find_by_id(p.user_id).github %>">@<%= User.find_by_id(p.user_id).github %></a></td>
+                                        <td class="text-center"><%= link_to "#{p.title}", show_post_path(post_id: p.id) %></td>
+                                        <td class="text-center"><%= p.sub_description %>...</td>
+                                        <td class="text-center"><%= p.language %></td>
+                                    </tr>
+                                <% end %>
+
+                                <% Project.order("updated_at DESC").each do |p| %>
                                     <tr>
                                         <td class="text-center"><div style="width: 50px; height: <%= current_mobileDevice ? "50" : "50" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="width:100px;height:100px;box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></div></td>
                                         <td class="text-center"><%= User.find_by_id(p.user_id).name %></td>

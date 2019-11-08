@@ -262,7 +262,7 @@
 
                 <% Project.where(principal: true).order("updated_at DESC").each do |p| %>
                         <div class="borderProj" style="width:80%">
-                            <%= link_to show_post_path(post_id: p.id), class:"noColor" do %>
+                            <%= link_to show_project_path(project_id: p.id), class:"noColor" do %>
                                 <div class="row">
                                     <div class="col-lg-3" style="display:flex; justify-content:center; border: 0px solid transparent">
                                         <% if p.video != "" %>
@@ -324,7 +324,7 @@
                                         <td class="text-center"><div style="width: 50px; height: <%= current_mobileDevice ? "50" : "50" %>px;"><img class="circleImg" src="https://github.com/<%= User.find_by_id(p.user_id).github %>.png"  style="width:100px;height:100px;box-shadow:-8px 5px 6px #aaaaaa;border: 2px solid #191919;width:100%;height:100%;"></div></td>
                                         <td class="text-center"><%= User.find_by_id(p.user_id).name %></td>
                                         <td class="text-center"><a href="https://github.com/<%= User.find_by_id(p.user_id).github %>">@<%= User.find_by_id(p.user_id).github %></a></td>
-                                        <td class="text-center"><%= link_to "#{p.title}", show_post_path(post_id: p.id) %></td>
+                                        <td class="text-center"><%= link_to "#{p.title}", show_project_path(project_id: p.id) %></td>
                                         <td class="text-center"><%= p.sub_description %>...</td>
                                         <td class="text-center"><%= p.language %></td>
                                     </tr>

@@ -162,32 +162,30 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <%# <div class="card " id="with-graph">
-                                <div class="card-body ">
-                                    <div id="Principal-Languages-chart"></div>
+                            <% if Post.where(user_id: current_user.id).length > 0 %> 
+                                <div class="card " id="with-graph">
+                                    <div class="card-body ">
+                                        <div id="Principal-Languages-chart"></div>
+                                    </div>
+                                </div> 
+                            <% else %>
+                                <div class="card " id="no-graph">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Gráfico de pizza</h4>
+                                        <p class="card-category">Estatísticas sobre as principais linguagens de seus projetos</p>
+                                    </div>
+                                    <div class="card-body ">
+                                        <p class="card-category">Você ainda não postou nenhum projeto!<br>
+                                        Compartilhe conhecimento e conheça mais sobre você com as estatísticas</p>
+                                    </div>
                                 </div>
-                            </div> %>
-                            <div class="card " id="no-graph">
-                                <div class="card-header">
-                                    <h4 class="card-title">Gráfico de pizza</h4>
-                                    <p class="card-category">Estatísticas sobre as principais linguagens de seus projetos</p>
-                                </div>
-                                <div class="card-body ">
-                                    <p class="card-category">Você ainda não postou nenhum projeto!<br>
-                                    Compartilhe conhecimento e conheça mais sobre você com as estatísticas</p>
-                                </div>
-                            </div>
+                            <% end %>
                         </div>
 
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Em desenvolvimento...</h4>
-                                    <p class="card-category"></p>
-                                </div>
                                 <div class="card-body ">
-                                    <p class="card-category">Sugira ideias interessantes sobre o que seria legal de visualizar aqui!<br>
-                                    Quem sabe a gente não acabe trabalhando junto nessa?</p>
+                                    <div id="users-languages-chart"></div>
                                 </div>
                             </div>
                         </div>
@@ -767,6 +765,49 @@ var pieChartNulo = {
         type: "doughnut2d",
         renderAt: "Principal-Languages-chart",
         dataSource: pieChartNulo
+    });
+
+</script>
+
+<script>
+    <%
+        @lang_array = ["Assembly", "Ruby", "JavaScript", "Python", "Java", "PHP", "C++", "C++", "Arduino", "CSS", "C#", "C", "Go", "Typescript", "Swift" ,"Conceito Teórico", "Outros" ]                                                    
+    %>
+                                    
+    var pieUserChartNulo = {
+        "chart": {
+            "caption": "Linguagens Favoritas",
+            "subCaption": "Filtro por Usuário",
+            "use3DLighting": "0",
+            "showPercentValues": "1",
+            "decimals": "1",
+            "showLegend": "0",
+            "pieRadius": "100",
+            "useDataPlotColorForLabels": "1",
+            "plotToolText": "<b>$dataValue</b> usuário(s) utiliza(m) mais $label",
+            "theme": "umber"
+        },
+        "data": [
+            <% @i = 0 %>
+            <% @lang_array.each do |l| %>
+                <% @colour = "%06x" % (rand * 0xffffff) %>
+                {
+                    "label": "<%= l %>",
+                    "value": "<%= User.where(favorite_language: l).length %>",
+                    "color": "#<%= @colour %>"
+                },
+                <% @i = @i + 1 %>
+            <% end %>
+        ]
+    }
+
+    var usersChart = FusionCharts.render(
+    {
+        width: "100%",
+        height: "400",
+        type: "pie2d",
+        renderAt: "users-languages-chart",
+        dataSource: pieUserChartNulo
     });
 
 </script>

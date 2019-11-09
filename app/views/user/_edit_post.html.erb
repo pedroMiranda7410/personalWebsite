@@ -109,7 +109,7 @@
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
                                                                                     <label><strong>Github do dono do Repositório:</strong> </label>
-                                                                                    <%= form.text_field :github_owner_name, class:"form-control ", value: current_user.github  %>
+                                                                                    <%= form.text_field :github_owner_name, class:"form-control ", value: @post.github_owner_name  %>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -238,6 +238,26 @@
                                                                                     </table>
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <table class="">
+                                                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                        <tbody style="display:flex;flex-direction:row">
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div class="form-check">
+                                                                                                        <label class="form-check-label">
+                                                                                                            <%= form.check_box :get_from_github ,class:"form-check-input", checked: @post.get_from_github  %>
+                                                                                                            <span class="form-check-sign"></span>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>Pegar README do github</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
                                                                         <% end %>
 
                                                                         <div class="row">
@@ -257,8 +277,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
-                                                                            <%= form.hidden_field :get_from_github, value: true %>
+                                                                    
                                                                             <%= form.hidden_field :user_id, value: @post.user_id %>
                                                                             <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                                                         <div class="clearfix"></div>
@@ -340,7 +359,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label><strong>Github do dono do Repositório:</strong> </label>
-                                                        <%= form.text_field :github_owner_name, class:"form-control ", value: current_user.github  %>
+                                                        <%= form.text_field :github_owner_name, class:"form-control ", value: @post.github_owner_name  %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -476,6 +495,26 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <table class="">
+                                                            <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                            <tbody style="display:flex;flex-direction:row">
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="form-check">
+                                                                            <label class="form-check-label">
+                                                                                <%= form.check_box :get_from_github ,class:"form-check-input", checked: @post.get_from_github  %>
+                                                                                <span class="form-check-sign"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Pegar README do github</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             <% end %>
 
                                             <div class="row">
@@ -514,8 +553,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                
-                                                <%= form.hidden_field :get_from_github, value: false %>
                                                 <%= form.hidden_field :user_id, value: @post.user_id %>
                                                 <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                             <div class="clearfix"></div>

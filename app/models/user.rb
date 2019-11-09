@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :projects, dependent: :delete_all
   has_many :posts, dependent: :delete_all
 
-  validates :nickname, uniqueness: true
+  #validates :nickname, uniqueness: true
   validates :email, uniqueness: true
 
   #after_create :send_confirmation

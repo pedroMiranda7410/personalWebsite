@@ -218,6 +218,27 @@
                                                                         </div>
 
                                                                         <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <table class="">
+                                                                                    <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                                                    <tbody style="display:flex;flex-direction:row">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <label class="form-check-label">
+                                                                                                        <%= form.check_box :get_from_github ,class:"form-check-input", checked: @project.get_from_github  %>
+                                                                                                        <span class="form-check-sign"></span>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>Pegar README do github</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label><strong>Teoria/Objetivo:</strong> </label>
@@ -234,8 +255,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
-                                                                            <%= form.hidden_field :get_from_github, value: true %>
                                                                             <%= form.hidden_field :user_id, value: @project.id %>
                                                                             <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                                                         <div class="clearfix"></div>
@@ -432,7 +451,26 @@
                                                     </table>
                                                 </div>
                                             </div>
-
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <table class="">
+                                                        <!-- PROJETO ESCRITO MANUALMENTE -->
+                                                        <tbody style="display:flex;flex-direction:row">
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-check">
+                                                                        <label class="form-check-label">
+                                                                            <%= form.check_box :get_from_github ,class:"form-check-input", checked: @project.get_from_github  %>
+                                                                            <span class="form-check-sign"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Pegar README do github</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
@@ -469,8 +507,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                
-                                                <%= form.hidden_field :get_from_github, value: false %>
                                                 <%= form.hidden_field :user_id, value: @project.user_id %>
                                                 <%= form.submit "Editar", class:"btn btn-success btn-fill pull-right" %>
                                             <div class="clearfix"></div>

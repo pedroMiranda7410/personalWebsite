@@ -217,6 +217,63 @@
                 })
             })
         </script>
+
+        <script>
+            $(document).ready(function (){
+                var contributors_url = 'https://api.github.com/repos/<%= User.find_by_id(@post.user_id).github %>/<%= @post.github_repo_name %>/contributors';
+                function getJson(myUrl){
+                    var result = null;
+                    $.ajax( { url: contributors_url, 
+                            type: 'get', 
+                            dataType: 'html',
+                            async: false,
+                            success: function(data) { result = data;  console.log("API github acessada com sucesso!");},
+                            error: function (request, status, error) {  console.log(request.responseText); }
+                            }
+                    );
+                    FileReady = true;
+                    return result;
+                }
+
+                var get_response = getJson(contributors_url);
+
+                if(get_response == undefined || get_response == null){
+                    console.log("Contributors Response = " + (get_response == undefined ? "Undefined" : (get_response == null ? "NULL" : "Nothing")));
+                    var json = get_response == undefined ? undefined : (get_response == null ? null : null);
+                }else{
+                    console.log("JSON diferente de null");
+                    var json = JSON.parse(getJson(contributors_url));
+                }
+
+                if(json == null || json == undefined){
+                    if(json == undefined){
+                        $("#collaborators-count").append("Requisição Falhou!");
+                    }else{
+                        $("#collaborators-count").append("0");
+                    }                
+                }else{
+                    console.log(json);
+                    $("#collaborators-count").append(json.length);
+
+                    var ul = document.getElementById("collaborators_list");
+                    var li;
+                    var a;
+
+                    for(var i = 0; i < json.length; i++){
+                        a = document.createElement("a");
+                        li = document.createElement("li");
+                        li.setAttribute("id", json[i].login ); // added line
+                        //li.appendChild(document.createTextNode(json[i].login));
+                        ul.appendChild(li);
+
+                        a.appendChild(document.createTextNode("@" + json[i].login));
+                        a.href = "https://github.com/" + json[i].login;
+                        li.appendChild(a);
+                    }
+                }
+            });
+        </script>
+
         <script>
 
             $(document).ready(function(){
@@ -224,49 +281,6 @@
             /*$.getJSON('https://api.github.com/repos/<%= User.find_by_id(@post.user_id).github %>/<%= @post.github_repo_name %>/contributors', function(data) {
                 alert(data.length());
             });*/
-
-                // get markdown content  
-                var body_location_2 = 'https://api.github.com/repos/<%= User.find_by_id(@post.user_id).github %>/<%= @post.github_repo_name %>/contributors';
-                function getJson(myUrl){
-                    var result = null;
-                    $.ajax( { url: body_location_2, 
-                            type: 'get', 
-                            dataType: 'html',
-                            async: false,
-                            success: function(data) { result = data; } 
-                            }
-                    );
-                    FileReady = true;
-                    return result;
-                }
-
-                var json = JSON.parse(getJson(body_location_2));
-
-                if(json == null){
-                    $("#collaborators-count").append("0");
-                }
-                $("#collaborators-count").append(json.length);
-
-                var ul = document.getElementById("collaborators_list");
-                var li;
-                var a;
-
-                for(var i = 0; i < json.length; i++){
-                    a = document.createElement("a");
-                    li = document.createElement("li");
-                    li.setAttribute("id", json[i].login ); // added line
-                    //li.appendChild(document.createTextNode(json[i].login));
-                    ul.appendChild(li);
-
-                    a.appendChild(document.createTextNode("@" + json[i].login));
-                    a.href = "https://github.com/" + json[i].login;
-                    li.appendChild(a);
-                }
-                <%# console.log(json.length);
-                console.log(json);
-                console.log(json[0]);
-                console.log(json[0].login);
-                alert(json[0].id); %>
 
             <% if @post.get_from_github %>
                 // get markdown content  
